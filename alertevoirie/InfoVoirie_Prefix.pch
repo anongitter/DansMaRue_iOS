@@ -1,0 +1,59 @@
+//
+// Prefix header for all source files of the 'InfoVoirie' target in the 'InfoVoirie' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+
+	#import "InfoVoirieContext.h"
+	#import "InfoVoirieAppDelegate.h"
+#endif
+
+#define kTimeOutIntervalRequest				20
+
+#define kErrorEmptyJsonRequest				1
+#define kErrorBadJsonRequest				2
+#define kErrorBadRequestSubElement			3
+#define kErrorEmptyDeviceIdentifier			4
+#define kErrorBadDeviceIdentifier				5
+#define kEmptyPositionParameter				6
+#define kErrorBadPositionParameter			7
+
+// Save Incident
+#define kErrorBadCategoryID					8
+#define kErrorEmptyCategoryID				9
+#define kErrorBadAddressParameter			90
+
+// Get Reports
+#define kErrorNoIncidentForUser				10
+
+// Update Incident
+#define kErrorEmptyIncidentID					11
+#define kErrorBadIncidentID					12
+#define kErrorBadUserID						13
+#define kErrorEmptyUserID					14
+
+#define kErrorDoubleResolved					17
+#define kErrorDoubleConfirm					18
+#define kErrorDoubleInvalidate				19
+
+// User Authentication
+#define kErrorAuthenticationFailed_BadLogin	20
+#define kErrorBadUserLogin					21
+#define kErrorEmptyUserLogin					22
+#define kErrorBadPassword					23
+#define kErrorEmptyPassword					24
+#define kErrorBadAuthentToken				25
+#define kErrorEmptyAuthentToken				26
+
+// Get Incident By Position
+#define kErrorBadRadius						27
+#define kErrorEmptyRadius					28
+
+// Save Incident Pictures
+#define kErrorBadIncidentPictureContent		29
+#define kErrorReadingTempPictureFile			30
+#define kErrorBadJsonRequestToken			31
+
+

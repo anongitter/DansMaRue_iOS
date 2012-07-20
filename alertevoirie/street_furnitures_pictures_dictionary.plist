@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>28</key>
+	<string>abri_bus.png</string>
+	<key>27</key>
+	<string>Plot.png</string>
+	<key>26</key>
+	<string>escaliers.png</string>
+	<key>25</key>
+	<string>égouts.png</string>
+	<key>24</key>
+	<string>bout_fer.png</string>
+	<key>23</key>
+	<string>arbre_cage.png</string>
+	<key>22</key>
+	<string>arbre_barriere.png</string>
+	<key>21</key>
+	<string>Banc.png</string>
+	<key>20</key>
+	<string>arceaux.png</string>
+	<key>19</key>
+	<string>Borne.png</string>
+	<key>18</key>
+	<string>Potelet.png</string>
+	<key>17</key>
+	<string>Barrière.png</string>
+</dict>
+</plist>
