@@ -19,6 +19,10 @@
 
 @implementation NouveauController
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -26,7 +30,10 @@
     
     [self.navigationController.navigationBar setNeedsDisplay];
     
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kTitleImageName]];
+    UIImageView* titleImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kTitleImageName]];
+    titleImage.contentMode = UIViewContentModeScaleAspectFit;
+    titleImage.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+	self.navigationItem.titleView = titleImage;
 	
 	mLoadingOngoing = 0;
 	

@@ -26,6 +26,10 @@
 }
 */
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 - (id)initWithViewController:(ValidationRapportController *)_nextViewController
 {
 	if(self = [super initWithNibName:@"CategorieController" bundle:nil])

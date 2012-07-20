@@ -24,6 +24,10 @@
 
 #pragma mark -
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 - (id)initWithIncident:(IncidentObj *)_incident
 {
 	self = [super initWithNibName:@"ValidationRapportController" bundle:nil];
