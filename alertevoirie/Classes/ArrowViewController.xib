@@ -53,6 +53,7 @@
 								<string key="NSFrameSize">{320, 480}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="268477281"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -66,6 +67,7 @@
 								<string key="NSFrame">{{130, 176}, {59, 128}}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<int key="IBUIContentMode">1</int>
@@ -83,6 +85,7 @@
 										<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 										<reference key="NSSuperview" ref="268477281"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="862650377"/>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<object class="NSCustomResource" key="IBUIImage">
@@ -96,6 +99,7 @@
 										<string key="NSFrame">{{20, 439}, {74, 32}}</string>
 										<reference key="NSSuperview" ref="268477281"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="94006929"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -139,6 +143,7 @@
 										<string key="NSFrame">{{226, 439}, {74, 32}}</string>
 										<reference key="NSSuperview" ref="268477281"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="972133520"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -164,6 +169,7 @@
 										<string key="NSFrameSize">{320, 46}</string>
 										<reference key="NSSuperview" ref="268477281"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="335914653"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -178,12 +184,13 @@
 										<string key="NSFrame">{{0, 10}, {320, 20}}</string>
 										<reference key="NSSuperview" ref="268477281"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="717884512"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">7</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<string key="IBUIText">Faites pointer la flèche sur l'incident</string>
+										<string key="IBUIText">arrowview.title</string>
 										<object class="NSColor" key="IBUITextColor" id="129122434">
 											<int key="NSColorSpace">1</int>
 											<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -199,6 +206,7 @@
 								<string key="NSFrameSize">{320, 480}</string>
 								<reference key="NSSuperview" ref="191373211"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="42505859"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -212,6 +220,7 @@
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="458596552"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="899253407"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -223,6 +232,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="191373211"/>
 				<reference key="IBUIBackgroundColor" ref="129122434"/>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -417,6 +427,7 @@
 					<string>22.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
+					<string>30.CustomClassName</string>
 					<string>30.IBPluginDependency</string>
 					<string>33.IBPluginDependency</string>
 					<string>35.IBPluginDependency</string>
@@ -434,6 +445,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>C4MLocalizedLabel</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -557,6 +569,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ArrowViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">C4MLocalizedLabel</string>
+					<string key="superclassName">UILabel</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/C4MLocalizedLabel.h</string>
 					</object>
 				</object>
 			</object>
