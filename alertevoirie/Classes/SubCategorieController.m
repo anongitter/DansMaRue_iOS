@@ -20,20 +20,31 @@
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNextView:(ValidationRapportController *)_nextView andID:(NSString*) _ParentID
 {
+    
+    NSLog(@"---------------1");
+    
     if ((self = [super initWithNibName:@"CategorieController" bundle:nil])) 
 	{
 		mParentCategorie = [[NSMutableArray alloc] init];
+        
 		for (id key in [InfoVoirieContext sharedInfoVoirieContext].mCategory) 
 		{
 			NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]; 
-			NSString* string = [lDic valueForKey:@"parent_id"];
-			
-			if([string isEqualToString:_ParentID] )
+            
+			NSNumber* num = [lDic valueForKey:@"parent_id"];
+			NSString* string = [NSString stringWithFormat:@"%d", [num intValue]];
+            
+            NSLog(@"sub lDic=%@ _ParentID='%@' string='%@'", lDic, _ParentID, string);
+			if([num intValue] ==  [_ParentID intValue])
 			{
 				[lDic setValue:key forKey:@"id"];
 				[mParentCategorie addObject:lDic];
 			}
 		}
+        NSLog(@"sub mParentCategorie=%@", mParentCategorie);
+        
+        
+        
 		mUseStreetFurnituresCells = NO;
 		
 		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:_ParentID] objectForKey:@"name"];

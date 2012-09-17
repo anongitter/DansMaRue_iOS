@@ -193,7 +193,7 @@
 - (IBAction)createReportButtonPressed
 {
 	ConfirmDeclarationController *lConfirmDeclarationController = [[ConfirmDeclarationController alloc] initWithNibName:@"ConfirmDeclarationController" bundle:nil];
-	[self.navigationController pushViewController:lConfirmDeclarationController animated:YES];
+	[self.navigationController pushViewController:lConfirmDeclarationController animated:NO]; //NO otherwise nested push animation can result in corrupted navigation bar
 	[lConfirmDeclarationController release];
 }
 

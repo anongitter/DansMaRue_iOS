@@ -57,6 +57,8 @@
 	
 	mParentCategorie = [[NSMutableArray alloc] init];
 	
+    
+    /* od style
 	for (id key in [InfoVoirieContext sharedInfoVoirieContext].mCategory) 
 	{
 		NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]; 
@@ -67,6 +69,18 @@
 			[mParentCategorie addObject:lDic];
 		}
 	}
+     */
+    
+    //new way
+    NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:@"0"];
+    for (NSNumber* key in [lDic objectForKey:@"children_id"]){
+        NSLog(@"key class: %@", [key class]);
+        NSMutableDictionary* cat = [NSMutableDictionary dictionaryWithDictionary:[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:[NSString stringWithFormat:@"%d", [key intValue]]]]; 
+        [cat setValue:key forKey:@"id"];
+        [mParentCategorie addObject:cat];
+    }
+    NSLog(@"mParentCategorie: %@", mParentCategorie);
+        
 	
 	UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:NSLocalizedString(@"categorie_navbar_title", nil)];
 	[self.navigationItem setTitleView:label];
