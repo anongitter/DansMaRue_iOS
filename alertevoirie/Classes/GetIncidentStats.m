@@ -69,7 +69,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	//NSLog(@"SCAN = %@", filesContent );
+	NSLog(@"SCAN = %@", filesContent );
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	if( [idRootJson isKindOfClass: [NSMutableArray class]] )
@@ -86,21 +86,24 @@
 		
 		[mIncidentStatsDelegate didReceiveIncidentStats:ongoingIncidents :updatedIncidents :resolvedIncidents];
 		
-		dicRoot = [jsonRootObject objectAtIndex:1];
-		answerRoot = [dicRoot valueForKey:@"answer"];
-		NSMutableArray* arrayRoot = [answerRoot valueForKey:kJSONIncidentsKey];
-		NSMutableArray* incidentsByStatus = [arrayRoot valueForKey:kJSONResolvedIncidentKey];
-		NSMutableArray* arrayResolved = [[NSMutableArray alloc] init];
-		IncidentObj *incident;
-		for(NSMutableDictionary* incidentDic in incidentsByStatus)
-		{
-			incident = [[IncidentObj alloc] initWithDic:incidentDic];
-			[arrayResolved addObject:incident];
-			[incident release];
-		}
-		
-		[mReportDelegate didReceiveReportsOngoing:nil updated:nil resolved:arrayResolved];
-		[arrayResolved release];
+        if ([jsonRootObject count] > 1)
+        {
+            dicRoot = [jsonRootObject objectAtIndex:1];
+            answerRoot = [dicRoot valueForKey:@"answer"];
+            NSMutableArray* arrayRoot = [answerRoot valueForKey:kJSONIncidentsKey];
+            NSMutableArray* incidentsByStatus = [arrayRoot valueForKey:kJSONResolvedIncidentKey];
+            NSMutableArray* arrayResolved = [[NSMutableArray alloc] init];
+            IncidentObj *incident;
+            for(NSMutableDictionary* incidentDic in incidentsByStatus)
+            {
+                incident = [[IncidentObj alloc] initWithDic:incidentDic];
+                [arrayResolved addObject:incident];
+                [incident release];
+            }
+            
+            [mReportDelegate didReceiveReportsOngoing:nil updated:nil resolved:arrayResolved];
+            [arrayResolved release];
+        }
 	}
 	else 
 	{

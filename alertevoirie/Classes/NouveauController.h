@@ -13,12 +13,13 @@
 #import "UserAuthentication.h"
 #import "ConfirmDeclarationController.h"
 #import "reportDelegate.h"
+#import "categoriesDelegate.h"
 #import "C4MInfo.h"
 
 #define kTitleImageName							@"title.png"
 
 @interface NouveauController : UIViewController
-	<incidentStatsDelegate, reportDelegate, userAuthenticationDelegate, UITextFieldDelegate>
+	<incidentStatsDelegate, reportDelegate, userAuthenticationDelegate, UITextFieldDelegate, categoriesDelegate>
 {
 	IBOutlet UIView*						mViewWelcomeUser;
 	IBOutlet UILabel*						mLabelWelcomeUser;

@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-#define kTestServer							@"http://test.dev.playtomo.com/tools/testpost.php"
-#define kPreProdServer						@"http://alerte-voirie.ppd.c4mprod.com/api/"
-#define kProdServer							@"http://www.alertevoirie.com/api/"
+//#define kTestServer							@"http://test.dev.playtomo.com/tools/testpost.php"
+//#define kPreProdServer						@"http://alerte-voirie.ppd.c4mprod.com/api/"
+//#define kProdServer							@"http://www.alertevoirie.com/api/"
 
-#define kServer								kPreProdServer
+#define kDev_CociteServer						@"http://dev.lutece.paris.fr/sira-integ/rest/signalement/api/"
+
+#define kServer								kDev_CociteServer
 
 #define kChosenDigestLength					CC_SHA1_DIGEST_LENGTH
 

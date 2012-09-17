@@ -41,15 +41,15 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 {
 	if (self = [super init])
 	{
-		SBJSON *json = [[SBJSON alloc] init];
-		
-		//Loading Categories
+		//Loading Categories in local file
+        /*
+        SBJSON *json = [[SBJSON alloc] init];
 		NSString* path  = [[NSBundle mainBundle] pathForResource:@"categories" ofType:@"json"];
 		NSString* filesContent = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 		NSMutableDictionary* dic =  [json objectWithString:filesContent error:nil];
 		[json release];
-		
 		self.mCategory = dic;
+         */
 		
 		self.mTextBlueColor = [UIColor colorWithRed:0.1764 green:0.549 blue:0.7804 alpha:1.0];
 		self.mTextBlueShadowColor = [UIColor colorWithRed:0.1764 green:0.549 blue:0.7804 alpha:0.5];
@@ -281,7 +281,7 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	
 	NSString* json_string = [NSString stringWithFormat:@"jsonStream=%@", jsonStream];
 	
-	//NSLog(@"%@",json_string);
+	NSLog(@"%@",json_string);
 	
 	NSData *request_body = [json_string dataUsingEncoding:NSUTF8StringEncoding];
 	NSString* stringurl = [InfoVoirieContext getServerURL:NO];

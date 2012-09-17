@@ -47,6 +47,7 @@
 		31F2617011BFE38200FEA59E /* ConfirmIncidentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F2616F11BFE38200FEA59E /* ConfirmIncidentCell.m */; };
 		31F2617211BFE39400FEA59E /* ConfirmIncidentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F2617111BFE39400FEA59E /* ConfirmIncidentCell.xib */; };
 		31F263AC11C0E1F300FEA59E /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 31F263AB11C0E1F300FEA59E /* categories.json */; };
+		6632014616074EB200B5F1C8 /* GetCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 6632014516074EB200B5F1C8 /* GetCategories.m */; };
 		D90B284211C6305C004DBA83 /* ReverseGeocoding.m in Sources */ = {isa = PBXBuildFile; fileRef = D90B284111C6305C004DBA83 /* ReverseGeocoding.m */; };
 		D90B29EA11C6634E004DBA83 /* SaveIncident.m in Sources */ = {isa = PBXBuildFile; fileRef = D90B29E911C6634E004DBA83 /* SaveIncident.m */; };
 		D910B736137822410077A7B1 /* alertevoirie_iphone_logos.png in Resources */ = {isa = PBXBuildFile; fileRef = D910B735137822410077A7B1 /* alertevoirie_iphone_logos.png */; };
@@ -288,6 +289,9 @@
 		31F2617111BFE39400FEA59E /* ConfirmIncidentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmIncidentCell.xib; sourceTree = "<group>"; };
 		31F261DF11BFE99C00FEA59E /* UpdateImageCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateImageCellDelegate.h; sourceTree = "<group>"; };
 		31F263AB11C0E1F300FEA59E /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = categories.json; sourceTree = "<group>"; };
+		6632014316074EB200B5F1C8 /* categoriesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = categoriesDelegate.h; sourceTree = "<group>"; };
+		6632014416074EB200B5F1C8 /* GetCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCategories.h; sourceTree = "<group>"; };
+		6632014516074EB200B5F1C8 /* GetCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCategories.m; sourceTree = "<group>"; };
 		7E5C9B3D1214404800617EDE /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* InfoVoirie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InfoVoirie-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D90B277A11C620EE004DBA83 /* UpdateFormPictureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateFormPictureDelegate.h; sourceTree = "<group>"; };
@@ -714,6 +718,16 @@
 				D9B05EF311ECBB36007BE7D3 /* Cell */,
 			);
 			name = "Fiche Incident";
+			sourceTree = "<group>";
+		};
+		6632014216074E9400B5F1C8 /* Get Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6632014316074EB200B5F1C8 /* categoriesDelegate.h */,
+				6632014416074EB200B5F1C8 /* GetCategories.h */,
+				6632014516074EB200B5F1C8 /* GetCategories.m */,
+			);
+			name = "Get Categories";
 			sourceTree = "<group>";
 		};
 		D90B29E511C662CF004DBA83 /* Incident exists */ = {
@@ -1218,6 +1232,7 @@
 			children = (
 				D9DE1F6912DDAB6A0026784E /* BasicRequest.h */,
 				D9DE1F6A12DDAB6A0026784E /* BasicRequest.m */,
+				6632014216074E9400B5F1C8 /* Get Categories */,
 				D982B75611C233860087363B /* Send Photos */,
 				D9F86CC811F5F7150036C38E /* Get User Reports */,
 				D9F86CC711F5F6F30036C38E /* Get Incident By Position */,
@@ -1550,6 +1565,7 @@
 				D984AE13135D910D009C063B /* ImageManager.m in Sources */,
 				D984AE14135D910D009C063B /* ImageViewManager.m in Sources */,
 				2599A4AF1451B9AB001B8D38 /* C4MNavigationBar.m in Sources */,
+				6632014616074EB200B5F1C8 /* GetCategories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1561,6 +1577,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (NRHJ5C2RXP)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1569,6 +1586,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
 			};
 			name = Debug;
 		};
@@ -1577,11 +1595,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/Documents/C4M/Projets/Alerte Voirie/sources/Alerte Voierie/dist.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = InfoVoirie_Prefix.pch;
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CD61113-4F16-4B40-8607-E9A9C8BD931C";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1590,7 +1610,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (4TSHYBULTJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (NRHJ5C2RXP)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1599,7 +1619,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADFB0DB3-AC07-4821-8AE2-05B524173DCB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1609,13 +1629,13 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mathieu Castelli";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: C4MProd";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C65FFAF-3F4E-4BBE-BB02-4172FBC52527";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CD61113-4F16-4B40-8607-E9A9C8BD931C";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1625,14 +1645,14 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mathieu Castelli";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (NRHJ5C2RXP)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C65FFAF-3F4E-4BBE-BB02-4172FBC52527";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
 				SDKROOT = iphoneos;
 			};
 			name = AdHoc;
@@ -1642,11 +1662,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/Documents/C4M/Projets/Alerte Voirie/sources/Alerte Voierie/dist.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (NRHJ5C2RXP)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = InfoVoirie_Prefix.pch;
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AdHoc;

@@ -8,6 +8,7 @@
 
 #import "NouveauController.h"
 #import "GetUserReports.h"
+#import "GetCategories.h"
 #import "C4MNavigationBar.h"
 
 @interface NouveauController (Private)
@@ -49,6 +50,8 @@
 	[mButtonDeconnexion setTitle:NSLocalizedString(@"deconnexion", nil) forState:UIControlStateNormal];
 	
 	[self updateLoginButton];
+    
+    [self getCategories];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -123,6 +126,12 @@
 	[mIndicatorView startAnimating];
 	
 	mHasBeenGeolocated = YES;
+}
+
+- (void)getCategories
+{
+	GetCategories *getCategories = [[GetCategories alloc] initWithDelegate:self];
+	[getCategories downloadCategories];
 }
 
 - (void)authenticate
@@ -304,6 +313,18 @@
 		return NO;
 	}
 }
+
+#pragma mark -
+#pragma mark GetCategories Delegate Methods
+
+-(void)didReceiveCategories{
+    
+    NSLog(@"didReceiveCategories");
+    
+    
+    
+}
+
 
 #pragma mark -
 #pragma mark GetIncidentStats Delegate Methods
