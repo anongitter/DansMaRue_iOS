@@ -23,6 +23,10 @@
 @synthesize mValRapController;
 @synthesize mFicheController;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 - (id)initWithIncident:(IncidentObj *)_incident
 {
 	self = [super initWithNibName:@"LieuIncidentController" bundle:nil];

@@ -14,6 +14,10 @@
 @synthesize mOrderedKeys;
 @synthesize mBannedIncidentsId;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -403,6 +407,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 28)] autorelease];
 	UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header_bar.png"]];
+    bg.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 300, 20)];
 	title.text = [self tableView:tableView titleForHeaderInSection:section];
 	title.text = [InfoVoirieContext capitalisedFirstLetter:(title.text)];

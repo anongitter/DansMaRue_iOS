@@ -20,6 +20,10 @@
 @synthesize mReportsUpdated;
 @synthesize mReportsResolved;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
 - (void)viewDidLoad
 {
 	mDictionnaryReportsOngoing = [[NSMutableDictionary alloc] init];
