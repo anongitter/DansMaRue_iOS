@@ -48,6 +48,9 @@
 		31F2617211BFE39400FEA59E /* ConfirmIncidentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F2617111BFE39400FEA59E /* ConfirmIncidentCell.xib */; };
 		31F263AC11C0E1F300FEA59E /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 31F263AB11C0E1F300FEA59E /* categories.json */; };
 		6632014616074EB200B5F1C8 /* GetCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 6632014516074EB200B5F1C8 /* GetCategories.m */; };
+		66B70A611608C3E300662979 /* C4MLocalizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */; };
+		66B70A621608C3E300662979 /* C4MLocalizedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A5E1608C3E300662979 /* C4MLocalizedLabel.m */; };
+		66B70A631608C3E300662979 /* C4MLocalizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A601608C3E300662979 /* C4MLocalizedTextField.m */; };
 		D90B284211C6305C004DBA83 /* ReverseGeocoding.m in Sources */ = {isa = PBXBuildFile; fileRef = D90B284111C6305C004DBA83 /* ReverseGeocoding.m */; };
 		D90B29EA11C6634E004DBA83 /* SaveIncident.m in Sources */ = {isa = PBXBuildFile; fileRef = D90B29E911C6634E004DBA83 /* SaveIncident.m */; };
 		D910B736137822410077A7B1 /* alertevoirie_iphone_logos.png in Resources */ = {isa = PBXBuildFile; fileRef = D910B735137822410077A7B1 /* alertevoirie_iphone_logos.png */; };
@@ -289,9 +292,15 @@
 		31F2617111BFE39400FEA59E /* ConfirmIncidentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmIncidentCell.xib; sourceTree = "<group>"; };
 		31F261DF11BFE99C00FEA59E /* UpdateImageCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateImageCellDelegate.h; sourceTree = "<group>"; };
 		31F263AB11C0E1F300FEA59E /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = categories.json; sourceTree = "<group>"; };
-		6632014316074EB200B5F1C8 /* categoriesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = categoriesDelegate.h; sourceTree = "<group>"; };
+		6632014316074EB200B5F1C8 /* categoriesDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoriesDelegate.h; sourceTree = "<group>"; };
 		6632014416074EB200B5F1C8 /* GetCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCategories.h; sourceTree = "<group>"; };
 		6632014516074EB200B5F1C8 /* GetCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCategories.m; sourceTree = "<group>"; };
+		66B70A5B1608C3E300662979 /* C4MLocalizedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MLocalizedButton.h; sourceTree = "<group>"; };
+		66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MLocalizedButton.m; sourceTree = "<group>"; };
+		66B70A5D1608C3E300662979 /* C4MLocalizedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MLocalizedLabel.h; sourceTree = "<group>"; };
+		66B70A5E1608C3E300662979 /* C4MLocalizedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MLocalizedLabel.m; sourceTree = "<group>"; };
+		66B70A5F1608C3E300662979 /* C4MLocalizedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MLocalizedTextField.h; sourceTree = "<group>"; };
+		66B70A601608C3E300662979 /* C4MLocalizedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MLocalizedTextField.m; sourceTree = "<group>"; };
 		7E5C9B3D1214404800617EDE /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* InfoVoirie-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InfoVoirie-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D90B277A11C620EE004DBA83 /* UpdateFormPictureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateFormPictureDelegate.h; sourceTree = "<group>"; };
@@ -597,6 +606,12 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				66B70A5B1608C3E300662979 /* C4MLocalizedButton.h */,
+				66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */,
+				66B70A5D1608C3E300662979 /* C4MLocalizedLabel.h */,
+				66B70A5E1608C3E300662979 /* C4MLocalizedLabel.m */,
+				66B70A5F1608C3E300662979 /* C4MLocalizedTextField.h */,
+				66B70A601608C3E300662979 /* C4MLocalizedTextField.m */,
 				2599A4AC1451B9AB001B8D38 /* C4MNavBar */,
 				D984AE0D135D90E0009C063B /* ImageManager */,
 				D9341BDE11E76E9C00E94AD8 /* Forward Geocoding */,
@@ -1566,6 +1581,9 @@
 				D984AE14135D910D009C063B /* ImageViewManager.m in Sources */,
 				2599A4AF1451B9AB001B8D38 /* C4MNavigationBar.m in Sources */,
 				6632014616074EB200B5F1C8 /* GetCategories.m in Sources */,
+				66B70A611608C3E300662979 /* C4MLocalizedButton.m in Sources */,
+				66B70A621608C3E300662979 /* C4MLocalizedLabel.m in Sources */,
+				66B70A631608C3E300662979 /* C4MLocalizedTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

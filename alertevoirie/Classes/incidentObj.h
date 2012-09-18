@@ -26,6 +26,7 @@
 
 #define kLatitudeKey				@"lat"
 #define kLongitudeKey			@"lng"
+#define kPriorityKey			@"priorityId"
 
 @interface IncidentObj : NSObject
 	<MKAnnotation>
@@ -34,7 +35,7 @@
 	NSInteger  mid;
 	NSInteger  mcategory;
 	NSUInteger mconfirms;
-	
+    
 	BOOL minvalid;
 	
 	NSString* 	mstate;
@@ -43,6 +44,9 @@
 	NSString*	mStreet;
 	NSString*	mZipCode;
 	NSString*	mCity;
+    
+    NSInteger   mPriorityId;
+    NSString*	mEmail;
 	
 	NSString* 	mdescriptive;
 	NSString* 	mdate;
@@ -56,7 +60,7 @@
 /*
  {	
  "id":2						//the id of the incident
- "category":3,					// the category id of the incident
+ "categoryId":3,					// the category id of the incident
  "state":"resolved",				// the incident state
  "address":"2 rue colbert...",			// the address where the incident
  "descriptive":"un gros trou",			// the incident description
@@ -86,4 +90,8 @@
 @property (nonatomic) NSInteger mcategory;
 @property (nonatomic) NSUInteger mconfirms;
 @property (nonatomic) BOOL minvalid;
+
+@property (nonatomic) NSInteger mPriorityId;
+@property (nonatomic, retain) NSString* 	mEmail;
+
 @end

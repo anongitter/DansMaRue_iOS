@@ -44,6 +44,8 @@
 @synthesize mFinalImage;
 @synthesize mArrayUpdate;
 @synthesize mUpdateImages;
+@synthesize mPicker;
+@synthesize mLabelPriority;
 
 - (id)initWithIncident:(IncidentObj	*)_incident
 {
@@ -139,6 +141,9 @@
 	[locale release];
 	[inputFormatter release];
 	[dateFormatter release];
+    
+    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangeureux", @"Génant", @"Mineur", nil];
+    self.mLabelPriority.text = [incidentLabels objectAtIndex:(mIncident.mPriorityId-1)];
 }
 
 - (NSString*)createConfirmationText
@@ -250,6 +255,10 @@
 	[nextController release];
 }
 
+- (IBAction)triggerPriorityButton:(id)sender{
+    mPickerHolderView.hidden = FALSE;
+}
+
 - (IBAction)triggerInvalidateIncidentButton:(id)sender
 {
 	/*if ([self testAuthenticationToken] == NO)
@@ -350,7 +359,39 @@
 	[mButtonConfirmIncident release];
 	[mGetUpdates release];
 	[mUpdateImages release];
+    [mPicker release];
+    [mLabelPriority release];
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark PickerView DataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [incidentLabels count];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    return [incidentLabels objectAtIndex:row];
+} 
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component
+{
+    incidentId = (row+1);
+    mIncident.mPriorityId = incidentId;
+    self.mLabelPriority.text = [incidentLabels objectAtIndex:row];
+}
+
+- (IBAction) onPickerHolder:(id)sender{
+    mPickerHolderView.hidden = TRUE;
 }
 
 #pragma mark -

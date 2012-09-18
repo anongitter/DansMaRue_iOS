@@ -46,7 +46,7 @@
 	<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, updateIncidentDelegate,
 	UIAlertViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate,
 	UINavigationControllerDelegate, finalImageDelegate, commentDelegate, sendingPictureDelegate,
-	/*UpdateFormPictureDelegate,*/ changeIncidentDelegate, getUpdatesDelegate>
+	/*UpdateFormPictureDelegate,*/ changeIncidentDelegate, getUpdatesDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
 	//UIScrollView *mScrollView;
 	UITableView *mTableView;
@@ -63,6 +63,7 @@
 	UILabel *mLabelParentCategory;
 	UILabel *mLabelCategory;
 	UILabel *mLabelNumberConfirmations;
+    UILabel *mLabelPriority;
 	
 	UIButton *mButtonAddPhoto;
 	UIButton *mButtonInvalidateIncident;
@@ -87,6 +88,11 @@
 	UIImage *mFinalImage;
 	UIView  *mLoadingView;
 	BOOL mLoadingOngoing;
+    
+    IBOutlet UIView             *mPickerHolderView;
+    UIPickerView       *mPicker;
+    int incidentId;
+    NSArray            *incidentLabels;
 }
 
 - (id)initWithIncident:(IncidentObj	*)_incident;
@@ -98,10 +104,13 @@
 - (IBAction)triggerReturnButton:(id)sender;
 - (IBAction)triggerWhereButton:(id)sender;
 - (IBAction)triggerCategoryButton:(id)sender;
+- (IBAction)triggerPriorityButton:(id)sender;
 - (IBAction)triggerInvalidateIncidentButton:(id)sender;
 - (IBAction)triggerIncidentResolvedButton:(id)sender;
 - (IBAction)triggerConfirmIncidentButton:(id)sender;
 - (IBAction) triggerAddPhotoButton:(id)sender;
+- (IBAction) onPickerHolder:(id)sender;
+
 /*+ (void)threadLoadingImageFar:(FicheIncidentController*)_fic;
 + (void)threadLoadingImageClose:(FicheIncidentController*)_fic;
 + (UIImage*) LoadImage:(NSString*) _fileName andURL:(NSString*) _url;
@@ -118,6 +127,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *mLabelAddress;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelParentCategory;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelCategory;
+@property (nonatomic, retain) IBOutlet UILabel *mLabelPriority;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelNumberConfirmations;
 
 @property (nonatomic, retain) IBOutlet UIButton *mButtonAddPhoto;
@@ -136,5 +146,7 @@
 
 @property (nonatomic, retain) ArrowViewController *mArrowViewController;
 @property (nonatomic, retain) UIImagePickerController *mImagePickerController;
+
+@property (nonatomic, retain) IBOutlet UIPickerView *mPicker;
 
 @end

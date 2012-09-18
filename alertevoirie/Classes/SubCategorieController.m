@@ -29,7 +29,7 @@
         
 		for (id key in [InfoVoirieContext sharedInfoVoirieContext].mCategory) 
 		{
-			NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]; 
+			NSMutableDictionary* lDic = [NSMutableDictionary dictionaryWithDictionary:[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]]; 
             
 			NSNumber* num = [lDic valueForKey:@"parent_id"];
 			NSString* string = [NSString stringWithFormat:@"%d", [num intValue]];

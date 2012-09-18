@@ -24,6 +24,7 @@
 #define kAlertViewReturnWithoutSave			1
 #define kAlertViewSavedIncident				2
 #define kAlertViewPhotoNotSaved				3
+#define kAlertViewEmail                     4
 
 #define kActionSheetLibrary					0
 #define kActionSheetPhoto					1
@@ -72,6 +73,14 @@
 	IncidentObj *mIncidentCreated;
 	
 	UIView *mLoadingView;
+    
+    UILabel *mLabelPriority;
+    UILabel *mLabelEmail;
+    
+    IBOutlet UIView             *mPickerHolderView;
+    UIPickerView       *mPicker;
+    int incidentId;
+    NSArray            *incidentLabels;
 }
 
 @property (nonatomic, retain) UIImage* mImageFar;
@@ -83,6 +92,9 @@
 @property (nonatomic, retain) ArrowViewController *mArrowViewController;
 @property (nonatomic, retain) UIImagePickerController *mImagePickerController;
 @property (nonatomic, retain) IncidentObj *mIncidentCreated;
+@property (nonatomic, retain) IBOutlet UILabel *mLabelPriority;
+@property (nonatomic, retain) IBOutlet UILabel *mLabelEmail;
+@property (nonatomic, retain) IBOutlet UIPickerView *mPicker;
 
 - (id)initWithIncident:(IncidentObj *)_incident;
 - (void) showLoadingView:(BOOL)show;
@@ -96,6 +108,9 @@
 - (IBAction) validateReport:(id)sender;
 - (IBAction) nearButtonPressed:(id)sender;
 - (IBAction) farButtonPressed:(id)sender;
+- (IBAction) triggerEmailButton:(id)sender;
+- (IBAction) triggerPriorityButton:(id)sender;
+- (IBAction) onPickerHolder:(id)sender;
 
 - (void)launchImagePicker;
 

@@ -40,6 +40,7 @@
 	
 	[dictionary setObject:@"saveIncident" forKey:@"request"];
 	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+    [dictionary setObject:_incident.mEmail forKey:@"email"];
 	
 #ifdef kMarseilleTownhallVersion
 	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
@@ -52,6 +53,7 @@
 	[incidentLog setObject:category forKey:@"categoryId"];
 	[incidentLog setObject:[_incident maddress] forKey:@"address"];
 	[incidentLog setObject:_incident.mdescriptive forKey:@"descriptive"];
+    [incidentLog setObject:[NSNumber numberWithInt:_incident.mPriorityId] forKey:@"priorityId"];
 	
 	NSNumber* latitude = [NSNumber numberWithDouble:(_incident.coordinate.latitude)];
 	NSNumber* longitude = [NSNumber numberWithDouble:(_incident.coordinate.longitude)];

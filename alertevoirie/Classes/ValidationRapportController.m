@@ -21,6 +21,9 @@
 @synthesize mArrowViewController;
 @synthesize mImagePickerController;
 @synthesize mIncidentCreated;
+@synthesize mPicker;
+@synthesize mLabelPriority;
+@synthesize mLabelEmail;
 
 #pragma mark -
 
@@ -43,7 +46,7 @@
 {
 	[super viewDidLoad];
 	
-	mScrollView.contentSize = CGSizeMake(320, 545);
+	mScrollView.contentSize = CGSizeMake(320, 690);
 	mScrollView.contentInset = UIEdgeInsetsMake(-60, 0, 0, 0);
 	
 	mButtonValidate.enabled = NO;
@@ -76,6 +79,9 @@
 	[self.navigationItem setLeftBarButtonItem:returnButton];
 	[returnButton release];
 	
+    mIncidentCreated.mPriorityId = 3;
+    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangeureux", @"Génant", @"Mineur", nil];
+    
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -291,6 +297,22 @@
 	[sender resignFirstResponder];
 }
 
+- (IBAction)triggerPriorityButton:(id)sender{
+    mPickerHolderView.hidden = FALSE;
+}
+
+- (IBAction)triggerEmailButton:(id)sender{
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Entrez votre email pour être informé de l'évolution de l'incident." delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.placeholder = @"Email";
+    alertTextField.keyboardType = UIKeyboardTypeEmailAddress;
+    alert.tag = kAlertViewEmail;
+    [alert show];
+    [alert release];
+    
+}
 - (void)launchImagePicker
 {	
 	if(mImagePickerController == nil)
@@ -377,32 +399,81 @@
 }
 
 #pragma mark -
+#pragma mark PickerView DataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [incidentLabels count];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component
+{
+    return [incidentLabels objectAtIndex:row];
+} 
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component
+{
+    incidentId = (row+1);
+    mIncidentCreated.mPriorityId = incidentId;
+    
+    self.mLabelPriority.text = [incidentLabels objectAtIndex:row];
+}
+
+- (IBAction) onPickerHolder:(id)sender{
+    
+    mPickerHolderView.hidden = TRUE;
+}
+
+#pragma mark -
 #pragma mark Alert View Delegate Methods
 - (void)alertView:(UIAlertView *)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if(buttonIndex != alertView.cancelButtonIndex)
-	{
-		switch (alertView.tag)
-		{
-			case kAlertViewCancelReport:
-				[self.navigationController popToRootViewControllerAnimated:YES];
-				[InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
-				break;
-			case kAlertViewReturnWithoutSave:
-				[self.navigationController popViewControllerAnimated:YES];
-				[InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
-				break;
-			case kAlertViewSavedIncident:
-			case kAlertViewPhotoNotSaved:
-				[self showLoadingView:NO];
-				[self.navigationController popToRootViewControllerAnimated:YES];
-				[InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
-				break;
-			default:
-				break;
-		}
-	}
+    if(buttonIndex != alertView.cancelButtonIndex)
+        {
+            switch (alertView.tag)
+            {
+                case kAlertViewCancelReport:
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
+                    break;
+                case kAlertViewReturnWithoutSave:
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
+                    break;
+                case kAlertViewSavedIncident:
+                case kAlertViewPhotoNotSaved:
+                    [self showLoadingView:NO];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
+                    break;
+                case kAlertViewEmail: 
+                {
+                    NSString* candidate = [[alertView textFieldAtIndex:0] text];
+                    NSLog(@"Entered: %@",candidate);
+                    
+                    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"; 
+                    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
+                    
+                    if([emailTest evaluateWithObject:candidate]){
+                        mIncidentCreated.mEmail = [[alertView textFieldAtIndex:0] text];
+                        self.mLabelEmail.text = mIncidentCreated.mEmail;
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+    
+    
+	
 }
 
 #pragma mark -
