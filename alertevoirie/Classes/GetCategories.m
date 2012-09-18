@@ -66,6 +66,32 @@
     [mCategoriesDelegate didReceiveCategories];
 }
 
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
+{
+	NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
+    
+    if ([httpResponse respondsToSelector:@selector(allHeaderFields)])
+	{
+        NSDictionary * dicresponse = httpResponse.allHeaderFields;
+		
+		NSLog(@"HTTP headers for response:\n %@",dicresponse);
+        BOOL testAvailableVersion = YES;
+        if ([dicresponse objectForKey:kHTTPHeaderForceUpdateKey/*@"x-app-force-update"*/])
+		{
+			if ([[dicresponse objectForKey:kHTTPHeaderForceUpdateKey] isEqualToString:@"true"])
+			{
+				[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidReceiveForceUpdate object:nil];
+                testAvailableVersion = NO;
+			}
+		}
+		
+		if (testAvailableVersion && [dicresponse objectForKey:kHTTPHeaderAvailableVersionKey/*@"x-app-available-version"*/])
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidReceiveNewVersion object:[dicresponse objectForKey:kHTTPHeaderAvailableVersionKey]];
+		}
+    }
+}
+
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];

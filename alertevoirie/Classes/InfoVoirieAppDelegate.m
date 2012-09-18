@@ -42,7 +42,8 @@
 	
 	mNumGeolocIteration = 0;
 	
-	
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newVersionAvailable:) name:kNotificationDidReceiveNewVersion object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdate:) name:kNotificationDidReceiveForceUpdate object:nil];
 	
 	return YES;
 }
@@ -100,6 +101,104 @@
     [window release];
 	[mLocationManager release];
     [super dealloc];
+}
+
+
+
+#pragma mark - Notification Methods
+- (void)newVersionAvailable:(NSNotification*)_notification
+{
+    NSArray* components;
+    
+    NSString* lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultKey_LastVersionAvailable];
+    components = [lastVersion componentsSeparatedByString:@"."];
+    //NSLog(@"last version components = %@", components);
+    int lastVersionMajor = 0;
+    int lastVersionMinor = 0;
+    int lastVersionBuild = 0;
+    if ([components count] > 0)
+    {
+        lastVersionMajor = [[components objectAtIndex:0] intValue];
+        
+        if ([components count] > 1)
+        {
+            lastVersionMinor = [[components objectAtIndex:1] intValue];
+            
+            if ([components count] > 2)
+            {
+                lastVersionBuild = [[components objectAtIndex:2] intValue];
+            }
+        }
+    }
+    
+    NSString* newVersion = _notification.object;
+    //NSLog(@"newVersion = %@", newVersion);
+    components = [newVersion componentsSeparatedByString:@"."];
+    //NSLog(@"new version components = %@", components);
+    int newVersionMajor = 0;
+    int newVersionMinor = 0;
+    int newVersionBuild = 0;
+    if ([components count] > 0)
+    {
+        newVersionMajor = [[components objectAtIndex:0] intValue];
+        
+        if ([components count] > 1)
+        {
+            newVersionMinor = [[components objectAtIndex:1] intValue];
+            
+            if ([components count] > 2)
+            {
+                newVersionBuild = [[components objectAtIndex:2] intValue];
+            }
+        }
+    }
+    //NSLog(@"");
+    
+    //NSLog(@"%d.%d.%d / %d.%d.%d", lastVersionMajor, lastVersionMinor, lastVersionBuild, newVersionMajor, newVersionMinor, newVersionBuild);
+    
+    if ( newVersionMajor > lastVersionMajor || 
+        ( newVersionMajor == lastVersionMajor && newVersionMinor > lastVersionMinor ) ||
+        ( newVersionMajor == lastVersionMajor && newVersionMinor == lastVersionMinor && newVersionBuild > lastVersionBuild ))
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alert_new_version_available_title", nil) message:[NSString stringWithFormat:NSLocalizedString(@"alert_new_version_available_message", nil), newVersion] delegate:self cancelButtonTitle:NSLocalizedString(@"close", nil) otherButtonTitles:NSLocalizedString(@"alert_new_version_available_open", nil), nil];
+        
+        alert.tag = 'NEWV';
+        [alert show];
+        [alert release];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newVersion forKey:kUserDefaultKey_LastVersionAvailable];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)forceUpdate:(NSNotification*)_notification
+{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alert_new_version_available_title", nil) message:NSLocalizedString(@"alert_new_version_force_update_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"alert_new_version_available_open", nil) otherButtonTitles:nil];
+    
+    alert.tag = 'FORC';
+    [alert show];
+    [alert release];
+}
+
+#pragma mark - UIAlertView Methods
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	//NSLog(@"");
+	if ( alertView.cancelButtonIndex != buttonIndex )
+	{
+		if ( alertView.tag == 'NEWV' )
+		{
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:NSLocalizedString(@"application_itunes_link", nil)]];
+		}
+	}
+	else
+	{
+		if ( alertView.tag == 'FORC' )
+		{
+			//NSLog(@"");
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:NSLocalizedString(@"application_itunes_link", nil)]];
+		}
+	}
 }
 
 @end

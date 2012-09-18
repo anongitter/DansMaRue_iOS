@@ -269,6 +269,8 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	[_request setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] forHTTPHeaderField:@"x-app-version"];
 	[_request setValue:@"iphone_family" forHTTPHeaderField:@"x-app-platform"];
 	[_request setValue:[[UIDevice currentDevice] model] forHTTPHeaderField:@"x-app-device-model"];
+    
+    
 }
 
 + (NSURLConnection*)launchRequestWithArray:(NSArray*)_array andDelegate:(id)_delegate
@@ -295,7 +297,7 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	
 	NSURLConnection* connection = [[[NSURLConnection alloc] initWithRequest:request delegate:_delegate startImmediately:YES] autorelease];
 	[request release];
-	
+    
 	return connection;
 }
 

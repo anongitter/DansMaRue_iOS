@@ -56,4 +56,11 @@
 #define kErrorReadingTempPictureFile			30
 #define kErrorBadJsonRequestToken			31
 
+//HTTP Header
+#define kUserDefaultKey_LastVersionAvailable			@"last_version_available"
+#define kNotificationDidReceiveForceUpdate              @"forceUpdate"
+#define kNotificationDidReceiveNewVersion               @"newAvailableAppVersion"
+#define kHTTPHeaderForceUpdateKey						@"X-App-Force-Update"
+#define kHTTPHeaderAvailableVersionKey					@"X-App-Available-Version"
+
 
