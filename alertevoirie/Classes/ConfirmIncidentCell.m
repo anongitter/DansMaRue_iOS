@@ -45,9 +45,13 @@
 	mIncidentName.text = [_IncidentObj.mdescriptive capitalizedString];
 	
 	NSMutableDictionary* lCategorie = [[InfoVoirieContext sharedInfoVoirieContext].mCategory valueForKey:[NSString stringWithFormat:@"%d", _IncidentObj.mcategory]];
-	NSString* parentID = [lCategorie objectForKey:@"parent_id"];
-	NSMutableDictionary* parentCategorie = [[[InfoVoirieContext sharedInfoVoirieContext] mCategory] valueForKey:parentID];
-	if ([[lCategorie valueForKey:@"parent_id"] isEqualToString:@"null"])
+    NSLog(@"lCategorie=%@", lCategorie);
+    
+	NSNumber* parentID = [lCategorie objectForKey:@"parent_id"];
+	NSMutableDictionary* parentCategorie = [[[InfoVoirieContext sharedInfoVoirieContext] mCategory] valueForKey:[NSString stringWithFormat:@"%d", [parentID intValue]]];
+    
+    
+	if ([parentID intValue] <= 0)
 	{
 		mIncidentCategory.text = [[lCategorie valueForKey:@"name"] capitalizedString];
 	}

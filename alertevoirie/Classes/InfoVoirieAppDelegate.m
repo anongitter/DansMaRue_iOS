@@ -68,9 +68,17 @@
  */
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+
 	NSLog(@"locationManager didUpdate");
 	// On sauvegarde la nouvelle position courante de l'utilisateur (utile pour les annotations)
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
+    
+    //TO REMOVE!!
+    CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
+    [InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
+    ///
+    
+    
 	[InfoVoirieContext sharedInfoVoirieContext].mLocationFound = YES;
 	mNumGeolocIteration++;
 	if (mNumGeolocIteration == 1)

@@ -263,12 +263,16 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	NSString* concatenated_signature_items = [NSString stringWithFormat:@"%@%@", kServerPrivateKey, _jsonStream];
 	NSString* signature = [[InfoVoirieContext getSHA1HashBytes:concatenated_signature_items] lowercaseString];
 	[_request setValue:signature forHTTPHeaderField:@"x-app-request-signature"];
-	
 	NSLog(@"x-app-request-signature : %@", signature);
 	
 	[_request setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] forHTTPHeaderField:@"x-app-version"];
+    NSLog(@"x-app-version : %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]);
+    
 	[_request setValue:@"iphone_family" forHTTPHeaderField:@"x-app-platform"];
+    NSLog(@"x-app-platform : %@", @"iphone_family");
+    
 	[_request setValue:[[UIDevice currentDevice] model] forHTTPHeaderField:@"x-app-device-model"];
+    NSLog(@"x-app-device-model : %@", [[UIDevice currentDevice] model]);
     
     
 }
