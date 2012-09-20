@@ -101,6 +101,7 @@
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	[filesContent release];
 	
+    //DAP : one level to add after server update
 //    NSMutableArray* jsonRootObject = (NSMutableArray*) idRootJson ;
 //    NSDictionary* lDicRoot = [jsonRootObject objectAtIndex:0];
 //    NSDictionary* lAnswerRoot = [lDicRoot valueForKey:@"answer"];

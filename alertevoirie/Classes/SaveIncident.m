@@ -39,7 +39,12 @@
 	NSMutableDictionary* position = [NSMutableDictionary dictionary];
 	
 	[dictionary setObject:@"saveIncident" forKey:@"request"];
-	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+    
+    
+    //DAP : come back to normal UDID after SERVER update
+	[dictionary setObject:[[UIDevice currentDevice].uniqueIdentifier substringToIndex:15] forKey:@"udid"];
+    //
+    
     [dictionary setObject:_incident.mEmail forKey:@"email"];
 	
 #ifdef kMarseilleTownhallVersion
