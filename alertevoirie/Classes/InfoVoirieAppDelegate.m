@@ -75,9 +75,9 @@
 	// On sauvegarde la nouvelle position courante de l'utilisateur (utile pour les annotations)
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
     
-    //DAP : TO REMOVE after server update!!
-    CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
-    [InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
+    //DAP : HACK to make it work ouside paris
+    //CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
+    //[InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
     ///
     
     
