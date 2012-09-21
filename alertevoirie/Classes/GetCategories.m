@@ -101,24 +101,19 @@
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	[filesContent release];
 	
-    //DAP : one level to add after server update
-//    NSMutableArray* jsonRootObject = (NSMutableArray*) idRootJson ;
-//    NSDictionary* lDicRoot = [jsonRootObject objectAtIndex:0];
-//    NSDictionary* lAnswerRoot = [lDicRoot valueForKey:@"answer"];
-
-    //workaround
-	if( [idRootJson isKindOfClass: [NSMutableArray class]] )
+    if( [idRootJson isKindOfClass: [NSMutableArray class]] )
 	{
         NSMutableArray* jsonRootObject = (NSMutableArray*) idRootJson ;
-		NSDictionary* lDicRoot = [jsonRootObject objectAtIndex:0];
+        NSDictionary* lDicRoot = [jsonRootObject objectAtIndex:0];
+        NSDictionary* lAnswerRoot = [lDicRoot valueForKey:@"answer"];
         
         //Store locally if necessary
-        NSString* version = [NSString stringWithFormat:@"%d", [[lDicRoot valueForKey:@"version"] intValue]];
+        NSString* version = [NSString stringWithFormat:@"%d", [[lAnswerRoot valueForKey:@"version"] intValue]];
         NSString* old_version = [[NSUserDefaults standardUserDefaults] valueForKey:@"categories_version"];
         if (![version isEqualToString:old_version]) {
             [[NSUserDefaults standardUserDefaults] setValue:version forKey:@"categories_version"];
             
-            NSDictionary* lCategoriesRoot = [lDicRoot valueForKey:@"categories"];
+            NSDictionary* lCategoriesRoot = [lAnswerRoot valueForKey:@"categories"];
             [[NSUserDefaults standardUserDefaults] setValue:lCategoriesRoot forKey:@"categories_json"];
         }
 	}

@@ -26,8 +26,16 @@
 }
 */
 
+-(BOOL) shouldAutorotate{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (id)initWithViewController:(ValidationRapportController *)_nextViewController

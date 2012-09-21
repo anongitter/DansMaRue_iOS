@@ -20,8 +20,16 @@
 
 @implementation NouveauController
 
+- (BOOL) shouldAutorotate{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -104,6 +112,7 @@
 	}
 	else
 	{
+        NSLog(@"Loading 1");
 		[mIndicatorView startAnimating];
 	}
 }
@@ -114,6 +123,7 @@
 	
 	if (mLoadingOngoing > 0)
 	{
+        NSLog(@"Loading 2");
 		[mIndicatorView startAnimating];
 	}
 }
@@ -130,6 +140,7 @@
 	
 	[getIncidentStats release];
 	
+    NSLog(@"Loading 3");
 	[mIndicatorView startAnimating];
 	
 	mHasBeenGeolocated = YES;
@@ -149,6 +160,7 @@
 	
 	[userAuthentication release];
 	
+    NSLog(@"Loading 4");
 	[mIndicatorView startAnimating];
 }
 

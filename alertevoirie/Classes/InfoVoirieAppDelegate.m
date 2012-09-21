@@ -26,7 +26,9 @@
 {    
 	[[UIApplication sharedApplication] setStatusBarHidden:NO];
     // Add the tab bar controller's current view as a subview of the window
-    [window addSubview:tabBarController.view];
+    
+    window.rootViewController = tabBarController;
+    //[window addSubview:tabBarController.view];
 	
 	[tabBarController setDelegate:[InfoVoirieContext sharedInfoVoirieContext]];
 	
@@ -207,6 +209,18 @@
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:NSLocalizedString(@"application_itunes_link", nil)]];
 		}
 	}
+}
+
+- (BOOL) shouldAutorotate{
+    return YES;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end

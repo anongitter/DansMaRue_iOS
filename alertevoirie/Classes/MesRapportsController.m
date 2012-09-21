@@ -20,8 +20,16 @@
 @synthesize mReportsUpdated;
 @synthesize mReportsResolved;
 
+-(BOOL) shouldAutorotate{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (void)viewDidLoad

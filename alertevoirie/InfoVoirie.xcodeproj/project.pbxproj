@@ -1605,6 +1605,7 @@
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1620,6 +1621,7 @@
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CD61113-4F16-4B40-8607-E9A9C8BD931C";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1687,6 +1689,7 @@
 				INFOPLIST_FILE = "InfoVoirie-Info.plist";
 				PRODUCT_NAME = AlerteVoirie;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AdHoc;

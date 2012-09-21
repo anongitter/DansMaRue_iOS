@@ -59,7 +59,7 @@
 		 }
 		 */
 	//	 {"category": 32, "status": "R", "date": "2010-04-23 05:03:13.424182", "descriptive": "un panneau cass\u00e9", "address": "2 rue colbert", "lat": 30.359089999999998, "lng": 9.3852100000000007, "id": 18}}
-		//NSLog(@"%@",_dictionary);
+		NSLog(@"%@",_dictionary);
 		
 		
 		self.mid  = ((NSNumber*)[_dictionary valueForKey:kIdKey]).intValue;
@@ -115,7 +115,17 @@
 		coordinate.longitude = ((NSNumber*)[_dictionary valueForKey:kLongitudeKey]).doubleValue;
         
         if ([_dictionary objectForKey:kPriorityKey]){
-            self.mPriorityId = ((NSNumber*)[_dictionary valueForKey:kPriorityKey]).intValue;
+            
+            if ([[_dictionary objectForKey:kPriorityKey] isKindOfClass:[NSDictionary class]]){
+                
+                NSDictionary* priorityDic = (NSDictionary*)[_dictionary valueForKey:kPriorityKey];
+                self.mPriorityId = ((NSNumber*)[priorityDic objectForKey:@"id"]).intValue;
+                
+            } if ([[_dictionary objectForKey:kPriorityKey] isKindOfClass:[NSNumber class]]){
+                
+                self.mPriorityId = ((NSNumber*)[_dictionary valueForKey:kPriorityKey]).intValue;
+            }
+                
         } else {
             self.mPriorityId = 3;
         }

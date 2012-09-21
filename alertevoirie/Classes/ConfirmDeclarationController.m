@@ -15,8 +15,16 @@
 @implementation ConfirmDeclarationController
 @synthesize mIncidentsOngoing;
 
+-(BOOL) shouldAutorotate{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

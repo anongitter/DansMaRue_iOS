@@ -26,9 +26,12 @@
 	CGRect PictWide = CGRectMake(0, 0, 320, kCellHeight);
 	
 	UIView *bgView = [[UIView alloc] initWithFrame:CellWide];
+    bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	UIImageView *imageView = [[UIImageView alloc] initWithFrame:PictWide];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	UIView *bgViewSelected = [[UIView alloc] initWithFrame:CellWide];
 	UIImageView *imageViewSelected = [[UIImageView alloc] initWithFrame:PictWide];
+    imageViewSelected.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	
 	[imageView setImage:[UIImage imageNamed:@"item_cell_ou_off.png"]];
 	[imageViewSelected setImage:[UIImage imageNamed:@"item_cell_ou_on.png"]];

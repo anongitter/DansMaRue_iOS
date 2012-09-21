@@ -14,8 +14,16 @@
 @synthesize mOrderedKeys;
 @synthesize mBannedIncidentsId;
 
+-(BOOL) shouldAutorotate{
+    return YES;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
