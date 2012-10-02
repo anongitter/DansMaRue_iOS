@@ -40,10 +40,7 @@
 	
 	[dictionary setObject:@"saveIncident" forKey:@"request"];
     
-    
-    //DAP : come back to normal UDID after SERVER update
-	[dictionary setObject:[[UIDevice currentDevice].uniqueIdentifier substringToIndex:15] forKey:@"udid"];
-    //
+    [dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
     
     [dictionary setObject:_incident.mEmail forKey:@"email"];
 	
