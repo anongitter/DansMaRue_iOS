@@ -76,8 +76,8 @@
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
     
     //DAP : HACK to make it work ouside paris
-    //CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
-    //[InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
+    CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
+    [InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
     ///
     
     

@@ -45,6 +45,7 @@
 	if (self)
 	{
 		mIncidentCreated = [_incident retain];
+        mIncidentCreated.mEmail = @"";
 	}
 	return self;
 }
@@ -455,8 +456,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                     [self.navigationController popViewControllerAnimated:YES];
                     [InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;
                     break;
-                case kAlertViewSavedIncident:
                 case kAlertViewPhotoNotSaved:
+                case kAlertViewSavedIncident:
                     [self showLoadingView:NO];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     [InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = NO;

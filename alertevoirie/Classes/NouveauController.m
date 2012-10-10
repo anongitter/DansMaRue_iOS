@@ -107,12 +107,12 @@
 			[lGetIncidentStats generateIncidentStats:lPosition];
 			
 			[lGetIncidentStats release];
-			mLoadingOngoing = 2;
+			mLoadingOngoing++;
 		}
 	}
 	else
 	{
-        NSLog(@"Loading 1");
+        NSLog(@"Loading 1, mLoadingOngoing=%d",mLoadingOngoing);
 		[mIndicatorView startAnimating];
 	}
 }
@@ -123,7 +123,7 @@
 	
 	if (mLoadingOngoing > 0)
 	{
-        NSLog(@"Loading 2");
+        NSLog(@"Loading 2, mLoadingOngoing=%d",mLoadingOngoing);
 		[mIndicatorView startAnimating];
 	}
 }
@@ -140,7 +140,7 @@
 	
 	[getIncidentStats release];
 	
-    NSLog(@"Loading 3");
+    NSLog(@"Loading 3, mLoadingOngoing=%d",mLoadingOngoing);
 	[mIndicatorView startAnimating];
 	
 	mHasBeenGeolocated = YES;

@@ -56,6 +56,9 @@
 #define kErrorReadingTempPictureFile			30
 #define kErrorBadJsonRequestToken			31
 
+//#define kDateFormat				@"yyyy-MM-dd HH:mm:ss"
+#define kDateFormat				@"yyyy-MM-dd"
+
 //HTTP Header
 #define kUserDefaultKey_LastVersionAvailable			@"last_version_available"
 #define kNotificationDidReceiveForceUpdate              @"forceUpdate"

@@ -78,7 +78,7 @@
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
 	
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDate *formatterDate = [inputFormatter dateFromString:mIncident.mdate];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];

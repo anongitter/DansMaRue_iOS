@@ -61,12 +61,13 @@
 	//	 {"category": 32, "status": "R", "date": "2010-04-23 05:03:13.424182", "descriptive": "un panneau cass\u00e9", "address": "2 rue colbert", "lat": 30.359089999999998, "lng": 9.3852100000000007, "id": 18}}
 		NSLog(@"%@",_dictionary);
 		
-		
+		self.mEmail = @"";
 		self.mid  = ((NSNumber*)[_dictionary valueForKey:kIdKey]).intValue;
 		self.mcategory  = ((NSNumber*)[_dictionary valueForKey:kCategoryKey]).intValue;
 		self.mconfirms = ((NSNumber*)[_dictionary valueForKey:kConfirmsKey]).intValue;
 		self.mstate  = [_dictionary valueForKey:kStateKey];
 		self.maddress  = [_dictionary valueForKey:kAddressKey];
+        self.mdate = [_dictionary valueForKey:kDateKey];
 		NSString* address = [_dictionary valueForKey:kAddressKey];
 		
 		NSArray* addressComponents = [address componentsSeparatedByString:@"\n"];
@@ -157,7 +158,7 @@
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
 	
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDate *formatterDate = [inputFormatter dateFromString:self.mdate];
 	NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];

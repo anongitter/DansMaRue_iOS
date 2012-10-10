@@ -34,7 +34,7 @@
 	
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"EEEE dd MMMM\nHH:mm"];

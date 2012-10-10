@@ -262,7 +262,7 @@
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
 	
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMMM"];
@@ -313,7 +313,7 @@
 	// placed here to avoid a bug that occured when the cells are not loaded
 	if ([self.mArrayCurrentTable count] > 0)
 	{
-		[mTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//		[mTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 	}
 	else
@@ -510,14 +510,20 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [inputFormatter setDateFormat:kDateFormat];
 	
 	for(NSString* key in keys)
 	{
 		NSMutableArray* section = [mDictionnaryReportsOngoing objectForKey:key];
 		IncidentObj *lincident = [section objectAtIndex:0];
-		[toOrder addObject:[inputFormatter dateFromString:lincident.mdate]];
+        NSLog(@"Date : %@", lincident.mdate);
+        if ([inputFormatter dateFromString:lincident.mdate] != nil)
+        {
+            [toOrder addObject:[inputFormatter dateFromString:lincident.mdate]];
+        }
+		
 	}
+    
 	[toOrder sortUsingFunction:(compareDateDescendingOrderReports) context:nil];
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMMM"];
@@ -649,6 +655,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	//if([mSegmentedControl selectedSegmentIndex] == kSwitchOngoingIndex)
 	{
 		NSInteger count = [mOrderedKeys count];
+        NSLog(@"numberOfSectionsInTableView = %d", count);
 		return (count > 0) ? count : 1;
 	}
 	//return 1;
@@ -664,6 +671,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 		NSString* key = [mOrderedKeys objectAtIndex:section];
 		NSArray* nameSection = [mDictionnaryReportsOngoing objectForKey:key];
 		
+        NSLog(@"numberOfRowsInSection = %d", [nameSection count]);
 		return [nameSection count];
 	}
 	//return [self.mArrayCurrentTable count];
@@ -786,6 +794,8 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 #pragma mark Report Delegate Methods
 - (void)didReceiveReportsOngoing:(NSArray*)_ongoing updated:(NSArray*)_updated resolved:(NSArray*)_resolved
 {
+    NSLog(@"didReceiveReportsOngoing");
+          
 	if (_ongoing == nil || _updated == nil || _resolved == nil)
 	{
 		[self showLoadingView:NO];
@@ -813,7 +823,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
 	
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMMM"];

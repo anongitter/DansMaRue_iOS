@@ -123,7 +123,7 @@ NSComparisonResult compareDateDescendingOrder(id _date1, id _date2, void *contex
 	
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	for(NSString* key in keys)
 	{
@@ -174,7 +174,7 @@ NSComparisonResult compareDateDescendingOrder(id _date1, id _date2, void *contex
 	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
 	
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[inputFormatter setDateFormat:kDateFormat];
 	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"EEEE d MMMM"];
