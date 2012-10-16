@@ -13,7 +13,15 @@
 //#define kPreProdServer						@"http://alerte-voirie.ppd.c4mprod.com/api/"
 //#define kProdServer							@"http://www.alertevoirie.com/api/"
 
-#define kDev_CociteServer						@"http://dev.lutece.paris.fr/sira-integ/rest/signalement/api/"
+#define AV_URL_DEV_LUTECE_SIRA_INTEG            @"http://dev.lutece.paris.fr/sira-integ/rest/signalement/api/"
+#define AV_URL_DEV_LUTECE_SIRA_R7               @"http://dev.lutece.paris.fr/sira/rest/signalement/api/"
+#define AV_URL_DEV_LUTECE_R57_SIRA              @"http://r57-sira-ws.rec.apps.paris.fr/sira/rest/signalement/api/"
+
+#if build_configuration == 2 //appstore
+    #define kDev_CociteServer						AV_URL_DEV_LUTECE_R57_SIRA
+#else
+    #define kDev_CociteServer						AV_URL_DEV_LUTECE_SIRA_INTEG
+#endif
 
 #define kServer								kDev_CociteServer
 

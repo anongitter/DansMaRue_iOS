@@ -623,8 +623,10 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	
 	UIView *bgView = [[UIView alloc] initWithFrame:CellWide];
 	UIImageView *imageView = [[UIImageView alloc] initWithFrame:PictWide];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	UIView *bgViewSelected = [[UIView alloc] initWithFrame:CellWide];
 	UIImageView *imageViewSelected = [[UIImageView alloc] initWithFrame:PictWide];
+    imageViewSelected.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	
 	[imageView setImage:[UIImage imageNamed:@"item_cell_ou_off.png"]];
 	[imageViewSelected setImage:[UIImage imageNamed:@"item_cell_ou_on.png"]];
@@ -735,6 +737,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	
 	UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 28)] autorelease];
 	UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header_bar.png"]];
+    bg.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 4, 300, 20)];
 	title.text = [self tableView:tableView titleForHeaderInSection:section];
 	title.text = [InfoVoirieContext capitalisedFirstLetter:(title.text)];

@@ -89,7 +89,6 @@
     //[InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
     ///
     
-    
 	[InfoVoirieContext sharedInfoVoirieContext].mLocationFound = YES;
 	mNumGeolocIteration++;
 	if (mNumGeolocIteration == 1)
