@@ -81,7 +81,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"SCAN = %@", filesContent );
+	NSLog(@"connectionDidFinishLoading = %@", filesContent );
 	id idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	[filesContent release];
@@ -91,22 +91,28 @@
 		NSMutableArray* jsonRootObject = (NSMutableArray*) idRootJson ;
 		
 		NSMutableDictionary* dicRoot = [jsonRootObject objectAtIndex:0];
-		NSMutableArray* answerRoot = [dicRoot valueForKey:@"answer"];
+        
+        if ([dicRoot objectForKey:@"answer"])
+        {
+            NSMutableArray* answerRoot = [dicRoot valueForKey:@"answer"];
+            NSString* status = [answerRoot valueForKey:@"status"];
+            if([status intValue] != 0)
+            {
+                [mSaveIncidentDelegate didSaveIncident:-1];
+            }
+            else
+            {
+                NSString* stringIncidentId = [answerRoot valueForKey:@"incidentId"];
+                NSInteger incidentId = [stringIncidentId integerValue];
+                
+                [mSaveIncidentDelegate didSaveIncident:incidentId];
+            }
+        } else if ([dicRoot objectForKey:@"error_message"]){
+            //connectionDidFinishLoading = [{"error":7,"error_message":"l'arrondissement n'est pas trouvé pour cette latitude et longitude. Etes vous bien dans Paris ? lat,lng : 43.31747,5.3599353"}]
+            
+            [mSaveIncidentDelegate didSaveIncident:-1 withMessage:[dicRoot objectForKey:@"error_message"]];
+        }
 		
-		NSString* status = [answerRoot valueForKey:@"status"];
-		
-		if([status intValue] != 0)
-		{
-			//TODO: Error Message ?
-			[mSaveIncidentDelegate didSaveIncident:-1];
-		}
-		else
-		{
-			NSString* stringIncidentId = [answerRoot valueForKey:@"incidentId"];
-			NSInteger incidentId = [stringIncidentId integerValue];
-			
-			[mSaveIncidentDelegate didSaveIncident:incidentId];
-		}
 	}
 	else 
 	{

@@ -12,5 +12,6 @@
 @protocol saveIncidentDelegate
 
 -(void)didSaveIncident:(NSInteger)_incidentId;
+-(void)didSaveIncident:(NSInteger)_incidentId withMessage:(NSString*) _msg;
 
 @end

@@ -10,9 +10,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "BWHockeyManager.h"
+#import "BWQuincyManager.h"
 
 @interface InfoVoirieAppDelegate : NSObject
-	<UIApplicationDelegate, CLLocationManagerDelegate>
+	<UIApplicationDelegate, CLLocationManagerDelegate,BWHockeyManagerDelegate>
 {
     UIWindow*					window;
     UITabBarController*			tabBarController;

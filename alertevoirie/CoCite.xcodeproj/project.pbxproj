@@ -51,6 +51,24 @@
 		66665403162569F900A12A49 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 66665400162569F900A12A49 /* Icon.png */; };
 		66665404162569F900A12A49 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66665401162569F900A12A49 /* Icon@2x.png */; };
 		66665405162569F900A12A49 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 66665402162569F900A12A49 /* Icon~ipad.png */; };
+		66B407ED162D5760008A3388 /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407CD162D5760008A3388 /* BWApp.m */; };
+		66B407EE162D5760008A3388 /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407CF162D5760008A3388 /* BWGlobal.m */; };
+		66B407EF162D5760008A3388 /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407D1162D5760008A3388 /* BWHockeyManager.m */; };
+		66B407F0162D5760008A3388 /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407D3162D5760008A3388 /* BWHockeySettingsViewController.m */; };
+		66B407F1162D5760008A3388 /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407D5162D5760008A3388 /* BWHockeyViewController.m */; };
+		66B407F2162D5760008A3388 /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407D8162D5760008A3388 /* NSString+HockeyAdditions.m */; };
+		66B407F3162D5760008A3388 /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407DA162D5760008A3388 /* PSAppStoreHeader.m */; };
+		66B407F4162D5760008A3388 /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407DC162D5760008A3388 /* PSStoreButton.m */; };
+		66B407F5162D5760008A3388 /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407DE162D5760008A3388 /* PSWebTableViewCell.m */; };
+		66B407F6162D5760008A3388 /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407E0162D5760008A3388 /* UIImage+HockeyAdditions.m */; };
+		66B407F7162D5760008A3388 /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66B407E1162D5760008A3388 /* Hockey.bundle */; };
+		66B407F8162D5760008A3388 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407E4162D5760008A3388 /* JSONKit.m */; };
+		66B407F9162D5760008A3388 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 66B407E5162D5760008A3388 /* README.md */; };
+		66B407FA162D5760008A3388 /* README.mkdown in Resources */ = {isa = PBXBuildFile; fileRef = 66B407E6162D5760008A3388 /* README.mkdown */; };
+		66B407FB162D5760008A3388 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B407E9162D5760008A3388 /* BWQuincyManager.m */; };
+		66B407FC162D5760008A3388 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66B407EA162D5760008A3388 /* CrashReporter.framework */; };
+		66B407FD162D5761008A3388 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66B407EB162D5760008A3388 /* LICENSE.txt */; };
+		66B407FE162D5761008A3388 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66B407EC162D5760008A3388 /* Quincy.bundle */; };
 		66B70A611608C3E300662979 /* C4MLocalizedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */; };
 		66B70A621608C3E300662979 /* C4MLocalizedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A5E1608C3E300662979 /* C4MLocalizedLabel.m */; };
 		66B70A631608C3E300662979 /* C4MLocalizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 66B70A601608C3E300662979 /* C4MLocalizedTextField.m */; };
@@ -235,7 +253,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* InfoVoirieAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoVoirieAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* InfoVoirieAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoVoirieAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* AlerteVoirie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlerteVoirie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Co-Cité Paris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co-Cité Paris.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2599A4AD1451B9AB001B8D38 /* C4MNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MNavigationBar.h; sourceTree = "<group>"; };
 		2599A4AE1451B9AB001B8D38 /* C4MNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MNavigationBar.m; sourceTree = "<group>"; };
@@ -300,6 +318,36 @@
 		66665400162569F900A12A49 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		66665401162569F900A12A49 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		66665402162569F900A12A49 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
+		66B407CC162D5760008A3388 /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
+		66B407CD162D5760008A3388 /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
+		66B407CE162D5760008A3388 /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
+		66B407CF162D5760008A3388 /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
+		66B407D0162D5760008A3388 /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
+		66B407D1162D5760008A3388 /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
+		66B407D2162D5760008A3388 /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
+		66B407D3162D5760008A3388 /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
+		66B407D4162D5760008A3388 /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
+		66B407D5162D5760008A3388 /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
+		66B407D7162D5760008A3388 /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
+		66B407D8162D5760008A3388 /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
+		66B407D9162D5760008A3388 /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
+		66B407DA162D5760008A3388 /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
+		66B407DB162D5760008A3388 /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
+		66B407DC162D5760008A3388 /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
+		66B407DD162D5760008A3388 /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
+		66B407DE162D5760008A3388 /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
+		66B407DF162D5760008A3388 /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
+		66B407E0162D5760008A3388 /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
+		66B407E1162D5760008A3388 /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
+		66B407E3162D5760008A3388 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		66B407E4162D5760008A3388 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		66B407E5162D5760008A3388 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		66B407E6162D5760008A3388 /* README.mkdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mkdown; sourceTree = "<group>"; };
+		66B407E8162D5760008A3388 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
+		66B407E9162D5760008A3388 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
+		66B407EA162D5760008A3388 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		66B407EB162D5760008A3388 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		66B407EC162D5760008A3388 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		66B70A5B1608C3E300662979 /* C4MLocalizedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MLocalizedButton.h; sourceTree = "<group>"; };
 		66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MLocalizedButton.m; sourceTree = "<group>"; };
 		66B70A5D1608C3E300662979 /* C4MLocalizedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MLocalizedLabel.h; sourceTree = "<group>"; };
@@ -549,6 +597,7 @@
 				D987B4B711BFF0A400709B26 /* CoreLocation.framework in Frameworks */,
 				D9B3A80E11C111BF00C41728 /* QuartzCore.framework in Frameworks */,
 				D9265E4911F4AF030050D89F /* MessageUI.framework in Frameworks */,
+				66B407FC162D5760008A3388 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +628,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* AlerteVoirie.app */,
+				1D6058910D05DD3D006BFB54 /* Co-Cité Paris.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -610,6 +659,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				66B407CB162D5760008A3388 /* HockeyKit */,
+				66B407E7162D5760008A3388 /* QuincyKit */,
 				66B70A5B1608C3E300662979 /* C4MLocalizedButton.h */,
 				66B70A5C1608C3E300662979 /* C4MLocalizedButton.m */,
 				66B70A5D1608C3E300662979 /* C4MLocalizedLabel.h */,
@@ -749,6 +800,68 @@
 				6632014516074EB200B5F1C8 /* GetCategories.m */,
 			);
 			name = "Get Categories";
+			sourceTree = "<group>";
+		};
+		66B407CB162D5760008A3388 /* HockeyKit */ = {
+			isa = PBXGroup;
+			children = (
+				66B407CC162D5760008A3388 /* BWApp.h */,
+				66B407CD162D5760008A3388 /* BWApp.m */,
+				66B407CE162D5760008A3388 /* BWGlobal.h */,
+				66B407CF162D5760008A3388 /* BWGlobal.m */,
+				66B407D0162D5760008A3388 /* BWHockeyManager.h */,
+				66B407D1162D5760008A3388 /* BWHockeyManager.m */,
+				66B407D2162D5760008A3388 /* BWHockeySettingsViewController.h */,
+				66B407D3162D5760008A3388 /* BWHockeySettingsViewController.m */,
+				66B407D4162D5760008A3388 /* BWHockeyViewController.h */,
+				66B407D5162D5760008A3388 /* BWHockeyViewController.m */,
+				66B407D6162D5760008A3388 /* Helper */,
+				66B407E1162D5760008A3388 /* Hockey.bundle */,
+				66B407E2162D5760008A3388 /* JSON */,
+				66B407E6162D5760008A3388 /* README.mkdown */,
+			);
+			name = HockeyKit;
+			path = Libraries/HockeyKit;
+			sourceTree = "<group>";
+		};
+		66B407D6162D5760008A3388 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				66B407D7162D5760008A3388 /* NSString+HockeyAdditions.h */,
+				66B407D8162D5760008A3388 /* NSString+HockeyAdditions.m */,
+				66B407D9162D5760008A3388 /* PSAppStoreHeader.h */,
+				66B407DA162D5760008A3388 /* PSAppStoreHeader.m */,
+				66B407DB162D5760008A3388 /* PSStoreButton.h */,
+				66B407DC162D5760008A3388 /* PSStoreButton.m */,
+				66B407DD162D5760008A3388 /* PSWebTableViewCell.h */,
+				66B407DE162D5760008A3388 /* PSWebTableViewCell.m */,
+				66B407DF162D5760008A3388 /* UIImage+HockeyAdditions.h */,
+				66B407E0162D5760008A3388 /* UIImage+HockeyAdditions.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		66B407E2162D5760008A3388 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				66B407E3162D5760008A3388 /* JSONKit.h */,
+				66B407E4162D5760008A3388 /* JSONKit.m */,
+				66B407E5162D5760008A3388 /* README.md */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		66B407E7162D5760008A3388 /* QuincyKit */ = {
+			isa = PBXGroup;
+			children = (
+				66B407E8162D5760008A3388 /* BWQuincyManager.h */,
+				66B407E9162D5760008A3388 /* BWQuincyManager.m */,
+				66B407EA162D5760008A3388 /* CrashReporter.framework */,
+				66B407EB162D5760008A3388 /* LICENSE.txt */,
+				66B407EC162D5760008A3388 /* Quincy.bundle */,
+			);
+			name = QuincyKit;
+			path = Libraries/QuincyKit;
 			sourceTree = "<group>";
 		};
 		D90B29E511C662CF004DBA83 /* Incident exists */ = {
@@ -1335,7 +1448,7 @@
 			);
 			name = CoCite;
 			productName = InfoVoirie;
-			productReference = 1D6058910D05DD3D006BFB54 /* AlerteVoirie.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Co-Cité Paris.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1524,6 +1637,11 @@
 				66665403162569F900A12A49 /* Icon.png in Resources */,
 				66665404162569F900A12A49 /* Icon@2x.png in Resources */,
 				66665405162569F900A12A49 /* Icon~ipad.png in Resources */,
+				66B407F7162D5760008A3388 /* Hockey.bundle in Resources */,
+				66B407F9162D5760008A3388 /* README.md in Resources */,
+				66B407FA162D5760008A3388 /* README.mkdown in Resources */,
+				66B407FD162D5761008A3388 /* LICENSE.txt in Resources */,
+				66B407FE162D5761008A3388 /* Quincy.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1592,6 +1710,18 @@
 				66B70A611608C3E300662979 /* C4MLocalizedButton.m in Sources */,
 				66B70A621608C3E300662979 /* C4MLocalizedLabel.m in Sources */,
 				66B70A631608C3E300662979 /* C4MLocalizedTextField.m in Sources */,
+				66B407ED162D5760008A3388 /* BWApp.m in Sources */,
+				66B407EE162D5760008A3388 /* BWGlobal.m in Sources */,
+				66B407EF162D5760008A3388 /* BWHockeyManager.m in Sources */,
+				66B407F0162D5760008A3388 /* BWHockeySettingsViewController.m in Sources */,
+				66B407F1162D5760008A3388 /* BWHockeyViewController.m in Sources */,
+				66B407F2162D5760008A3388 /* NSString+HockeyAdditions.m in Sources */,
+				66B407F3162D5760008A3388 /* PSAppStoreHeader.m in Sources */,
+				66B407F4162D5760008A3388 /* PSStoreButton.m in Sources */,
+				66B407F5162D5760008A3388 /* PSWebTableViewCell.m in Sources */,
+				66B407F6162D5760008A3388 /* UIImage+HockeyAdditions.m in Sources */,
+				66B407F8162D5760008A3388 /* JSONKit.m in Sources */,
+				66B407FB162D5760008A3388 /* BWQuincyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1604,13 +1734,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Castelli (NRHJ5C2RXP)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Libraries/QuincyKit\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CoCite_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "CoCite-Info.plist";
-				PRODUCT_NAME = AlerteVoirie;
+				PRODUCT_NAME = "Co-Cité Paris";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F84382A1-405C-4782-8CC9-EB474ED745D4";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1622,10 +1756,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Libraries/QuincyKit\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CoCite_Prefix.pch;
 				INFOPLIST_FILE = "CoCite-Info.plist";
-				PRODUCT_NAME = AlerteVoirie;
+				PRODUCT_NAME = "Co-Cité Paris";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CD61113-4F16-4B40-8607-E9A9C8BD931C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1693,10 +1831,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Libraries/QuincyKit\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CoCite_Prefix.pch;
 				INFOPLIST_FILE = "CoCite-Info.plist";
-				PRODUCT_NAME = AlerteVoirie;
+				PRODUCT_NAME = "Co-Cité Paris";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7CD61113-4F16-4B40-8607-E9A9C8BD931C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

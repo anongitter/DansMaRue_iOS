@@ -84,6 +84,7 @@
 		region.center = [[InfoVoirieContext sharedInfoVoirieContext] mLocation];
 		region.span = MKCoordinateSpanMake(.01, .01);
 		[mMKMapView setRegion:region];
+        //mMKMapView.region = MKCoordinateRegionMakeWithDistance(region.center, 1.0f, 1.0f);
 		
 		[self showLoadingView:YES];
 	}

@@ -199,6 +199,7 @@
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	NSDictionary* category = [mParentCategorie objectAtIndex:[indexPath row]];
+ 
 	NSNumber *numCat = [category valueForKey:@"id"];
 	BOOL children = NO;
 	if ([category valueForKey:@"children_id"] != nil)

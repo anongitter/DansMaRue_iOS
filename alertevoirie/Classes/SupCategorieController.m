@@ -18,13 +18,16 @@
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithID:(NSArray*) _ChildrenID
 {
+    //NSLog(@"_ChildrenID=%@", _ChildrenID);
+    
 	self = [super initWithNibName:@"CategorieController" bundle:nil];
 	if (self)
 	{
 		mSupCategorie = [[NSMutableArray alloc] init];
-		for (NSString* child in _ChildrenID) 
+		for (NSNumber* child in _ChildrenID)
 		{
-			NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:child];
+            //NSLog(@"mCategory=%@", [InfoVoirieContext sharedInfoVoirieContext].mCategory);
+			NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:[NSString stringWithFormat:@"%d", child.intValue]];
 			[lDic setValue:child forKey:@"id"];
 			[mSupCategorie addObject:lDic];
 		}

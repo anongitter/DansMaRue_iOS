@@ -665,11 +665,23 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 #pragma mark Save Incident Delegate Methods
 -(void) didSaveIncident:(NSInteger)_incidentId
 {
+    [self didSaveIncident:_incidentId withMessage:nil];
+}
+
+-(void) didSaveIncident:(NSInteger)_incidentId withMessage:(NSString *)_msg
+{
 	if (_incidentId < 0)
 	{
-		UIAlertView *lAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"server_error_title", nil) message:NSLocalizedString(@"report_not_sent", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-		[lAlert show];
-		[lAlert release];
+        if (_msg!=nil){
+            UIAlertView *lAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"server_error_title", nil) message:_msg delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
+            [lAlert show];
+            [lAlert release];
+        } else {
+            UIAlertView *lAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"server_error_title", nil) message:NSLocalizedString(@"report_not_sent", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
+            [lAlert show];
+            [lAlert release];
+        }
+		
 		
 		[self showLoadingView:NO];
 		[mScrollView setUserInteractionEnabled:YES];

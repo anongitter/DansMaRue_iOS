@@ -177,8 +177,13 @@
 {
 	MKCoordinateRegion region;
 	region.center = [[[mMKMapView annotations] lastObject] coordinate];
-	region.span = MKCoordinateSpanMake(.001, .001);
+	
+    //method 1
+    region.span = MKCoordinateSpanMake(.001, .001);
 	[mMKMapView setRegion:region];
+    
+    //method 2 - zoomed to 5kms radius
+    //mMKMapView.region = MKCoordinateRegionMakeWithDistance(mCoordinate, 1.0f, 1.0f);
 	
 	mIsLeaving = NO;
 	
@@ -679,9 +684,16 @@
         BSKmlResult *place = [mForwardGeocoder.results objectAtIndex:0];
         [[[mMKMapView annotations] objectAtIndex:0] setCoordinate:place.coordinateRegion.center];
 		mCoordinate = place.coordinateRegion.center;
-		MKCoordinateRegion region = place.coordinateRegion;
+		
+        //method 1
+        MKCoordinateRegion region = place.coordinateRegion;
 		region.span = MKCoordinateSpanMake(.001, .001);
         [mMKMapView setRegion:region animated:YES];
+        
+        //method 2 - zoomed to 5kms radius
+        //mMKMapView.region = MKCoordinateRegionMakeWithDistance(mCoordinate, 25.0f, 25.0f);
+        //[mMKMapView setRegion:mMKMapView.region animated:YES];
+        
 	}
     else
     {

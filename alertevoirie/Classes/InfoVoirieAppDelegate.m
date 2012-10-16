@@ -23,7 +23,16 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
-{    
+{
+    
+    #if build_configuration == 3 // AdHoc Mode
+        [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"7035a4f8d51792b02dfec7d6e2cb1694"];
+        [[BWHockeyManager sharedHockeyManager] setDelegate:self];
+        [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
+    #endif
+    
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"7035a4f8d51792b02dfec7d6e2cb1694"];
+    
 	[[UIApplication sharedApplication] setStatusBarHidden:NO];
     // Add the tab bar controller's current view as a subview of the window
     
@@ -75,9 +84,9 @@
 	// On sauvegarde la nouvelle position courante de l'utilisateur (utile pour les annotations)
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
     
-    //DAP : HACK to make it work ouside paris
-    CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.8467231 longitude:2.369384];
-    [InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
+    //DAP : DEBUG ONLY when not on Paris (2 rue de la cité 75004 Paris)!!
+    //CLLocation *tempLocation = [[CLLocation alloc] initWithLatitude:48.854491 longitude:2.347629];
+    //[InfoVoirieContext sharedInfoVoirieContext].mLocation = tempLocation.coordinate;
     ///
     
     
