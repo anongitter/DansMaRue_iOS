@@ -16,11 +16,12 @@
 #define AV_URL_DEV_LUTECE_SIRA_INTEG            @"http://dev.lutece.paris.fr/sira-integ/rest/signalement/api/"
 #define AV_URL_DEV_LUTECE_SIRA_R7               @"http://dev.lutece.paris.fr/sira/rest/signalement/api/"
 #define AV_URL_DEV_LUTECE_R57_SIRA              @"http://r57-sira-ws.rec.apps.paris.fr/sira/rest/signalement/api/"
+#define AV_URL_PROD                             @"http://r57-sira-ws.apps.paris.fr/sira/rest/signalement/api/";
 
 #if build_configuration == 2 //appstore
-    #define kDev_CociteServer						AV_URL_DEV_LUTECE_R57_SIRA
+    #define kDev_CociteServer						AV_URL_PROD
 #else
-    #define kDev_CociteServer						AV_URL_DEV_LUTECE_SIRA_INTEG
+    #define kDev_CociteServer						AV_URL_DEV_LUTECE_R57_SIRA
 #endif
 
 #define kServer								kDev_CociteServer
