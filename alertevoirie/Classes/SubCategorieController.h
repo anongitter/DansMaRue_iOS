@@ -29,8 +29,8 @@
 @property (nonatomic, retain) ValidationRapportController *mNextViewController;
 @property (nonatomic, retain) FicheIncidentController *mFicheViewController;
 
-- (id)initWithNextView:(ValidationRapportController*)_nextView andID:(NSString*) _ParentID;
-- (id)initWithFicheView:(FicheIncidentController *)_nextView andID:(NSString*) _ParentID;
+- (id)initWithNextView:(ValidationRapportController*)_nextView andID:(NSNumber*) _ParentID;
+- (id)initWithFicheView:(FicheIncidentController *)_nextView andID:(NSNumber*) _ParentID;
 - (IBAction) returnToPreviousView:(id)sender;
 
 @end

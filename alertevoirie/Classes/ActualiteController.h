@@ -40,6 +40,7 @@
 	BOOL						mLoadingOngoing;
 }
 
+@property (nonatomic, retain) UILabel *                 mLabelInfo;
 @property (nonatomic, retain) NSMutableDictionary*		mActivities;
 @property (nonatomic, retain) NSMutableDictionary*		mIncidentsById;
 @property (nonatomic, retain) NSMutableArray*			mOrderedKeys;

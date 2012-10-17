@@ -13,6 +13,7 @@
 @synthesize mIncidentsById;
 @synthesize mOrderedKeys;
 @synthesize mBannedIncidentsId;
+@synthesize mLabelInfo;
 
 -(BOOL) shouldAutorotate{
     return YES;
@@ -171,69 +172,104 @@ NSComparisonResult compareDateDescendingOrder(id _date1, id _date2, void *contex
 		return;
 	}
 	
-	NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
-	
-	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-	[inputFormatter setDateFormat:kDateFormat];
-	
-	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"EEEE d MMMM"];
-	[dateFormatter setLocale:locale];
-	
-	[mIncidentsById removeAllObjects];
-	[mActivities removeAllObjects];
-	[mOrderedKeys removeAllObjects];
-	
-	for(IncidentObj *lincident in _incidents)
+    if ([_incidentLogs count] == 0)
 	{
-		[mIncidentsById setObject:lincident forKey:[NSString stringWithFormat:@"%d", lincident.mid]];
-	}
-	
-	NSMutableArray* invalidIncidentsID = [NSMutableArray array];
-	for (LogObj *log in _incidentLogs)
-	{
-		if([[log mStatus] isEqualToString:@"Invalid"])
+        [self showLoadingView:NO];
+		mTableView.hidden = YES;
+		if (mLabelInfo == nil)
 		{
-			[invalidIncidentsID addObject:[NSNumber numberWithInteger:[log mId]]];
+			mLabelInfo = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 320, 207)];
+			mLabelInfo.hidden = NO;
+			[self.view addSubview:mLabelInfo];
 		}
-	}
-	
-	for(LogObj *llog in _incidentLogs)
-	{
-		BOOL showLog = YES;
+		else
+		{
+			mLabelInfo.hidden = NO;
+		}
 		
-		for (NSNumber *Id in invalidIncidentsID)
-		{
-			if(llog.mId == [Id integerValue])
-				showLog = NO;
-		}
-		if (showLog == YES)
-		{
-			if ([[llog mStatus] isEqualToString:@"Resolved"])
-			{
-				[mBannedIncidentsId addObject:[NSNumber numberWithInteger:llog.mId]];
-			}
-			//NSString* date = [[llog.mDate componentsSeparatedByString:@"."] objectAtIndex:0];
-			NSDate *date2format = [inputFormatter dateFromString:llog.mDate];
-			NSString* newDateString = [dateFormatter stringFromDate:date2format];
-			NSMutableArray* llogAtDate = [mActivities valueForKey:newDateString];
-			
-			if(llogAtDate == nil)
-			{
-				llogAtDate = [NSMutableArray array];
-			}
-			[llogAtDate addObject:llog];
-			[mActivities setObject:llogAtDate forKey:newDateString];
-		}
+		NSString* info;
+		NSString* string = [NSString stringWithFormat:@"no_report_around", info];
+		mLabelInfo.text = NSLocalizedString(string, nil);
+		mLabelInfo.font = [UIFont systemFontOfSize:22.0];
+		mLabelInfo.textAlignment = UITextAlignmentCenter;
+		mLabelInfo.textColor = [[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor];
+		mLabelInfo.backgroundColor = [UIColor clearColor];
 	}
-	//NSLog(@"ok");
-	//NSLog(@"count = %d", [[mActivities allValues] count]);
-	[self orderDictionaryAccordingToDate];
-	[locale release];
-	[inputFormatter release];
-	[dateFormatter release];
-	[mTableView reloadData];
-	[self showLoadingView:NO];
+	else
+	{
+		mTableView.hidden = NO;
+		if(mLabelInfo != nil)
+			mLabelInfo.hidden = YES;
+        
+        
+        NSLocale* locale = [[NSLocale alloc] initWithLocaleIdentifier:NSLocalizedString(@"locale", nil)];
+        
+        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+        [inputFormatter setDateFormat:kDateFormat];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EEEE d MMMM"];
+        [dateFormatter setLocale:locale];
+        
+        [mIncidentsById removeAllObjects];
+        [mActivities removeAllObjects];
+        [mOrderedKeys removeAllObjects];
+        
+        for(IncidentObj *lincident in _incidents)
+        {
+            [mIncidentsById setObject:lincident forKey:[NSString stringWithFormat:@"%d", lincident.mid]];
+        }
+        
+        NSMutableArray* invalidIncidentsID = [NSMutableArray array];
+        for (LogObj *log in _incidentLogs)
+        {
+            if([[log mStatus] isEqualToString:@"Invalid"])
+            {
+                [invalidIncidentsID addObject:[NSNumber numberWithInteger:[log mId]]];
+            }
+        }
+        
+        for(LogObj *llog in _incidentLogs)
+        {
+            BOOL showLog = YES;
+            
+            for (NSNumber *Id in invalidIncidentsID)
+            {
+                if(llog.mId == [Id integerValue])
+                    showLog = NO;
+            }
+            if (showLog == YES)
+            {
+                if ([[llog mStatus] isEqualToString:@"Resolved"])
+                {
+                    [mBannedIncidentsId addObject:[NSNumber numberWithInteger:llog.mId]];
+                }
+                //NSString* date = [[llog.mDate componentsSeparatedByString:@"."] objectAtIndex:0];
+                NSDate *date2format = [inputFormatter dateFromString:llog.mDate];
+                NSString* newDateString = [dateFormatter stringFromDate:date2format];
+                NSMutableArray* llogAtDate = [mActivities valueForKey:newDateString];
+                
+                if(llogAtDate == nil)
+                {
+                    llogAtDate = [NSMutableArray array];
+                }
+                [llogAtDate addObject:llog];
+                [mActivities setObject:llogAtDate forKey:newDateString];
+            }
+        }
+        //NSLog(@"ok");
+        //NSLog(@"count = %d", [[mActivities allValues] count]);
+        [self orderDictionaryAccordingToDate];
+        [locale release];
+        [inputFormatter release];
+        [dateFormatter release];
+        [mTableView reloadData];
+        [self showLoadingView:NO];
+        
+	}
+    
+    
+	
 }
 
 #pragma mark -

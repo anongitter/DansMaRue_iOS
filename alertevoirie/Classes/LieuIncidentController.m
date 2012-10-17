@@ -412,8 +412,8 @@
 		return;
 	}
 	
-	if (/*(mReverseGeocodingDone == YES) && */
-		([[mTextFieldNumber text] length] > 0) && ([[mTextFieldStreet text] length] > 0) &&
+	if (/*(mReverseGeocodingDone == YES) && 
+		([[mTextFieldNumber text] length] > 0) &&*/ ([[mTextFieldStreet text] length] > 0) &&
 		(([[mTextFieldCity text] length] > 0 && [[mTextFieldCP text] length] > 0) || ([[mLabelCity text] length] > 0)) /*&&
 		((mChosePinPosition == YES) || (mForwardGeocodingDone == YES))*/ )
 	{
@@ -641,7 +641,7 @@
         mForwardGeocoder = [[BSForwardGeocoder alloc] initWithDelegate:self];
     }
     // Forward geocode!
-    if ([mTextFieldNumber.text length] != 0 && [mTextFieldStreet.text length] != 0 && ([mTextFieldCity.text length] != 0 || [mLabelCity.text length] != 0) )
+    if (/*[mTextFieldNumber.text length] != 0 && */[mTextFieldStreet.text length] != 0 && ([mTextFieldCity.text length] != 0 || [mLabelCity.text length] != 0) )
     {
 		NSString* city = nil;
 		if ([mTextFieldCity.text length] == 0)
@@ -693,6 +693,19 @@
         //method 2 - zoomed to 5kms radius
         //mMKMapView.region = MKCoordinateRegionMakeWithDistance(mCoordinate, 25.0f, 25.0f);
         //[mMKMapView setRegion:mMKMapView.region animated:YES];
+        
+//        int components = [place.addressComponents count];
+//        for(int i = 0; i < components; i++)
+//        {
+//            BSAddressComponent *component = [place.addressComponents objectAtIndex:i];
+//            if(component.types != nil)
+//            {
+//                NSLog(@"component %d= %@", i, component.longName);
+//            }
+//        }
+//        
+//        NSLog(@"place.address= %@", place.address);
+//        mTextFieldCity.text = place.address;
         
 	}
     else

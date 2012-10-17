@@ -18,7 +18,7 @@
 @synthesize mStreetFurnituresPictures;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNextView:(ValidationRapportController *)_nextView andID:(NSString*) _ParentID
+- (id)initWithNextView:(ValidationRapportController *)_nextView andID:(NSNumber*) _ParentID
 {
     
     NSLog(@"---------------1");
@@ -34,20 +34,23 @@
 			NSNumber* num = [lDic valueForKey:@"parent_id"];
 			NSString* string = [NSString stringWithFormat:@"%d", [num intValue]];
             
-            NSLog(@"sub lDic=%@ _ParentID='%@' string='%@'", lDic, _ParentID, string);
+            //NSLog(@"sub lDic=%@ _ParentID='%@' string='%@'", lDic, _ParentID, string);
 			if([num intValue] ==  [_ParentID intValue])
 			{
 				[lDic setValue:key forKey:@"id"];
 				[mParentCategorie addObject:lDic];
 			}
 		}
-        NSLog(@"sub mParentCategorie=%@", mParentCategorie);
-        
-        
+        //NSLog(@"sub mParentCategorie=%@", mParentCategorie);
         
 		mUseStreetFurnituresCells = NO;
 		
-		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:_ParentID] objectForKey:@"name"];
+		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:[NSString stringWithFormat:@"%d", [_ParentID intValue]]] objectForKey:@"name"];
+        //NSLog(@"====> parent=%@", [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:_ParentID]);
+        
+        UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:mParentString];
+        [self.navigationItem setTitleView:label];
+        
 		
 		if ([[mParentString lowercaseString] isEqualToString:[NSString stringWithFormat:@"%@", @"mobiliers urbains"]])
 		{

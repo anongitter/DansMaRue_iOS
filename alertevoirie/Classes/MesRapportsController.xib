@@ -280,7 +280,6 @@
 						<string key="NSFrame">{{0, 367}, {320, 307}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -943,7 +942,7 @@
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{320, 417}</string>
+				<string>{10, 960}</string>
 				<string>{74, 32}</string>
 				<string>{74, 32}</string>
 				<string>{74, 32}</string>

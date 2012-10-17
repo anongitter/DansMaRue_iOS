@@ -32,9 +32,12 @@
 			[mSupCategorie addObject:lDic];
 		}
 		mUseStreetFurnituresCells = NO;
-		NSString* parentID = [[mSupCategorie objectAtIndex:0] objectForKey:@"parent_id"];
-		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:parentID] objectForKey:@"name"];
+		NSNumber* parentID = [[mSupCategorie objectAtIndex:0] objectForKey:@"parent_id"];
+		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:[NSString stringWithFormat:@"%d", parentID.intValue]] objectForKey:@"name"];
 		
+        UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:mParentString];
+        [self.navigationItem setTitleView:label];
+        
 		if ([[mParentString lowercaseString] isEqualToString:[NSString stringWithFormat:@"%@", @"mobiliers urbains"]])
 		{
 			mUseStreetFurnituresCells = YES;
