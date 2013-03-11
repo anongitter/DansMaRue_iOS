@@ -703,7 +703,7 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 	if(mTypeImagePicked == kImagePickerOverView)
 	{
 		// hide status bar
-		[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+		[[UIApplication sharedApplication] setStatusBarHidden:YES];
 		// Set the background of ArrowView to limage
 		ArrowViewController *newArrowViewController = [[ArrowViewController alloc] initWithBackgroundImage:limage andDelegate:self];
 		[self presentModalViewController:newArrowViewController animated:YES];

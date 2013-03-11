@@ -16,7 +16,8 @@
 #import "categoriesDelegate.h"
 #import "C4MInfo.h"
 
-#define kTitleImageName							@"title.png"
+//#define kTitleImageName							@"title.png"
+#define kTitleImageName							@"dans_ma_rue.jpg"
 
 @interface NouveauController : UIViewController
 	<incidentStatsDelegate, reportDelegate, userAuthenticationDelegate, UITextFieldDelegate, categoriesDelegate>

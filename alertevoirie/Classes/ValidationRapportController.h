@@ -64,6 +64,8 @@
 	IBOutlet UILabel *mLabelNearPhoto;
 	
 	IBOutlet UIButton *mButtonValidate;
+    UIBarButtonItem          *mCancelButtonItem;
+    UIBarButtonItem          *mOkButtonItem;
 	
 	UIImage *mImageFar;
 	UIImage *mImageClose;

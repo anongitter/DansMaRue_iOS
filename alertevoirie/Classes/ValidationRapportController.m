@@ -64,10 +64,21 @@
 	[cancelButtonView setImage:[UIImage imageNamed:@"hdr_btn_annuler_off.png"] forState:UIControlStateNormal];
 	[cancelButtonView setImage:[UIImage imageNamed:@"hdr_btn_annuler_on.png"] forState:UIControlStateHighlighted];
 	[cancelButtonView addTarget:self action:@selector(cancelReport:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButtonView];
-	[self.navigationItem setRightBarButtonItem:cancelButton];
+	mCancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButtonView];
+	[self.navigationItem setRightBarButtonItem:mCancelButtonItem];
 	[cancelButtonView release];
-	[cancelButton release];
+    
+    
+    UIButton *okButtonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 60, 34)];
+	[okButtonView setBackgroundImage:[UIImage imageNamed:@"btn_blue.png"] forState:UIControlStateNormal];
+	[okButtonView setBackgroundImage:[UIImage imageNamed:@"btn_blue_on.png"] forState:UIControlStateHighlighted];
+    [okButtonView setTitle:@"OK" forState:UIControlStateNormal];
+    [okButtonView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    okButtonView.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+	[okButtonView addTarget:self action:@selector(onPickerHolder:) forControlEvents:UIControlEventTouchUpInside];
+	mOkButtonItem = [[UIBarButtonItem alloc] initWithCustomView:okButtonView];
+	[okButtonView release];
+    
 	
 	UIBarButtonItem *previous = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"back", nil) style:UIBarButtonItemStyleDone target:self action:@selector(returnToPreviousView:)];
 	self.navigationItem.leftBarButtonItem = previous;
@@ -306,9 +317,15 @@
 	[sender resignFirstResponder];
 }
 
-- (IBAction)triggerPriorityButton:(id)sender{
+
+- (IBAction)triggerPriorityButton:(id)sender
+{
     mPickerHolderView.hidden = FALSE;
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationItem setRightBarButtonItem:mOkButtonItem];
 }
+
 
 - (IBAction)triggerEmailButton:(id)sender{
     
@@ -383,6 +400,7 @@
 	self.mLabelAddressStreet = nil;
 }
 
+
 - (void)dealloc
 {	
 	[mImageFar release];
@@ -404,8 +422,12 @@
 	[mButtonValidate release];
 	[mLabelFarPhoto release];
 	[mLabelNearPhoto release];
+    [mCancelButtonItem release];
+    [mOkButtonItem release];
+    
 	[super dealloc];
 }
+
 
 #pragma mark -
 #pragma mark PickerView DataSource
@@ -437,7 +459,11 @@
 - (IBAction) onPickerHolder:(id)sender{
     
     mPickerHolderView.hidden = TRUE;
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationItem setRightBarButtonItem:mCancelButtonItem];
 }
+
 
 #pragma mark -
 #pragma mark Alert View Delegate Methods
@@ -521,7 +547,7 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 	
 	if(mTypeImagePicked == kImagePickerOverView)
 	{
-		[[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+		[[UIApplication sharedApplication] setStatusBarHidden:YES];
 		
 		/*CGSize newSize = CGSizeMake(320, 480);
 		UIGraphicsBeginImageContext( newSize );
