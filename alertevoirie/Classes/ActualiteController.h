@@ -11,6 +11,7 @@
 #import "FicheIncidentController.h"
 #import "GetActivities.h"
 #import "ActualiteCell.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 #define kTableViewRowHeight			100
 #define kTableViewHeaderHeight		28
@@ -28,7 +29,7 @@
 #define kIconInvalidated			@"icn_incident_nonvalide.png"
 
 @interface ActualiteController : UIViewController
-	<UITableViewDelegate, UITableViewDataSource, activityDelegate>
+	<UITableViewDelegate, UITableViewDataSource, activityDelegate, MFMailComposeViewControllerDelegate>
 {
 	NSMutableDictionary*		mActivities;
 	NSMutableDictionary*		mIncidentsById;
@@ -47,5 +48,7 @@
 @property (nonatomic, retain) NSMutableArray*			mBannedIncidentsId;
 
 - (void)showLoadingView:(BOOL)show;
+
+- (IBAction) mailShareApp;
 
 @end

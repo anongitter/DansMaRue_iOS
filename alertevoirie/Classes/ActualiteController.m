@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
+	/*
 	mActivities = [[NSMutableDictionary alloc] init];
 	mIncidentsById = [[NSMutableDictionary alloc] init];
 	mOrderedKeys = [[NSMutableArray alloc] init];
@@ -42,7 +42,8 @@
 	
 	mLoadingView.frame = CGRectMake(0, 0, 320, 44);
 	[self.view addSubview:mLoadingView];
-	
+	*/
+    
 	UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:NSLocalizedString(@"actuality_navbar_title", nil)];
 	[self.navigationItem setTitleView:label];
 }
@@ -52,6 +53,8 @@
 	NSLog(@"viewWillAppear");
 	
 	[super viewWillAppear:animated];
+    
+    /*
 	if (mLoadingOngoing == NO) {
 		
 		GetActivities * lGetActivities = [[GetActivities alloc] initWithDelegate:self];
@@ -64,7 +67,43 @@
 		
 		[self showLoadingView:YES];
 	}
+     */
 }
+
+
+- (IBAction) mailShareApp
+{
+	MFMailComposeViewController *mailComposeController = [[MFMailComposeViewController alloc] init];
+	
+	if(mailComposeController != nil)
+	{
+		mailComposeController.mailComposeDelegate = self;
+		mailComposeController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+        
+        [mailComposeController setBccRecipients:[NSArray arrayWithObject:NSLocalizedString(@"infopanel.mail.comments.mailto.address", nil)]];
+        
+		[mailComposeController setSubject:NSLocalizedString(@"infopanel.mail.comments.subject", @"")];
+        
+        [mailComposeController setMessageBody:NSLocalizedString(@"infopanel.mail.comments.body", @"") isHTML:YES];
+		[self presentModalViewController:mailComposeController animated:YES];
+		[mailComposeController release];
+		
+	}
+}
+
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+- (IBAction) openMail:(id)sender
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    [app openURL:[[NSURL alloc] initWithString:NSLocalizedString(@"infopanel.mail.comments.mailto.address", nil)]];
+}
+
 
 - (void) showLoadingView:(BOOL)show
 {
