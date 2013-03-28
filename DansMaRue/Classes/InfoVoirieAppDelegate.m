@@ -26,12 +26,12 @@
 {
     
     #if build_configuration == 3 // AdHoc Mode
-        [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"7035a4f8d51792b02dfec7d6e2cb1694"];
+        [[BWHockeyManager sharedHockeyManager] setAppIdentifier:kHockeyAppSecret];
         [[BWHockeyManager sharedHockeyManager] setDelegate:self];
         [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     #endif
     
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"7035a4f8d51792b02dfec7d6e2cb1694"];
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:kHockeyAppSecret];
     
 	[[UIApplication sharedApplication] setStatusBarHidden:NO];
     // Add the tab bar controller's current view as a subview of the window
