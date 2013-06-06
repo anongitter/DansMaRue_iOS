@@ -13,12 +13,12 @@
 #import "ReverseGeocoding.h"
 #import "ValidationRapportController.h"
 #import "FicheIncidentController.h"
-#import "BSForwardGeocoder.h"
+//#import "BSForwardGeocoder.h"
 
 #define kMapZoom		0.001
 
-@interface LieuIncidentController : UIViewController 
-	<MKReverseGeocoderDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate, BSForwardGeocoderDelegate>
+@interface LieuIncidentController : UIViewController
+<ReverseGeocodingDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate/*, BSForwardGeocoderDelegate*/>
 {
 	IBOutlet UITextField*			mTextFieldNumber;
 	IBOutlet UITextField*			mTextFieldStreet;
@@ -44,7 +44,7 @@
 	ValidationRapportController*	mValRapController;
 	FicheIncidentController*		mFicheController;
 	
-	BSForwardGeocoder*				mForwardGeocoder;
+	//BSForwardGeocoder*				mForwardGeocoder;
 	ReverseGeocoding*				mReverseGeocoding;
 	
 	BOOL							mReverseGeocodingDone;

@@ -7,16 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "ReverseGeocodingDelegate.h"
 
-@interface ReverseGeocoding : NSObject {
-	MKReverseGeocoder *mReverseGeocoder;
+
+@interface ReverseGeocoding : NSObject
+{
 }
 
-- (id) initWithDelegate:(NSObject<MKReverseGeocoderDelegate> *)_delegate;
-- (id) initWithDelegate:(NSObject <MKReverseGeocoderDelegate>*)_delegate andCoordinate:(CLLocationCoordinate2D)_coordinate;
-- (void) launchReverseGeocoding;
 
-@property (nonatomic, retain) MKReverseGeocoder *mReverseGeocoder;
+@property (retain, nonatomic) CLGeocoder* mGeocoder;
+@property (retain, nonatomic) NSObject<ReverseGeocodingDelegate>* mDelegate;
+
+
+- (id) initWithDelegate:(NSObject<ReverseGeocodingDelegate>*)_Delegate;
+
+- (void)launchReverseGeocodingForLocation:(CLLocationCoordinate2D)_Location;
+- (void)launchFowardGeocoderWithDictionary:(NSDictionary*)_Dictionary;
+- (void)cancelCurrentReverseGeocoding;
 
 @end

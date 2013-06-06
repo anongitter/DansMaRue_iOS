@@ -10,6 +10,8 @@
 #import "ValidationRapportController.h"
 #import "DDAnnotation.h"
 #import "DDAnnotationView.h"
+#import "InfoVoirieContext.h"
+#import <AddressBook/AddressBook.h>
 
 @interface LieuIncidentController (Private)
 
@@ -37,7 +39,7 @@
 
 - (id)initWithIncident:(IncidentObj *)_incident
 {
-	self = [super initWithNibName:@"LieuIncidentController" bundle:nil];
+	self = [self initWithNibName:@"LieuIncidentController" bundle:nil];
 	if (self) {
 		self.mIncidentCreated = _incident;
 		self.mValRapController = nil;
@@ -50,7 +52,7 @@
 
 - (id)initWithViewController:(ValidationRapportController *)_valController
 {
-	self = [super initWithNibName:@"LieuIncidentController" bundle:nil];
+	self = [self initWithNibName:@"LieuIncidentController" bundle:nil];
 	if (self) {
 		self.mIncidentCreated = _valController.mIncidentCreated;
 		self.mValRapController = _valController;
@@ -63,7 +65,7 @@
 
 - (id)initWithFicheViewController:(FicheIncidentController *) _ficheController
 {
-	self = [super initWithNibName:@"LieuIncidentController" bundle:nil];
+	self = [self initWithNibName:@"LieuIncidentController" bundle:nil];
 	if (self) {
 		self.mIncidentCreated = _ficheController.mIncident;
 		self.mValRapController = nil;
@@ -73,6 +75,20 @@
 	}
 	return self;
 }
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self)
+    {
+        mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
+    }
+    
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -133,30 +149,30 @@
 		}
 		else
 		{
-		if ([mIncidentCreated maddress] != nil && [[mIncidentCreated maddress] length] != 0)
-		{
-			NSArray* addressArray = [[mIncidentCreated maddress] componentsSeparatedByString:@"\n"];
-			NSLog(@"address = %@", addressArray);
-			if (addressArray != nil && [addressArray count] > 0)
-			{
-				NSMutableString* street = [NSMutableString stringWithString:[addressArray objectAtIndex:0]];
-				NSString* number = [[street componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] objectAtIndex:0];
-				
-				NSRange range;
-				range.location = 0;
-				range.length = [number length]+1;
-				[street deleteCharactersInRange:range];
-				
-				mTextFieldNumber.text = number;
-				mTextFieldStreet.text = street;
-			}
-			
-			if (addressArray != nil && [addressArray count] > 1)
-			{
-				mLabelCity.text = [addressArray objectAtIndex:1];
-				mLabelSearch.text = @"";
-			}
-		}
+            if ([mIncidentCreated maddress] != nil && [[mIncidentCreated maddress] length] != 0)
+            {
+                NSArray* addressArray = [[mIncidentCreated maddress] componentsSeparatedByString:@"\n"];
+                NSLog(@"address = %@", addressArray);
+                if (addressArray != nil && [addressArray count] > 0)
+                {
+                    NSMutableString* street = [NSMutableString stringWithString:[addressArray objectAtIndex:0]];
+                    NSString* number = [[street componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] objectAtIndex:0];
+                    
+                    NSRange range;
+                    range.location = 0;
+                    range.length = [number length]+1;
+                    [street deleteCharactersInRange:range];
+                    
+                    mTextFieldNumber.text = number;
+                    mTextFieldStreet.text = street;
+                }
+                
+                if (addressArray != nil && [addressArray count] > 1)
+                {
+                    mLabelCity.text = [addressArray objectAtIndex:1];
+                    mLabelSearch.text = @"";
+                }
+            }
 		}
 	}
 	
@@ -189,12 +205,11 @@
 	
 	if (mFicheController == nil && mValRapController == nil)
 	{
-		if (mReverseGeocoding == nil)
-		{
-			mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
-		}
+        NSLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude);
+        NSLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude);
+        [mReverseGeocoding launchReverseGeocodingForLocation:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
 		[mLoader startAnimating];
-		[mReverseGeocoding launchReverseGeocoding];
+        
 		mLabelSearch.text = NSLocalizedString(@"searching_street", nil);
 		//mLabelCity.text = @"";
 		mLabelStreet.text = @"";
@@ -202,51 +217,43 @@
 		mForwardGeocodingDone = NO;
 		if ([mTextFieldNumber.text length] != 0)
 		{
-			if(mForwardGeocoder == nil)
-			{
-				mForwardGeocoder = [[BSForwardGeocoder alloc] initWithDelegate:self];
-			}
 			// Forward geocode!
 			if (mLabelStreet.text != nil || mLabelCity.text != nil)
 			{
 				[mLoader startAnimating];
-				[mForwardGeocoder findLocation:[NSString stringWithFormat:@"%@ %@ %@ %@",
-												([mTextFieldNumber.text length] == 0)?@"":mTextFieldNumber.text,
-												(mTextFieldStreet.text == nil)?@"":mTextFieldStreet.text,
-												(mLabelCity.text == nil)?@"":mLabelCity.text,
-												NSLocalizedString(@"country", nil)]];
+                
+                [self launchFowardGeocoder];
 			}
 		}
-
+        
 		mButtonValidatePosition.enabled = NO;
 	}
 	else
 	{
-		/*if (mReverseGeocoding == nil)
-		{
-			mReverseGeocoding = [ReverseGeocoding alloc];
-		}
-		[mReverseGeocoding initWithDelegate:self andCoordinate:mIncidentCreated.coordinate];
-		[mReverseGeocoding launchReverseGeocoding];*/
-		mLabelSearch.text = @"";
+        mLabelSearch.text = @"";
 	}
-
+    
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coordinateChanged_:) name:@"DDAnnotationCoordinateDidChangeNotification" object:nil];
 }
 
+
+
 #pragma mark -
 #pragma mark Actions
+
+
 
 - (IBAction) returnToPreviousView:(id)sender
 {
 	mIsLeaving = YES;
-	if (mForwardGeocoder != nil) {
-		[mForwardGeocoder setFwdGeocoderDelegate:nil];
+    
+	if (mReverseGeocoding != nil)
+    {
+        mReverseGeocoding.mDelegate = nil;
+		[mReverseGeocoding cancelCurrentReverseGeocoding];
 	}
-	if (mReverseGeocoding != nil) {
-		[mReverseGeocoding mReverseGeocoder].delegate = nil;
-	}
+    
 	[self.navigationController popViewControllerAnimated:YES];
 	mMKMapView.delegate = nil;
 }
@@ -308,7 +315,7 @@
 		[mMapControlButton setImage:[UIImage imageNamed:@"bouton_diminuer.png"] forState:UIControlStateNormal];
 		[mMapControlButton setImage:[UIImage imageNamed:@"bouton_diminuer_on.png"] forState:UIControlStateHighlighted];
 	}
-
+    
 	mMapControl.frame = frame;
 	[UIView commitAnimations];
 	
@@ -412,10 +419,10 @@
 		return;
 	}
 	
-	if (/*(mReverseGeocodingDone == YES) && 
-		([[mTextFieldNumber text] length] > 0) &&*/ ([[mTextFieldStreet text] length] > 0) &&
+	if (/*(mReverseGeocodingDone == YES) &&
+         ([[mTextFieldNumber text] length] > 0) &&*/ ([[mTextFieldStreet text] length] > 0) &&
 		(([[mTextFieldCity text] length] > 0 && [[mTextFieldCP text] length] > 0) || ([[mLabelCity text] length] > 0)) /*&&
-		((mChosePinPosition == YES) || (mForwardGeocodingDone == YES))*/ )
+                                                                                                                        ((mChosePinPosition == YES) || (mForwardGeocodingDone == YES))*/ )
 	{
 		mButtonValidatePosition.enabled = YES;
 	}
@@ -462,24 +469,25 @@
 	[mLabelCity release];
 	[mLabelStreet release];
 	[mButtonValidatePosition release];
-	[mMapControlButton release];
-	
+	[mMapControlButton release];	
 	[mIncidentCreated release];
-	[mForwardGeocoder release];
 	[mReverseGeocoding release];
-		
+    
 	[super dealloc];
 }
 
+
+
 #pragma mark -
 #pragma mark Alert View Delegate Methods
+
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if(buttonIndex != alertView.cancelButtonIndex)
 	{
-		ReverseGeocoding* lreverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
-		[lreverseGeocoding launchReverseGeocoding];
-		[lreverseGeocoding release];
+        [mReverseGeocoding launchReverseGeocodingForLocation:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
 		mLabelSearch.text = NSLocalizedString(@"searching_street", nil);
 		mLabelCity.text = @"";
 		mLabelStreet.text = @"";
@@ -489,82 +497,21 @@
 	}
 }
 
-#pragma mark -
-#pragma mark Reverse Geocoder Delegate Methods
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
-{
-	NSLog(@"reverseGeocoder didFail");
-	/*UIAlertView * lAlertTmp = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"impossible_geolocalization", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-	[lAlertTmp show];
-	[lAlertTmp release];*/
-	
-	mTextFieldCity.hidden = NO;
-	mTextFieldCP.hidden = NO;
-	mLabelCity.text = @"";
-	mLabelSearch.text = @"";
-	
-	[mLoader stopAnimating];
-}
-
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
-{
-	NSLog(@"didFindPlacemark : %@", placemark.thoroughfare);
-	mLabelSearch.text = @"";
-	if (placemark.postalCode != nil && placemark.locality != nil)
-	{
-		mLabelCity.text = [NSString stringWithFormat:@"%@ %@", placemark.postalCode, placemark.locality];
-	}
-	else
-	{
-		mTextFieldNumber.text = @"";
-		mTextFieldStreet.text = @"";
-		[mTextFieldCP setHidden:NO];
-		[mTextFieldCity setHidden:NO];
-		mLabelCity.text = @"";
-		mLabelSearch.text = @"";
-	}
-
-	
-	if ([placemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
-	{
-		mTextFieldNumber.text = placemark.subThoroughfare;
-	}
-	mLabelStreet.text = placemark.thoroughfare;
-	mTextFieldStreet.text = mLabelStreet.text;
-	
-	if ([mLabelCity.text length] == 0)
-	{
-		mTextFieldCP.hidden = NO;
-		mTextFieldCity.hidden = NO;
-	}
-	else
-	{
-		mTextFieldCP.hidden = YES;
-		mTextFieldCity.hidden = YES;
-	}
-
-	
-	mReverseGeocodingDone = YES;
-	[self testValidateButtonEnable];
-	[mLoader stopAnimating];
-	//mButtonValidatePosition.enabled = YES;
-}
 
 
 #pragma mark -
 #pragma mark DDAnnotationCoordinateDidChangeNotification
 
+
+
 // NOTE: DDAnnotationCoordinateDidChangeNotification won't fire in iOS 4, use -mapView:annotationView:didChangeDragState:fromOldState: instead.
 - (void)coordinateChanged_:(NSNotification *)notification
 {
 	DDAnnotation *annotation = notification.object;
-	if (mReverseGeocoding == nil) {
-		mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
-	}
-	mReverseGeocoding.mReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:annotation.coordinate] autorelease];
-	mReverseGeocoding.mReverseGeocoder.delegate = self;
+
+	[mReverseGeocoding launchReverseGeocodingForLocation:annotation.coordinate];
+    
 	[mLoader startAnimating];
-	[mReverseGeocoding launchReverseGeocoding];
 	mChosePinPosition = YES;
 	[self testValidateButtonEnable];
 }
@@ -576,24 +523,11 @@
 	if (oldState == MKAnnotationViewDragStateDragging)
 	{
 		DDAnnotation *annotation = (DDAnnotation *)annotationView.annotation;
-		//annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];		
-		if (mReverseGeocoding == nil)
-		{
-			mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
-		}
-		[mLoader startAnimating];
-	
-		if (mReverseGeocoding.mReverseGeocoder != nil)
-		{
-			mReverseGeocoding.mReverseGeocoder.delegate = nil;
-			[mReverseGeocoding.mReverseGeocoder cancel];
-			//[mReverseGeocoding.mReverseGeocoder release];
-			mReverseGeocoding.mReverseGeocoder = nil;
-		}
+		//annotation.subtitle = [NSString	stringWithFormat:@"%f %f", annotation.coordinate.latitude, annotation.coordinate.longitude];
 		
-		mReverseGeocoding.mReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:annotation.coordinate] autorelease];
-		mReverseGeocoding.mReverseGeocoder.delegate = self;
-		[mReverseGeocoding launchReverseGeocoding];
+		[mLoader startAnimating];
+        
+        [mReverseGeocoding launchReverseGeocodingForLocation:annotation.coordinate];
 		mChosePinPosition = YES;
 		[self testValidateButtonEnable];
 	}
@@ -632,14 +566,12 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    NSLog(@"textFieldShouldEndEditing start");
 	if (mIsLeaving == YES)
 	{
 		return YES;
 	}
-	if(mForwardGeocoder == nil)
-    {
-        mForwardGeocoder = [[BSForwardGeocoder alloc] initWithDelegate:self];
-    }
+	
     // Forward geocode!
     if (/*[mTextFieldNumber.text length] != 0 && */[mTextFieldStreet.text length] != 0 && ([mTextFieldCity.text length] != 0 || [mLabelCity.text length] != 0) )
     {
@@ -654,20 +586,146 @@
 			city = [city stringByAppendingFormat:@" %@", mTextFieldCity.text];
 		}
 		[mLoader startAnimating];
-		[mForwardGeocoder findLocation:[NSString stringWithFormat:@"%@ %@ %@ %@",
-											([mTextFieldNumber.text length] == 0)?@"":mTextFieldNumber.text,
-											(mTextFieldStreet.text == nil)?@"":mTextFieldStreet.text,
-											city,
-											NSLocalizedString(@"country", nil)]];
+		[self launchFowardGeocoder];
     }
+    NSLog(@"textFieldShouldEndEditing end");
 	return YES;
 }
 
+
+#pragma mark -
+#pragma mark View Update Methods
+
+
+
+- (void)updateViewForFowardLocationFailed
+{
+    mTextFieldNumber.text = @"";
+    mTextFieldStreet.text = @"";
+    [mTextFieldCP setHidden:NO];
+    [mTextFieldCity setHidden:NO];
+    mLabelCity.text = @"";
+    mLabelSearch.text = @"";
+}
+
+
+
+#pragma mark -
+#pragma mark Reverse Geocoder Delegate Methods
+
+
+
+- (void)reverseGeocoder:(CLGeocoder*)_Geocoder didFailWithError:(NSError*)_Error
+{
+	NSLog(@"reverseGeocoder didFail");
+	/*UIAlertView * lAlertTmp = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"impossible_geolocalization", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
+     [lAlertTmp show];
+     [lAlertTmp release];*/
+	
+	mTextFieldCity.hidden = NO;
+	mTextFieldCP.hidden = NO;
+	mLabelCity.text = @"";
+	mLabelSearch.text = @"";
+	
+	[mLoader stopAnimating];
+}
+
+
+- (void)reverseGeocoder:(CLGeocoder*)_Geocoder didFindPlacemark:(NSArray*)_Placemarks
+{
+    CLPlacemark* lPacemark = nil;
+    
+    if ([_Placemarks count] > 0)
+    {
+        lPacemark = [_Placemarks objectAtIndex:0];
+    }
+    
+    
+	NSLog(@"didFindPlacemark : %@", lPacemark.thoroughfare);
+	mLabelSearch.text = @"";
+	if (lPacemark.postalCode != nil && lPacemark.locality != nil)
+	{
+		mLabelCity.text = [NSString stringWithFormat:@"%@ %@", lPacemark.postalCode, lPacemark.locality];
+	}
+	else
+	{
+        [self updateViewForFowardLocationFailed];
+	}
+    
+	
+	if ([lPacemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
+	{
+		mTextFieldNumber.text = lPacemark.subThoroughfare;
+	}
+	mLabelStreet.text = lPacemark.thoroughfare;
+	mTextFieldStreet.text = mLabelStreet.text;
+	
+	if ([mLabelCity.text length] == 0)
+	{
+		mTextFieldCP.hidden = NO;
+		mTextFieldCity.hidden = NO;
+	}
+	else
+	{
+		mTextFieldCP.hidden = YES;
+		mTextFieldCity.hidden = YES;
+	}
+    
+	
+	mReverseGeocodingDone = YES;
+	[self testValidateButtonEnable];
+	[mLoader stopAnimating];
+	//mButtonValidatePosition.enabled = YES;
+}
+
+
+
 #pragma mark -
 #pragma mark Forward Geocoder Delegate Methods
-- (void)forwardGeocoderError:(NSString*)errorMessage
+
+
+
+- (void)launchFowardGeocoder
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
+    NSMutableDictionary* locationDictionary = [NSMutableDictionary dictionary];
+    
+    if ([mTextFieldNumber.text length] > 0 || [mTextFieldStreet.text length] > 0)
+    {
+        NSString* address = @"";
+        
+        if ([mTextFieldNumber.text length] > 0)
+        {
+            address = [address stringByAppendingString:mTextFieldNumber.text];
+        }
+        if ([mTextFieldStreet.text length] > 0)
+        {
+            if ([address length] > 0)
+            {
+                address = [address stringByAppendingString:@" "];
+            }
+            address = [address stringByAppendingString:mTextFieldStreet.text];
+        }
+        
+        [locationDictionary setValue:address forKey:(NSString *)kABPersonAddressStreetKey];
+    }
+    if ([mTextFieldCity.text length] > 0)
+    {
+        [locationDictionary setValue:mTextFieldCity.text forKey:(NSString *)kABPersonAddressCityKey];
+    }
+    if ([mTextFieldCP.text length] > 0)
+    {
+        [locationDictionary setValue:mTextFieldCP.text forKey:(NSString *)kABPersonAddressZIPKey];
+    }
+    
+    [locationDictionary setValue:NSLocalizedString(@"country", nil) forKey:(NSString *)kABPersonAddressCountryKey];
+   
+    [mReverseGeocoding launchFowardGeocoderWithDictionary:locationDictionary];
+}
+
+
+- (void)fowardGeocoder:(CLGeocoder*)_Geocoder didFailWithError:(NSError*)_Error
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[_Error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
 	[alert show];
 	[alert release];
 	mForwardGeocodingDone = YES;
@@ -675,63 +733,51 @@
 	[mLoader stopAnimating];
 }
 
-- (void)forwardGeocoderFoundLocation
+
+- (void)fowardGeocoder:(CLGeocoder*)_Geocoder didFindPlacemark:(NSArray*)_Placemarks
 {
 	mForwardGeocodingDone = YES;
-	if(mForwardGeocoder.status == G_GEO_SUCCESS && [mForwardGeocoder.results count] == 1)
-	{
+    
+    NSLog(@"_Placemarks %@", _Placemarks);
+    CLPlacemark* lPacemark = nil;
+    
+    if ([_Placemarks count] > 0)
+    {
+        lPacemark = [_Placemarks objectAtIndex:0];
+        
         //define zoom
-        BSKmlResult *place = [mForwardGeocoder.results objectAtIndex:0];
-        [[[mMKMapView annotations] objectAtIndex:0] setCoordinate:place.coordinateRegion.center];
-		mCoordinate = place.coordinateRegion.center;
+        [[[mMKMapView annotations] objectAtIndex:0] setCoordinate:CLLocationCoordinate2DMake(lPacemark.location.coordinate.latitude, lPacemark.location.coordinate.longitude)];
+		mCoordinate = CLLocationCoordinate2DMake(lPacemark.location.coordinate.latitude, lPacemark.location.coordinate.longitude);
 		
+        
         //method 1
-        MKCoordinateRegion region = place.coordinateRegion;
-		region.span = MKCoordinateSpanMake(.001, .001);
+        MKCoordinateRegion region = MKCoordinateRegionMake(lPacemark.location.coordinate, MKCoordinateSpanMake(.001, .001));
         [mMKMapView setRegion:region animated:YES];
-        
-        //method 2 - zoomed to 5kms radius
-        //mMKMapView.region = MKCoordinateRegionMakeWithDistance(mCoordinate, 25.0f, 25.0f);
-        //[mMKMapView setRegion:mMKMapView.region animated:YES];
-        
-//        int components = [place.addressComponents count];
-//        for(int i = 0; i < components; i++)
-//        {
-//            BSAddressComponent *component = [place.addressComponents objectAtIndex:i];
-//            if(component.types != nil)
-//            {
-//                NSLog(@"component %d= %@", i, component.longName);
-//            }
-//        }
-//        
-//        NSLog(@"place.address= %@", place.address);
-//        mTextFieldCity.text = place.address;
-        
-	}
+    }
     else
     {
 		NSString* message = @"";
-        switch (mForwardGeocoder.status)
+        
+        if ([mTextFieldNumber.text length] > 0)
         {
-            case G_GEO_SUCCESS:
-                message = NSLocalizedString(@"too_much_results_found", nil);
-                break;
-            case G_GEO_BAD_KEY:
-                message = NSLocalizedString(@"incorrect_api_key", nil);
-                break;
-            case G_GEO_UNKNOWN_ADDRESS:
-                message = [NSString stringWithFormat:@"%@ : %@.", NSLocalizedString(@"cant_find", nil), mForwardGeocoder.searchQuery];
-                break;
-            case G_GEO_TOO_MANY_QUERIES:
-                message = NSLocalizedString(@"too_much_requests_send_with_this_API", nil);
-                break;
-            case G_GEO_SERVER_ERROR:
-                message = NSLocalizedString(@"server_error_please_retry", nil);
-                break;
-            default:
-                break;
+            message = [message stringByAppendingFormat:@"%@ ", mTextFieldNumber.text];
         }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"information", nil) message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
+        if([mTextFieldStreet.text length] > 0)
+        {
+            message = [message stringByAppendingFormat:@"%@ ", mTextFieldStreet.text];
+        }
+        if ([mLabelCity.text length] > 0)
+        {
+            message = [message stringByAppendingFormat:@"%@ ", mLabelCity.text];
+        }
+        if ([mTextFieldCP.text length] > 0)
+        {
+            message = [message stringByAppendingFormat:@"%@ ", mTextFieldCP.text];
+        }
+        
+        NSString* content = [NSString stringWithFormat:@"%@ : %@.", NSLocalizedString(@"cant_find", nil), message];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"information", nil) message:content delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
         [alert show];
         [alert release];
 		mForwardGeocodingDone = NO;
@@ -739,5 +785,6 @@
 	[self testValidateButtonEnable];
 	[mLoader stopAnimating];
 }
+
 
 @end

@@ -7,41 +7,93 @@
 //
 
 #import "ReverseGeocoding.h"
+#import <AddressBook/AddressBook.h>
+
 
 @implementation ReverseGeocoding
-@synthesize mReverseGeocoder;
 
-- (id) initWithDelegate:(NSObject<MKReverseGeocoderDelegate> *)_delegate
+
+@synthesize mGeocoder;
+@synthesize mDelegate;
+
+
+
+#pragma mark -
+#pragma mark Object Life Cycle Methods
+
+
+
+- (id) initWithDelegate:(NSObject<ReverseGeocodingDelegate>*)_Delegate
 {
 	self = [super init];
 	if (self)
 	{
-		self.mReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]] autorelease];
-		self.mReverseGeocoder.delegate = _delegate;
+		mGeocoder = [[CLGeocoder alloc] init];
+		self.mDelegate = _Delegate;
 	}
 	return self;
-}
-
-- (id) initWithDelegate:(NSObject <MKReverseGeocoderDelegate>*)_delegate andCoordinate:(CLLocationCoordinate2D)_coordinate
-{
-	self = [super init];
-	if (self)
-	{
-		self.mReverseGeocoder = [[[MKReverseGeocoder alloc] initWithCoordinate:_coordinate] autorelease];
-		self.mReverseGeocoder.delegate = _delegate;
-	}
-	return self;
-}
-
--(void) launchReverseGeocoding
-{
-	[mReverseGeocoder start];
 }
 
 - (void)dealloc
 {
-	[mReverseGeocoder release];
+	[mGeocoder release];
+    [mDelegate release];
 	[super dealloc];
 }
+
+
+
+#pragma mark -
+#pragma mark Data Management Methods
+
+
+
+- (void)launchReverseGeocodingForLocation:(CLLocationCoordinate2D)_Location
+{
+    NSLog(@"launchReverseGeocodingForLocation");
+    [mGeocoder cancelGeocode];
+    
+    
+    CLLocation* loc = [[CLLocation alloc] initWithLatitude:_Location.latitude longitude:_Location.longitude];
+    
+    [mGeocoder reverseGeocodeLocation:loc completionHandler:^(NSArray* _Placemarks, NSError* _Error)
+     {
+         NSLog(@"mDelegate %@", mDelegate);
+         if (_Error)
+         {
+             [mDelegate reverseGeocoder:mGeocoder didFailWithError:_Error];
+         }
+         else
+         {
+             [mDelegate reverseGeocoder:mGeocoder didFindPlacemark:_Placemarks];
+         }
+     }];
+    [loc release];
+}
+
+
+// Dictionary with keys contained ABPerson/Addresses keys
+- (void)launchFowardGeocoderWithDictionary:(NSDictionary*)_Dictionary
+{    
+    [mGeocoder geocodeAddressDictionary:_Dictionary completionHandler:^(NSArray* _Placemarks, NSError* _Error)
+     {
+         if (_Error)
+         {
+             [mDelegate fowardGeocoder:mGeocoder didFailWithError:_Error];
+         }
+         else
+         {
+             [mDelegate fowardGeocoder:mGeocoder didFindPlacemark:_Placemarks];
+         }
+     }];
+}
+
+
+- (void)cancelCurrentReverseGeocoding
+{
+    [mGeocoder cancelGeocode];
+}
+
+
 
 @end
