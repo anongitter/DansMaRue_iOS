@@ -45,7 +45,7 @@
 	
 	NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
 	[dictionary setObject:@"getReports" forKey:@"request"];
-	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	
 #ifdef kMarseilleTownhallVersion
 	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)

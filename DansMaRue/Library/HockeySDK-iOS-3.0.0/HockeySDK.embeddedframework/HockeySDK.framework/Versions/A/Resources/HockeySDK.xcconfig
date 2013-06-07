@@ -1,0 +1,6 @@
+OTHER_LDFLAGS=$(inherited) -framework CoreText -framework CoreGraphics -framework Foundation -framework QuartzCore -framework SystemConfiguration -framework UIKit
+HOCKEYSDK_DOCSET_NAME=HockeySDK-iOS
+GCC_PREPROCESSOR_DEFINITIONS=$(inherited) CONFIGURATION_$(CONFIGURATION)
+
+
+806ad0b99832c14d1bc7d3f5317c0cbbda0073e3

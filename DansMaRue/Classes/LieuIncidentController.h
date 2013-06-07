@@ -13,12 +13,12 @@
 #import "ReverseGeocoding.h"
 #import "ValidationRapportController.h"
 #import "FicheIncidentController.h"
-//#import "BSForwardGeocoder.h"
+
 
 #define kMapZoom		0.001
 
 @interface LieuIncidentController : UIViewController
-<ReverseGeocodingDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate/*, BSForwardGeocoderDelegate*/>
+<ReverseGeocodingDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate>
 {
 	IBOutlet UITextField*			mTextFieldNumber;
 	IBOutlet UITextField*			mTextFieldStreet;
@@ -43,8 +43,6 @@
 	IncidentObj*					mIncidentCreated;
 	ValidationRapportController*	mValRapController;
 	FicheIncidentController*		mFicheController;
-	
-	//BSForwardGeocoder*				mForwardGeocoder;
 	ReverseGeocoding*				mReverseGeocoding;
 	
 	BOOL							mReverseGeocodingDone;
@@ -59,6 +57,9 @@
 }
 
 - (id)initWithIncident:(IncidentObj *)_incident;
+- (id)initWithFicheViewController:(FicheIncidentController *) _ficheController;
+- (id)initWithViewController:(ValidationRapportController *)_valController;
+
 
 - (IBAction) validateButtonPressed:(id)sender;
 - (IBAction) backgroundTap:(id)sender;

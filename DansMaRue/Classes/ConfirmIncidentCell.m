@@ -67,7 +67,8 @@
 	CLLocationCoordinate2D userLocation = [[InfoVoirieContext sharedInfoVoirieContext] mLocation];
 	CLLocation *location1 = [[CLLocation alloc] initWithLatitude:userLocation.latitude longitude:userLocation.longitude];
 	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:_IncidentObj.coordinate.latitude longitude:_IncidentObj.coordinate.longitude];
-	double distance = [location1 getDistanceFrom:location2];
+	double distance = [location1 distanceFromLocation:location2];
+    
 	
 	mIncidentDistance.text = [NSString stringWithFormat:@"à %dm", [[NSNumber numberWithDouble:(distance)] intValue]];
 	

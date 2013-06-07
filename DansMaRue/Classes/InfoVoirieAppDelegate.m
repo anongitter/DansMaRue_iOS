@@ -10,12 +10,23 @@
 #import "NouveauController.h"
 
 #import "InfoVoirieContext.h"
+#import <HockeySDK/HockeySDK.h>
+
+
+
+
+@interface InfoVoirieAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
+@end
+
+
+
 
 @implementation InfoVoirieAppDelegate
 
 @synthesize window;
 @synthesize tabBarController;
 @synthesize mUseStandardNavBar;
+
 
 + (InfoVoirieAppDelegate*)sharedDelegate
 {
@@ -24,16 +35,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppBetaId
+														 liveIdentifier:kHockeyAppLiveId
+															   delegate:self];
+#if CONFIGURATION_Release
+	[BITHockeyManager sharedHockeyManager].disableUpdateManager = TRUE;
+#endif
+	
+	[[BITHockeyManager sharedHockeyManager] startManager];
     
-    #if build_configuration == 3 // AdHoc Mode
-        [[BWHockeyManager sharedHockeyManager] setAppIdentifier:kHockeyAppSecret];
-        [[BWHockeyManager sharedHockeyManager] setDelegate:self];
-        [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
-    #endif
     
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:kHockeyAppSecret];
     
-	[[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     // Add the tab bar controller's current view as a subview of the window
     
     window.rootViewController = tabBarController;
@@ -231,7 +244,25 @@
     return UIInterfaceOrientationMaskAll;
 }
 
+
+
+#pragma mark -
+#pragma mark HockeyApp Methods
+
+
+
+- (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager {
+#ifndef CONFIGURATION_Release
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
+        return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
+#endif
+    return nil;
+}
+
+
 @end
+
+
 
 /*
 //custom navigation bar

@@ -32,7 +32,7 @@
 			NSMutableDictionary* lDic = [NSMutableDictionary dictionaryWithDictionary:[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]]; 
             
 			NSNumber* num = [lDic valueForKey:@"parent_id"];
-			NSString* string = [NSString stringWithFormat:@"%d", [num intValue]];
+			//NSString* string = [NSString stringWithFormat:@"%d", [num intValue]];
             
             //NSLog(@"sub lDic=%@ _ParentID='%@' string='%@'", lDic, _ParentID, string);
 			if([num intValue] ==  [_ParentID intValue])

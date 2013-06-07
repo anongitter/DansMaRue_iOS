@@ -46,7 +46,7 @@
 #endif
 	
 	[incidentLog setObject:(NSNumber*)_incidentId forKey:@"incidentId"];
-	[incidentLog setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[incidentLog setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	[incidentLog setObject:_status forKey:@"status"];
 	
 	[dictionary setObject:incidentLog forKey:@"incidentLog"];

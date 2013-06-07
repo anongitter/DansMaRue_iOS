@@ -56,7 +56,7 @@ CGImageRef UIGetScreenImage();
 	mViewInfo.hidden = NO;
 	mLabelInfo.hidden = NO;
 	
-	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 	[mDelegate didReceiveImage:mFinalImage fromController:self];
 }
 
@@ -218,7 +218,7 @@ CGImageRef UIGetScreenImage();
 
 - (IBAction)triggerCancelButton:(id)sender
 {
-	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 	[mDelegate didReceiveImage:nil fromController:self];
 }
 

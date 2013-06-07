@@ -6,9 +6,34 @@
 	#import <Foundation/Foundation.h>
 	#import <UIKit/UIKit.h>
 
+    #import "UIDevice+IdentifierAddition.h"
+
 	#import "InfoVoirieContext.h"
 	#import "InfoVoirieAppDelegate.h"
+
 #endif
+
+
+#define kHockeyAppBetaId				@"ec713c79aa54a6f88faf42251244cb28"
+#define kHockeyAppLiveId				@"cfba79666242b1e33c03c9695ebd8b01"
+
+
+// Debug Mode
+#if CONFIGURATION_Debug
+#define C4MLog(...)  NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#endif
+
+//Release Mode
+#if CONFIGURATION_Release
+#define C4MLog(...)  NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#endif
+
+//AdHoc Mode
+#if CONFIGURATION_AdHoc
+#define C4MLog(...)  { }
+#endif
+
+
 
 #define kTimeOutIntervalRequest				20
 

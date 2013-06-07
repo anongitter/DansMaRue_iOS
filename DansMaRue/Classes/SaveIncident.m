@@ -40,7 +40,7 @@
 	
 	[dictionary setObject:@"saveIncident" forKey:@"request"];
     
-    [dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+    [dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
     
     [dictionary setObject:_incident.mEmail forKey:@"email"];
 	

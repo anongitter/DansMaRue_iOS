@@ -34,7 +34,7 @@
 	NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
 	
 	[dictionary setObject:@"changeIncident" forKey:@"request"];
-	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	[dictionary setObject:(NSNumber*)_incidentId forKey:@"incidentId"];
 	[dictionary setObject:(NSNumber *)_incidentCategory forKey:@"categoryId"];
 	[dictionary setObject:_incidentAddress forKey:@"address"];
@@ -64,7 +64,7 @@
 	NSMutableDictionary* position = [NSMutableDictionary dictionary];
 	
 	[dictionary setObject:@"changeIncident" forKey:@"request"];
-	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	[dictionary setObject:[NSNumber numberWithInt:_incident.mid] forKey:@"incidentId"];
 	[dictionary setObject:[NSNumber numberWithInt: _incident.mcategory] forKey:@"categoryId"];
 	[dictionary setObject:_incident.maddress forKey:@"address"];

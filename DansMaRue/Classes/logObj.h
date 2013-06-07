@@ -20,6 +20,7 @@
 	NSString* mDate;
 	NSString* mStatus;
 }
+- (id)initWithDic:(NSMutableDictionary*) _Dictionnary;
 
 @property (nonatomic, retain) NSString* mUdid;
 @property (nonatomic, retain) NSString* mDate;

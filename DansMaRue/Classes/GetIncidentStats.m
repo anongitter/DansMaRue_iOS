@@ -37,13 +37,13 @@
 	
 	NSMutableDictionary* dictionnary = [NSMutableDictionary dictionary];
 	[dictionnary setObject:@"getIncidentStats" forKey:@"request"];
-	[dictionnary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionnary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	[dictionnary setObject:_MapLocationCoordinate forKey:@"position"];
 	[requests addObject:dictionnary];
 	
 	NSMutableDictionary* dictionnaryReports = [NSMutableDictionary dictionary];
 	[dictionnaryReports setObject:@"getReports" forKey:@"request"];
-	[dictionnaryReports setObject:(id)[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionnaryReports setObject:(id)[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	
 #ifdef kMarseilleTownhallVersion
 	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)

@@ -226,8 +226,7 @@ NSComparisonResult compareDateDescendingOrder(id _date1, id _date2, void *contex
 			mLabelInfo.hidden = NO;
 		}
 		
-		NSString* info;
-		NSString* string = [NSString stringWithFormat:@"no_report_around", info];
+        NSString* string = [NSString stringWithFormat:@"no_report_around"];
 		mLabelInfo.text = NSLocalizedString(string, nil);
 		mLabelInfo.font = [UIFont systemFontOfSize:22.0];
 		mLabelInfo.textAlignment = UITextAlignmentCenter;

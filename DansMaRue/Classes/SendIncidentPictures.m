@@ -94,7 +94,7 @@
 	[request setHTTPBody:data];
 	
 	[request setValue:@"binary/octet-stream" forHTTPHeaderField:@"Content-type"];
-	[request addValue:[UIDevice currentDevice].uniqueIdentifier forHTTPHeaderField:@"udid"];
+	[request addValue:[[UIDevice currentDevice] uniqueDeviceIdentifier] forHTTPHeaderField:@"udid"];
 	[request setValue:_comment forHTTPHeaderField:@"img_comment"];
 	[request setValue:[NSString stringWithFormat:@"%d", [_incidentId integerValue]] forHTTPHeaderField:@"incident_id"];
 	[request setValue:_type forHTTPHeaderField:@"type"];

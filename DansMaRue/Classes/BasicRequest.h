@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SBJSON.h"
 
-@interface BasicRequest : NSObject
+@interface BasicRequest : NSObject <NSURLConnectionDelegate>
 {
-	SBJSON*				mJson;
+	SBJSON*                 mJson;
 	NSMutableData*			mReceivedData;
 	NSURLConnection*		mURLConnection;
 }

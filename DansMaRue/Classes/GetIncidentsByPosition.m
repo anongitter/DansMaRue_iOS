@@ -48,7 +48,7 @@
 	
 	NSMutableDictionary* dictionary = [NSMutableDictionary dictionary]; //	NSNumber
 	[dictionary setObject:@"getIncidentsByPosition" forKey:@"request"];
-	[dictionary setObject:[UIDevice currentDevice].uniqueIdentifier forKey:@"udid"];
+	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	
 	if (_farRadius == YES)
 	{
