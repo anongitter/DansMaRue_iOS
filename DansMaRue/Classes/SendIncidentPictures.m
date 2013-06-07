@@ -104,7 +104,7 @@
 		[request setValue:@"YES" forHTTPHeaderField:@"incident_creation"];
 	}
 	
-	NSLog(@"request header = %@", [request allHTTPHeaderFields]);
+	C4MLog(@"request header = %@", [request allHTTPHeaderFields]);
 	
 #ifdef kMarseilleTownhallVersion
 	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
@@ -132,7 +132,7 @@
 	BOOL success;
 	
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"SCAN = %@", filesContent);
+	C4MLog(@"SCAN = %@", filesContent);
 	
 	NSMutableDictionary* rootJson = [mJson objectWithString:filesContent error:nil];
 	NSMutableDictionary* answer = [rootJson objectForKey:@"answer"];

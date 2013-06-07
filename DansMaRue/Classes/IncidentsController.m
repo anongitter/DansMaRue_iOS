@@ -235,7 +235,7 @@
 		}
 		else
 		{
-			NSLog(@"ERROR : invalid status (%@)", lstatus);
+			C4MLog(@"ERROR : invalid status (%@)", lstatus);
 		}
 	}
 	

@@ -69,7 +69,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"SCAN = %@", filesContent );
+	C4MLog(@"SCAN = %@", filesContent );
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	if( [idRootJson isKindOfClass: [NSMutableArray class]] )
@@ -107,7 +107,7 @@
 	}
 	else 
 	{
-		NSLog(@"Error : %@", filesContent);
+		C4MLog(@"Error : %@", filesContent);
 		[mIncidentStatsDelegate didReceiveIncidentStats:@"" :@"" :@""];
 		[mReportDelegate didReceiveReportsOngoing:nil updated:nil resolved:nil];
 	}

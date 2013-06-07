@@ -10,6 +10,8 @@
 #import "incidentObj.h"
 //#import "imageLoader.h"
 #import "ImageManager.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation ConfirmIncidentCell
 
@@ -48,7 +50,6 @@
 	mIncidentName.text = [_IncidentObj.mdescriptive capitalizedString];
 	
 	NSMutableDictionary* lCategorie = [[InfoVoirieContext sharedInfoVoirieContext].mCategory valueForKey:[NSString stringWithFormat:@"%d", _IncidentObj.mcategory]];
-    NSLog(@"lCategorie=%@", lCategorie);
     
 	NSNumber* parentID = [lCategorie objectForKey:@"parent_id"];
 	NSMutableDictionary* parentCategorie = [[[InfoVoirieContext sharedInfoVoirieContext] mCategory] valueForKey:[NSString stringWithFormat:@"%d", [parentID intValue]]];

@@ -516,7 +516,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	{
 		NSMutableArray* section = [mDictionnaryReportsOngoing objectForKey:key];
 		IncidentObj *lincident = [section objectAtIndex:0];
-        NSLog(@"Date : %@", lincident.mdate);
+        C4MLog(@"Date : %@", lincident.mdate);
         if ([inputFormatter dateFromString:lincident.mdate] != nil)
         {
             [toOrder addObject:[inputFormatter dateFromString:lincident.mdate]];
@@ -657,7 +657,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 	//if([mSegmentedControl selectedSegmentIndex] == kSwitchOngoingIndex)
 	{
 		NSInteger count = [mOrderedKeys count];
-        NSLog(@"numberOfSectionsInTableView = %d", count);
+        C4MLog(@"numberOfSectionsInTableView = %d", count);
 		return (count > 0) ? count : 1;
 	}
 	//return 1;
@@ -673,7 +673,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 		NSString* key = [mOrderedKeys objectAtIndex:section];
 		NSArray* nameSection = [mDictionnaryReportsOngoing objectForKey:key];
 		
-        NSLog(@"numberOfRowsInSection = %d", [nameSection count]);
+        C4MLog(@"numberOfRowsInSection = %d", [nameSection count]);
 		return [nameSection count];
 	}
 	//return [self.mArrayCurrentTable count];
@@ -797,7 +797,7 @@ NSComparisonResult compareDateDescendingOrderReports(id _date1, id _date2, void 
 #pragma mark Report Delegate Methods
 - (void)didReceiveReportsOngoing:(NSArray*)_ongoing updated:(NSArray*)_updated resolved:(NSArray*)_resolved
 {
-    NSLog(@"didReceiveReportsOngoing");
+    C4MLog(@"didReceiveReportsOngoing");
           
 	if (_ongoing == nil || _updated == nil || _resolved == nil)
 	{

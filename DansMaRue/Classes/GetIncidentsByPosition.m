@@ -84,7 +84,6 @@
 {
 	if (mIncidentDelegate == nil)
 	{
-		NSLog(@"incident delegate nil");
 		return;
 	}
 	
@@ -122,7 +121,6 @@
 	}
 	else 
 	{
-		NSLog(@"Error");
 		[mIncidentDelegate didReceiveIncidents:nil];
 	}
 }

@@ -81,7 +81,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"connectionDidFinishLoading = %@", filesContent );
+	C4MLog(@"connectionDidFinishLoading = %@", filesContent );
 	id idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	[filesContent release];
@@ -117,7 +117,7 @@
 	else 
 	{
 		[mSaveIncidentDelegate didSaveIncident:-1];
-		NSLog(@"Error");
+		C4MLog(@"Error");
 	}
 }
 

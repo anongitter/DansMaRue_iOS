@@ -10,6 +10,8 @@
 #import "CategorieController.h"
 #import "LieuIncidentController.h"
 #import "InfoVoirieAppDelegate.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation ValidationRapportController
 @synthesize mImageFar;
@@ -102,7 +104,7 @@
     mIncidentCreated.mPriorityId = 3;
     incidentLabels = [[NSArray alloc] initWithObjects:@"Dangeureux", @"Génant", @"Mineur", nil];
     
-	NSLog(@"%s", __PRETTY_FUNCTION__);
+	C4MLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -111,7 +113,7 @@
 	
 	[InfoVoirieContext sharedInfoVoirieContext].mCreatingNewReport = YES;
 	
-	NSLog(@"%@", mIncidentCreated);
+	C4MLog(@"%@", mIncidentCreated);
 	
 	NSArray* laddress = [[mIncidentCreated maddress] componentsSeparatedByString:@"\n"];
 	
@@ -150,7 +152,7 @@
 	
 	if (mImageFar != nil)
 	{
-		NSLog(@"%s image far", __PRETTY_FUNCTION__);
+		C4MLog(@"%s image far", __PRETTY_FUNCTION__);
 		mImageViewFar.image = mImageFar;
 		mCameraFar.hidden = YES;
 		mLabelFarPhoto.hidden = YES;
@@ -159,7 +161,7 @@
 	
 	if (mImageClose != nil)
 	{
-		NSLog(@"%s image close", __PRETTY_FUNCTION__);
+		C4MLog(@"%s image close", __PRETTY_FUNCTION__);
 		mImageViewNear.image = mImageClose;
 		mCameraNear.hidden = YES;
 		mLabelNearPhoto.hidden = YES;
@@ -491,7 +493,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                 case kAlertViewEmail: 
                 {
                     NSString* candidate = [[alertView textFieldAtIndex:0] text];
-                    NSLog(@"Entered: %@",candidate);
+                    C4MLog(@"Entered: %@",candidate);
                     
                     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"; 
                     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
@@ -590,7 +592,7 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 {
 	if (_image != nil)
 	{
-		NSLog(@"%s", __PRETTY_FUNCTION__);
+		C4MLog(@"%s", __PRETTY_FUNCTION__);
 		
 		self.mImageFar = _image;
 		[mImageViewFar setImage:(self.mImageFar)];

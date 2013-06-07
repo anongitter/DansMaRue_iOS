@@ -152,7 +152,7 @@
             if ([mIncidentCreated maddress] != nil && [[mIncidentCreated maddress] length] != 0)
             {
                 NSArray* addressArray = [[mIncidentCreated maddress] componentsSeparatedByString:@"\n"];
-                NSLog(@"address = %@", addressArray);
+                C4MLog(@"address = %@", addressArray);
                 if (addressArray != nil && [addressArray count] > 0)
                 {
                     NSMutableString* street = [NSMutableString stringWithString:[addressArray objectAtIndex:0]];
@@ -205,8 +205,8 @@
 	
 	if (mFicheController == nil && mValRapController == nil)
 	{
-        NSLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude);
-        NSLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude);
+        C4MLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude);
+        C4MLog(@"[[InfoVoirieContext sharedInfoVoirieContext] mLocation] %f", [[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude);
         [mReverseGeocoding launchReverseGeocodingForLocation:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
 		[mLoader startAnimating];
         
@@ -566,7 +566,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    NSLog(@"textFieldShouldEndEditing start");
+    C4MLog(@"textFieldShouldEndEditing start");
 	if (mIsLeaving == YES)
 	{
 		return YES;
@@ -588,7 +588,7 @@
 		[mLoader startAnimating];
 		[self launchFowardGeocoder];
     }
-    NSLog(@"textFieldShouldEndEditing end");
+    C4MLog(@"textFieldShouldEndEditing end");
 	return YES;
 }
 
@@ -617,7 +617,7 @@
 
 - (void)reverseGeocoder:(CLGeocoder*)_Geocoder didFailWithError:(NSError*)_Error
 {
-	NSLog(@"reverseGeocoder didFail");
+	C4MLog(@"reverseGeocoder didFail");
 	/*UIAlertView * lAlertTmp = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"impossible_geolocalization", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
      [lAlertTmp show];
      [lAlertTmp release];*/
@@ -641,7 +641,7 @@
     }
     
     
-	NSLog(@"didFindPlacemark : %@", lPacemark.thoroughfare);
+	C4MLog(@"didFindPlacemark : %@", lPacemark.thoroughfare);
 	mLabelSearch.text = @"";
 	if (lPacemark.postalCode != nil && lPacemark.locality != nil)
 	{
@@ -738,7 +738,7 @@
 {
 	mForwardGeocodingDone = YES;
     
-    NSLog(@"_Placemarks %@", _Placemarks);
+    C4MLog(@"_Placemarks %@", _Placemarks);
     CLPlacemark* lPacemark = nil;
     
     if ([_Placemarks count] > 0)

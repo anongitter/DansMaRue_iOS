@@ -72,8 +72,7 @@
 	
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	[filesContent release];
-	
-	NSLog(@"SCAN: %@", idRootJson);
+    
 	
 	if( [idRootJson isKindOfClass: [NSMutableArray class]] )
 	{
@@ -122,18 +121,18 @@
 		for(NSMutableDictionary* incidentDic in incidentsByStatus)
 		{
 			incident = [[IncidentObj alloc] initWithDic:incidentDic];
-			NSLog(@"incident ongoing : %@", [incident description]);
+			C4MLog(@"incident ongoing : %@", [incident description]);
 			[arrayOngoing addObject:incident];
 			[incident release];
 		}
 		
-		NSLog(@"arrayOngoing : %@ count = %d", arrayOngoing, [arrayOngoing count]);
+		C4MLog(@"arrayOngoing : %@ count = %d", arrayOngoing, [arrayOngoing count]);
 		
 		[mReportDelegate didReceiveReportsOngoing:arrayOngoing updated:arrayUpdated resolved:arrayResolved];
 	}
 	else 
 	{
-		NSLog(@"Error");
+		C4MLog(@"Error");
 		[mReportDelegate didReceiveReportsOngoing:nil updated:nil resolved:nil];
 	}
 }

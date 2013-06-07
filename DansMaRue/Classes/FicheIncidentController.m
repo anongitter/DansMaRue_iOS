@@ -18,6 +18,8 @@
 #import "InfoVoirieAppDelegate.h"
 #import "ImageManager.h"
 #import "UpdateCell.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation FicheIncidentController
 @synthesize mScrollView;

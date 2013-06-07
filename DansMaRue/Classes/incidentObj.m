@@ -59,7 +59,7 @@
 		 }
 		 */
 	//	 {"category": 32, "status": "R", "date": "2010-04-23 05:03:13.424182", "descriptive": "un panneau cass\u00e9", "address": "2 rue colbert", "lat": 30.359089999999998, "lng": 9.3852100000000007, "id": 18}}
-		NSLog(@"%@",_dictionary);
+		C4MLog(@"%@",_dictionary);
 		
 		self.mEmail = @"";
 		self.mid  = ((NSNumber*)[_dictionary valueForKey:kIdKey]).intValue;

@@ -10,6 +10,8 @@
 #import "SupCategorieController.h"
 #import "LieuIncidentController.h"
 #import "CategoriesCell.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation SubCategorieController
 @synthesize mNextViewController;
@@ -21,7 +23,7 @@
 - (id)initWithNextView:(ValidationRapportController *)_nextView andID:(NSNumber*) _ParentID
 {
     
-    NSLog(@"---------------1");
+    C4MLog(@"---------------1");
     
     if ((self = [super initWithNibName:@"CategorieController" bundle:nil])) 
 	{
@@ -74,11 +76,15 @@
 			NSMutableDictionary* lDic = [[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:key]; 
 			NSString* string = [lDic valueForKey:@"parent_id"];
 			
-			if([string isEqualToString:_ParentID] )
-			{
-				[lDic setValue:key forKey:@"id"];
+            C4MLog(@"string_id %@  / string_id_class %@", string, [string class]);
+            C4MLog(@"parent_id %@  / parent_id_class %@", _ParentID, [_ParentID class]);
+            
+            if (([string isKindOfClass:[NSNumber class]] && [_ParentID isKindOfClass:[NSNumber class]] && [(NSNumber*)string isEqualToNumber:(NSNumber*)_ParentID]) ||
+                ([string isKindOfClass:[NSString class]] && [_ParentID isKindOfClass:[NSString class]] && [string isEqualToString:_ParentID]))
+            {
+                [lDic setValue:key forKey:@"id"];
 				[mParentCategorie addObject:lDic];
-			}
+            }
 		}
 		mUseStreetFurnituresCells = NO;
 		

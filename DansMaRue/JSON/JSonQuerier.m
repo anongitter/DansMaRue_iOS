@@ -18,7 +18,7 @@
 - (void)performRequest:(NSString*)requestKeyWord withParams:(NSMutableDictionary*)params {
 	NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:params];
 	
-	NSLog(@"Sending %@ with params:%@", requestKeyWord, params);
+	C4MLog(@"Sending %@ with params:%@", requestKeyWord, params);
 	
 	[dic setObject:requestKeyWord forKey:kJsonRequestKeyWord];
 	SBJSON *json = [[SBJSON alloc] init];
@@ -30,7 +30,7 @@
 	NSString* json_string = [NSString stringWithFormat:@"jsonStream=%@", [json stringWithObject:dic]];
 	[json release];
 	
-	NSLog(@"Sending %@", json_string);
+	C4MLog(@"Sending %@", json_string);
 
 	
 	NSData *body = [json_string dataUsingEncoding:NSUTF8StringEncoding];
@@ -60,8 +60,8 @@
 #pragma mark Connection Delegate Methods
 
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	NSLog(@"JSonQuerier connection failed -- %@", [error localizedDescription]);
-	NSLog(@"JSonQuerier code:%d  ------  domain:%@", [error code], [error domain]);
+	C4MLog(@"JSonQuerier connection failed -- %@", [error localizedDescription]);
+	C4MLog(@"JSonQuerier code:%d  ------  domain:%@", [error code], [error domain]);
 	
 	// This commented code can be used in the response handler for instance.
 	//if ([error code] == NSURLErrorNotConnectedToInternet) {

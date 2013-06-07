@@ -52,7 +52,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	NSLog(@"SCAN = %@", filesContent );
+	C4MLog(@"SCAN = %@", filesContent );
 	id idRootJson = [mJson objectWithString:filesContent error:nil];
 	[filesContent release];
 	
@@ -79,7 +79,7 @@
 	}
 	else
 	{
-		NSLog(@"Error");
+		C4MLog(@"Error");
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"server_error_title", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];

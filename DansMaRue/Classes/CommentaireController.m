@@ -32,7 +32,6 @@
 
 - (id)initWithDelegate:(NSObject<commentDelegate> *) _commentDelegate andComment:(NSString*)_comment
 {
-	NSLog(@"init");
 	self = [super initWithNibName:@"CommentaireController" bundle:nil];
 	if (self)
 	{

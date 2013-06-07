@@ -50,7 +50,7 @@
 
 - (void)launchReverseGeocodingForLocation:(CLLocationCoordinate2D)_Location
 {
-    NSLog(@"launchReverseGeocodingForLocation");
+    C4MLog(@"launchReverseGeocodingForLocation");
     [mGeocoder cancelGeocode];
     
     
@@ -58,7 +58,7 @@
     
     [mGeocoder reverseGeocodeLocation:loc completionHandler:^(NSArray* _Placemarks, NSError* _Error)
      {
-         NSLog(@"mDelegate %@", mDelegate);
+         C4MLog(@"mDelegate %@", mDelegate);
          if (_Error)
          {
              [mDelegate reverseGeocoder:mGeocoder didFailWithError:_Error];

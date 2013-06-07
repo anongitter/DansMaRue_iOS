@@ -48,28 +48,6 @@
 	[self.navigationItem setTitleView:label];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	NSLog(@"viewWillAppear");
-	
-	[super viewWillAppear:animated];
-    
-    /*
-	if (mLoadingOngoing == NO) {
-		
-		GetActivities * lGetActivities = [[GetActivities alloc] initWithDelegate:self];
-		NSMutableDictionary* lPosition =	[NSMutableDictionary dictionary];
-		[lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude] forKey:@"latitude"];
-		[lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude] forKey:@"longitude"];
-		
-		[lGetActivities generateActivities:lPosition];
-		[lGetActivities release];
-		
-		[self showLoadingView:YES];
-	}
-     */
-}
-
 
 - (IBAction) mailShareApp
 {
@@ -295,8 +273,6 @@ NSComparisonResult compareDateDescendingOrder(id _date1, id _date2, void *contex
                 [mActivities setObject:llogAtDate forKey:newDateString];
             }
         }
-        //NSLog(@"ok");
-        //NSLog(@"count = %d", [[mActivities allValues] count]);
         [self orderDictionaryAccordingToDate];
         [locale release];
         [inputFormatter release];

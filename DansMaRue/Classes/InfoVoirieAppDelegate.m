@@ -93,7 +93,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
 
-	NSLog(@"locationManager didUpdate");
+	C4MLog(@"locationManager didUpdate");
 	// On sauvegarde la nouvelle position courante de l'utilisateur (utile pour les annotations)
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
     
@@ -106,7 +106,7 @@
 	mNumGeolocIteration++;
 	if (mNumGeolocIteration == 1)
 	{
-		NSLog(@"numGeoloc = 1");
+		C4MLog(@"numGeoloc = 1");
 		
 		UIViewController *home = [[[[tabBarController viewControllers] objectAtIndex:0] viewControllers] objectAtIndex:0];
 		if ([home isKindOfClass:[NouveauController class]])
@@ -114,7 +114,7 @@
 			[(NouveauController*)home reloadIncidentStats];
 		}
 	}
-	NSLog(@"ok");
+	C4MLog(@"ok");
 }
 
 
@@ -123,7 +123,7 @@
  */
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-	NSLog(@"locationManager: fail with error : %@", error);
+	C4MLog(@"locationManager: fail with error : %@", error);
 }
 
 - (void)dealloc

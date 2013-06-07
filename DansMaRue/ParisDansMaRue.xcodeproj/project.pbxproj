@@ -972,11 +972,11 @@
 			children = (
 				31EAC34611AD7B2300E928E0 /* CategorieController.h */,
 				31EAC34711AD7B2300E928E0 /* CategorieController.m */,
+				31EAC34811AD7B2300E928E0 /* CategorieController.xib */,
 				31EAC34B11AD7B3600E928E0 /* SubCategorieController.h */,
 				31EAC34C11AD7B3600E928E0 /* SubCategorieController.m */,
 				D9F659E711F0563B00095C40 /* SupCategorieController.h */,
 				D9F659E811F0563B00095C40 /* SupCategorieController.m */,
-				31EAC34811AD7B2300E928E0 /* CategorieController.xib */,
 				D9C28EDF11E23815006C1957 /* CategoriesCell */,
 			);
 			name = Categories;

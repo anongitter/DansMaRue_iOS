@@ -9,6 +9,8 @@
 #import "SupCategorieController.h"
 #import "LieuIncidentController.h"
 #import "CategoriesCell.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation SupCategorieController
 @synthesize mNextViewController;
@@ -31,6 +33,8 @@
 			[lDic setValue:child forKey:@"id"];
 			[mSupCategorie addObject:lDic];
 		}
+        
+        
 		mUseStreetFurnituresCells = NO;
 		NSNumber* parentID = [[mSupCategorie objectAtIndex:0] objectForKey:@"parent_id"];
 		mParentString = [[[InfoVoirieContext sharedInfoVoirieContext].mCategory objectForKey:[NSString stringWithFormat:@"%d", parentID.intValue]] objectForKey:@"name"];

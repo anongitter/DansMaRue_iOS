@@ -43,35 +43,13 @@ static ImageManager *	sharedImageManagerInstance = nil;
 	[super dealloc];
 }
 
-/**
- Returns the path to the application's Documents directory.
- */
-/*
-- (NSString *) applicationImagesDirectory
-{
-	NSError* error = nil;
-	NSString* imagesfolderpath = [[AppDelegate_Shared applicationDocumentsDirectory] stringByAppendingPathComponent:@"images"];
-	BOOL folder_exists = [[NSFileManager defaultManager] fileExistsAtPath:imagesfolderpath];
-	if (!folder_exists)
-	{
-		[[NSFileManager defaultManager] createDirectoryAtPath:imagesfolderpath withIntermediateDirectories:YES attributes:nil error:&error];
-		if (error != nil)
-		{
-			NSLog(@"-[ImageManager applicationImagesDirectory] Error creating images folder : %@", error);
-		}
-	}
-	
-	return imagesfolderpath;
-	
-	//NSString *basePath = NSHomeDirectory();
-	//return basePath;
-}*/
 
 - (NSString*)applicationImagesDirectory 
 {	
 	NSString* basePath = NSTemporaryDirectory();
     return basePath;
 }
+
 
 - (UIImage *) getImageNamed:(NSString *)urlImage withDelegate:(NSObject <ImageManagerDelegate> *)delegate
 {
@@ -178,7 +156,7 @@ static ImageManager *	sharedImageManagerInstance = nil;
 			NSError * error;
 			if (![data writeToFile:img_path options:0 error:&error])
 			{
-				NSLog(@"-[ImageManager downloadImageToCache:] error %@",error);
+				C4MLog(@"-[ImageManager downloadImageToCache:] error %@",error);
 			}
 			
 			if([mDelegateDictionary objectForKey:urlImage] != nil)
@@ -196,7 +174,7 @@ static ImageManager *	sharedImageManagerInstance = nil;
 	}
 	else
 	{
-		NSLog(@"-[ImageManager downloadImageToCache:] image = nil");
+		C4MLog(@"-[ImageManager downloadImageToCache:] image = nil");
 		
 		if([mDelegateDictionary objectForKey:urlImage] != nil)
 		{

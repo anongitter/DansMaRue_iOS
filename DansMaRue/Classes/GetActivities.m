@@ -51,11 +51,10 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	//NSLog(@"SCAN = %@", filesContent );
 	//id idRootJson = [mJson objectWithString:filesContent error:nil];
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	//NSLog(@"idRootJson count : %d", [(NSMutableArray*)idRootJson count]);
-	NSLog(@"idRootJson : %@", idRootJson);
+	
 	[filesContent release];
 	
 	if( [idRootJson isKindOfClass: [NSMutableArray class]] )
@@ -115,7 +114,6 @@
 	}
 	else 
 	{
-		NSLog(@"Error");
 		[mActivityDelegate didReceiveActivities:nil logs:nil];
 	}
 }

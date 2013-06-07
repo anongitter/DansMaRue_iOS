@@ -56,7 +56,7 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	//NSLog(@"SCAN = %@", filesContent );
+
 	id idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	[filesContent release];
@@ -70,8 +70,6 @@
 		NSDictionary* lAnswerRoot = [lDicRoot valueForKey:@"answer"];
 		
 		NSArray* lUpdates = [lAnswerRoot objectForKey:@"photos"];
-		
-		//NSLog(@"%@", lUpdates);
 		
 		[mUpdateIncidentDelegate didReceiveUpdates:lUpdates];
 	}
@@ -87,7 +85,6 @@
 	else 
 	{
 		[mUpdateIncidentDelegate didReceiveUpdates:nil];
-		NSLog(@"Error");
 	}
 }
 

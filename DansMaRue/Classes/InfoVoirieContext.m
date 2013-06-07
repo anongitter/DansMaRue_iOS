@@ -225,7 +225,7 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 		return nil;
 	}
 	
-	NSLog(@"generate new authentication token");
+	C4MLog(@"generate new authentication token");
 	
 	if (mUserLogin != nil)
 	{
@@ -263,16 +263,16 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	NSString* concatenated_signature_items = [NSString stringWithFormat:@"%@%@", kServerPrivateKey, _jsonStream];
 	NSString* signature = [[InfoVoirieContext getSHA1HashBytes:concatenated_signature_items] lowercaseString];
 	[_request setValue:signature forHTTPHeaderField:@"x-app-request-signature"];
-	NSLog(@"x-app-request-signature : %@", signature);
+	C4MLog(@"x-app-request-signature : %@", signature);
 	
 	[_request setValue:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] forHTTPHeaderField:@"x-app-version"];
-    NSLog(@"x-app-version : %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]);
+    C4MLog(@"x-app-version : %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]);
     
 	[_request setValue:@"iphone_family" forHTTPHeaderField:@"x-app-platform"];
-    NSLog(@"x-app-platform : %@", @"iphone_family");
+    C4MLog(@"x-app-platform : %@", @"iphone_family");
     
 	[_request setValue:[[UIDevice currentDevice] model] forHTTPHeaderField:@"x-app-device-model"];
-    NSLog(@"x-app-device-model : %@", [[UIDevice currentDevice] model]);
+    C4MLog(@"x-app-device-model : %@", [[UIDevice currentDevice] model]);
     
     
 }
@@ -287,7 +287,7 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 	
 	NSString* json_string = [NSString stringWithFormat:@"jsonStream=%@", jsonStream];
 	
-	NSLog(@"%@",json_string);
+	C4MLog(@"%@",json_string);
 	
 	NSData *request_body = [json_string dataUsingEncoding:NSUTF8StringEncoding];
 	NSString* stringurl = [InfoVoirieContext getServerURL:NO];

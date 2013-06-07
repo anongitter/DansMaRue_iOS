@@ -7,6 +7,8 @@
 //
 
 #import "GetCategories.h"
+#import "InfoVoirieContext.h"
+
 
 @implementation GetCategories
 @synthesize mCategoriesDelegate;
@@ -62,7 +64,7 @@
 {
 	[super connection:connection didFailWithError:error];
 	
-	[InfoVoirieContext sharedInfoVoirieContext].mCategory = [[NSUserDefaults standardUserDefaults] valueForKey:@"categories_json"];
+	[InfoVoirieContext sharedInfoVoirieContext].mCategory = [self getMutableObjectFromObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"categories_json"]];
     [mCategoriesDelegate didReceiveCategories];
 }
 
@@ -104,8 +106,8 @@
     if( [idRootJson isKindOfClass: [NSMutableArray class]] )
 	{
         NSMutableArray* jsonRootObject = (NSMutableArray*) idRootJson ;
-        NSDictionary* lDicRoot = [jsonRootObject objectAtIndex:0];
-        NSDictionary* lAnswerRoot = [lDicRoot valueForKey:@"answer"];
+        NSMutableDictionary* lDicRoot = [NSMutableDictionary dictionaryWithDictionary:[jsonRootObject objectAtIndex:0]];
+        NSMutableDictionary* lAnswerRoot = [NSMutableDictionary dictionaryWithDictionary:[lDicRoot valueForKey:@"answer"]];
         
         //Store locally if necessary
         NSString* version = [NSString stringWithFormat:@"%d", [[lAnswerRoot valueForKey:@"version"] intValue]];
@@ -113,17 +115,58 @@
         if (![version isEqualToString:old_version]) {
             [[NSUserDefaults standardUserDefaults] setValue:version forKey:@"categories_version"];
             
-            NSDictionary* lCategoriesRoot = [lAnswerRoot valueForKey:@"categories"];
+            NSMutableDictionary* lCategoriesRoot = [NSMutableDictionary dictionary];
+            [lCategoriesRoot addEntriesFromDictionary:[lAnswerRoot valueForKey:@"categories"]];
+            
+            
+            C4MLog(@"STOP1 %@", [NSMutableDictionary class]);
+            C4MLog(@"STOP1 %@", [lCategoriesRoot class]);
+            C4MLog(@"STOP1 %@", lCategoriesRoot);
+            
             [[NSUserDefaults standardUserDefaults] setValue:lCategoriesRoot forKey:@"categories_json"];
         }
 	}
-	else 
-	{
-		NSLog(@"Error");
-	}
     
-    [InfoVoirieContext sharedInfoVoirieContext].mCategory = [[NSUserDefaults standardUserDefaults] valueForKey:@"categories_json"];
+    [[NSUserDefaults standardUserDefaults] synchronize];  
+    
+    
+	[InfoVoirieContext sharedInfoVoirieContext].mCategory = [self getMutableObjectFromObject:[[NSUserDefaults standardUserDefaults] valueForKey:@"categories_json"]];
+    
     [mCategoriesDelegate didReceiveCategories];
 }
 
+
+
+- (id)getMutableObjectFromObject:(id)_Object
+{
+    if ([_Object isKindOfClass:[NSDictionary class]])
+    {
+        NSMutableDictionary* res = [NSMutableDictionary dictionary];
+        
+        NSDictionary* dictionary = (NSDictionary*)_Object;
+        
+        for (NSString* aKey in [dictionary allKeys])
+        {
+            [res setValue:[self getMutableObjectFromObject:[dictionary objectForKey:aKey]] forKey:aKey];
+        }
+        return res;
+    }
+    else if ([_Object isKindOfClass:[NSArray class]])
+    {
+        NSMutableArray* res = [NSMutableArray array];
+        
+        NSArray* array = (NSArray*)_Object;
+        
+        for (id anObject in array)
+        {
+            [res addObject:[self getMutableObjectFromObject:anObject]];
+        }
+        
+        return res;
+    }
+    else
+    {
+        return _Object;
+    }
+}
 @end

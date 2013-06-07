@@ -59,39 +59,39 @@ kErrorEmptyUserID
 	switch (_status)
 	{
 		case kErrorEmptyJsonRequest:
-			NSLog(@"Error: Empty Json Request");
+			C4MLog(@"Error: Empty Json Request");
 			generalError = YES;
 			break;
 		case kErrorBadJsonRequest:
-			NSLog(@"Error: Bad Json Request");
+			C4MLog(@"Error: Bad Json Request");
 			generalError = YES;
 			break;
 		case kErrorBadRequestSubElement:
-			NSLog(@"Error: Bar Request Sub-Element");
+			C4MLog(@"Error: Bar Request Sub-Element");
 			generalError = YES;
 			break;
 		case kErrorEmptyDeviceIdentifier:
-			NSLog(@"Error: Empty Device Identifier");
+			C4MLog(@"Error: Empty Device Identifier");
 			generalError = YES;
 			break;
 		case kErrorBadDeviceIdentifier:
-			NSLog(@"Error: Bad Device Identifier");
+			C4MLog(@"Error: Bad Device Identifier");
 			generalError = YES;
 			break;
 		case kEmptyPositionParameter:
-			NSLog(@"Empty Position Parameter");
+			C4MLog(@"Empty Position Parameter");
 			generalError = YES;
 			break;
 		case kErrorBadPositionParameter:
-			NSLog(@"Bad Position Parameter");
+			C4MLog(@"Bad Position Parameter");
 			generalError = YES;
 			break;
 
 		case kErrorBadCategoryID:
-			NSLog(@"Error: Bad Category ID");
+			C4MLog(@"Error: Bad Category ID");
 			break;
 		case kErrorEmptyCategoryID:
-			NSLog(@"Error: Empty Category ID");
+			C4MLog(@"Error: Empty Category ID");
 			break;
 		case kErrorBadAddressParameter:
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_bad_address_parameter", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
@@ -105,43 +105,43 @@ kErrorEmptyUserID
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
 			break;
 		case kErrorEmptyUserLogin:
-			NSLog(@"Error: Empty User Login");
+			C4MLog(@"Error: Empty User Login");
 			generalError = YES;
 			break;
 		case kErrorBadPassword:
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
 			break;
 		case kErrorEmptyPassword:
-			NSLog(@"Error: Empty Password");
+			C4MLog(@"Error: Empty Password");
 			generalError = YES;
 			break;
 		case kErrorBadAuthentToken:
-			NSLog(@"Error: Bad Authentication Token sent to Server");
+			C4MLog(@"Error: Bad Authentication Token sent to Server");
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
 			break;
 		case kErrorEmptyAuthentToken:
-			NSLog(@"Error: No Authentication Token sent to Server");
+			C4MLog(@"Error: No Authentication Token sent to Server");
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
 			break;
 #endif
 		
 		case kErrorBadRadius:
-			NSLog(@"Error: Bad Radius");
+			C4MLog(@"Error: Bad Radius");
 			generalError = YES;
 			break;
 		case kErrorEmptyRadius:
-			NSLog(@"Error: Empty Radius");
+			C4MLog(@"Error: Empty Radius");
 			break;
 			
 		case kErrorBadIncidentPictureContent:
-			NSLog(@"Error: Bad Incident Picture Content");
+			C4MLog(@"Error: Bad Incident Picture Content");
 			break;
 		case kErrorReadingTempPictureFile:
-			NSLog(@"Error: Error Reading Temp Picture File");
+			C4MLog(@"Error: Error Reading Temp Picture File");
 			break;
 			
 		case kErrorBadJsonRequestToken:
-			NSLog(@"Error: Bad Json Request Token");
+			C4MLog(@"Error: Bad Json Request Token");
 			break;
 		default:
 			break;

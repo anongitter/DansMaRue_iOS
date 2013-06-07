@@ -71,7 +71,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	NSLog(@"viewWillAppear");
+	C4MLog(@"viewWillAppear");
 	
 #ifdef kMarseilleTownhallVersion
 	CGRect frame;
@@ -112,7 +112,7 @@
 	}
 	else
 	{
-        NSLog(@"Loading 1, mLoadingOngoing=%d",mLoadingOngoing);
+        C4MLog(@"Loading 1, mLoadingOngoing=%d",mLoadingOngoing);
 		[mIndicatorView startAnimating];
 	}
 }
@@ -123,7 +123,7 @@
 	
 	if (mLoadingOngoing > 0)
 	{
-        NSLog(@"Loading 2, mLoadingOngoing=%d",mLoadingOngoing);
+        C4MLog(@"Loading 2, mLoadingOngoing=%d",mLoadingOngoing);
 		[mIndicatorView startAnimating];
 	}
 }
@@ -140,7 +140,7 @@
 	
 	[getIncidentStats release];
 	
-    NSLog(@"Loading 3, mLoadingOngoing=%d",mLoadingOngoing);
+    C4MLog(@"Loading 3, mLoadingOngoing=%d",mLoadingOngoing);
 	[mIndicatorView startAnimating];
 	
 	mHasBeenGeolocated = YES;
@@ -160,7 +160,7 @@
 	
 	[userAuthentication release];
 	
-    NSLog(@"Loading 4");
+    C4MLog(@"Loading 4");
 	[mIndicatorView startAnimating];
 }
 
@@ -338,7 +338,7 @@
 
 -(void)didReceiveCategories{
     
-    NSLog(@"didReceiveCategories");
+    C4MLog(@"didReceiveCategories");
     
     
     
@@ -350,7 +350,7 @@
 
 - (void)didReceiveIncidentStats:(NSString*)_nbOngoingIncidents :(NSString*)_nbUpdatedIncidents :(NSString*)_nbResolvedIncidents
 {
-	NSLog(@"didReceiveIncidentStats : mLoadingOngoing = %d", mLoadingOngoing);
+	C4MLog(@"didReceiveIncidentStats : mLoadingOngoing = %d", mLoadingOngoing);
 	
 	mLoadingOngoing--;
 	if (mLoadingOngoing <= 0)
@@ -391,7 +391,7 @@
 #pragma mark Report Delegate Methods
 - (void)didReceiveReportsOngoing:(NSArray*)_ongoing updated:(NSArray*)_updated resolved:(NSArray*)_resolved
 {	
-	NSLog(@"didReceiveReportsOngoing : mLoadingOngoing = %d", mLoadingOngoing);
+	C4MLog(@"didReceiveReportsOngoing : mLoadingOngoing = %d", mLoadingOngoing);
 	mLoadingOngoing--;
 	if (mLoadingOngoing <= 0)
 	{
@@ -415,7 +415,7 @@
 	
 	if(resolvedIncidents > [nbResolved integerValue])
 	{
-		//NSLog(@"NSUser value : %d/%d", [[[NSUserDefaults standardUserDefaults] objectForKey:kUserDictionaryKeyNumberResolved] integerValue], resolvedIncidents);
+		//C4MLog(@"NSUser value : %d/%d", [[[NSUserDefaults standardUserDefaults] objectForKey:kUserDictionaryKeyNumberResolved] integerValue], resolvedIncidents);
 		NSArray* items = [self.tabBarController.tabBar items];
 		UITabBarItem *reports = [items objectAtIndex:3];
 		reports.badgeValue = [NSString stringWithFormat:@"%d", [[NSNumber numberWithInt:(resolvedIncidents - [nbResolved integerValue])] integerValue]];
