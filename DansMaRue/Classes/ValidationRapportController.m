@@ -102,7 +102,7 @@
 	[returnButton release];
 	
     mIncidentCreated.mPriorityId = 3;
-    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangeureux", @"Génant", @"Mineur", nil];
+    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangereux", @"Gênant", @"Mineur", nil];
     
 	C4MLog(@"%s", __PRETTY_FUNCTION__);
 }

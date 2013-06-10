@@ -1759,7 +1759,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: prigent roudaut (7LDKB49Z7K)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1769,7 +1769,7 @@
 				GCC_PREFIX_HEADER = ParisDansMaRue_Prefix.pch;
 				INFOPLIST_FILE = "ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "6FF48C1F-4B10-4C09-9673-D1C044C95EB0";
+				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

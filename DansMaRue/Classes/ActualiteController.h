@@ -41,6 +41,8 @@
 	BOOL						mLoadingOngoing;
 }
 
+@property (retain, nonatomic) IBOutlet UIView*          mContentView;
+@property (retain, nonatomic) IBOutlet UIScrollView*    mScrollView;
 @property (nonatomic, retain) UILabel *                 mLabelInfo;
 @property (nonatomic, retain) NSMutableDictionary*		mActivities;
 @property (nonatomic, retain) NSMutableDictionary*		mIncidentsById;

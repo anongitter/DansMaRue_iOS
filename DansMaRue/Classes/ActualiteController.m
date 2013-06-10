@@ -49,6 +49,18 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_mScrollView addSubview:_mContentView];
+    _mScrollView.contentSize = _mContentView.frame.size;
+    
+    C4MLog(@"_mScrollView %@", [NSValue valueWithCGRect:_mScrollView.frame]);
+    C4MLog(@"_mScrollView.contentSize %@", [NSValue valueWithCGSize:_mScrollView.contentSize]);
+}
+
+
 - (IBAction) mailShareApp
 {
 	MFMailComposeViewController *mailComposeController = [[MFMailComposeViewController alloc] init];
@@ -109,6 +121,8 @@
 }
 
 - (void)viewDidUnload {
+    [self setMScrollView:nil];
+    [self setMContentView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 	mTableView = nil;
@@ -119,6 +133,8 @@
 	[mTableView release];
 	[mLoadingView release];
 	[mOrderedKeys release];
+    [_mScrollView release];
+    [_mContentView release];
     [super dealloc];
 }
 

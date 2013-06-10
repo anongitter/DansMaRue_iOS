@@ -144,7 +144,7 @@
 	[inputFormatter release];
 	[dateFormatter release];
     
-    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangeureux", @"Génant", @"Mineur", nil];
+    incidentLabels = [[NSArray alloc] initWithObjects:@"Dangereux", @"Gênant", @"Mineur", nil];
     self.mLabelPriority.text = [incidentLabels objectAtIndex:(mIncident.mPriorityId-1)];
 }
 
