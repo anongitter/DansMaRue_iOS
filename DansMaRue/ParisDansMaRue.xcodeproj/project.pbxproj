@@ -32,8 +32,6 @@
 		31EAC25611AD633600E928E0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EAC25511AD633600E928E0 /* MapKit.framework */; };
 		31EAC26A11AD641900E928E0 /* incidentObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EAC26911AD641900E928E0 /* incidentObj.m */; };
 		31EAC26D11AD65A500E928E0 /* GetIncidentsByPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EAC26C11AD65A500E928E0 /* GetIncidentsByPosition.m */; };
-		31EAC32211AD775A00E928E0 /* ActualiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EAC32111AD775A00E928E0 /* ActualiteCell.m */; };
-		31EAC32411AD776900E928E0 /* ActualiteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31EAC32311AD776900E928E0 /* ActualiteCell.xib */; };
 		31EAC33811AD790100E928E0 /* MesRapportsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EAC33711AD790100E928E0 /* MesRapportsCell.m */; };
 		31EAC33A11AD790F00E928E0 /* MesRapportsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31EAC33911AD790F00E928E0 /* MesRapportsCell.xib */; };
 		31EAC34411AD7B1600E928E0 /* ConfirmDeclarationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EAC34211AD7B1600E928E0 /* ConfirmDeclarationController.m */; };
@@ -275,9 +273,6 @@
 		31EAC26911AD641900E928E0 /* incidentObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = incidentObj.m; sourceTree = "<group>"; };
 		31EAC26B11AD65A500E928E0 /* GetIncidentsByPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetIncidentsByPosition.h; sourceTree = "<group>"; };
 		31EAC26C11AD65A500E928E0 /* GetIncidentsByPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetIncidentsByPosition.m; sourceTree = "<group>"; };
-		31EAC32011AD775A00E928E0 /* ActualiteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualiteCell.h; sourceTree = "<group>"; };
-		31EAC32111AD775A00E928E0 /* ActualiteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActualiteCell.m; sourceTree = "<group>"; };
-		31EAC32311AD776900E928E0 /* ActualiteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActualiteCell.xib; sourceTree = "<group>"; };
 		31EAC33611AD790100E928E0 /* MesRapportsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MesRapportsCell.h; sourceTree = "<group>"; };
 		31EAC33711AD790100E928E0 /* MesRapportsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MesRapportsCell.m; sourceTree = "<group>"; };
 		31EAC33911AD790F00E928E0 /* MesRapportsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MesRapportsCell.xib; sourceTree = "<group>"; };
@@ -700,7 +695,6 @@
 				31EAC1F711AD588200E928E0 /* ActualiteController.h */,
 				31EAC1F811AD588200E928E0 /* ActualiteController.m */,
 				31EAC1F911AD588200E928E0 /* ActualiteController.xib */,
-				D9E85BEB11E5C84900914E7A /* Cell */,
 			);
 			name = Actualites;
 			sourceTree = "<group>";
@@ -1202,16 +1196,6 @@
 			name = "NavBar Buttons";
 			sourceTree = "<group>";
 		};
-		D9E85BEB11E5C84900914E7A /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				31EAC32011AD775A00E928E0 /* ActualiteCell.h */,
-				31EAC32111AD775A00E928E0 /* ActualiteCell.m */,
-				31EAC32311AD776900E928E0 /* ActualiteCell.xib */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
 		D9E85BEE11E5C87700914E7A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1432,7 +1416,6 @@
 				31EAC1FB11AD588200E928E0 /* ActualiteController.xib in Resources */,
 				31EAC20011AD589100E928E0 /* IncidentsController.xib in Resources */,
 				31EAC20511AD589D00E928E0 /* MesRapportsController.xib in Resources */,
-				31EAC32411AD776900E928E0 /* ActualiteCell.xib in Resources */,
 				31EAC33A11AD790F00E928E0 /* MesRapportsCell.xib in Resources */,
 				31EAC34511AD7B1600E928E0 /* ConfirmDeclarationController.xib in Resources */,
 				31EAC34A11AD7B2300E928E0 /* CategorieController.xib in Resources */,
@@ -1608,7 +1591,6 @@
 				31EAC20411AD589D00E928E0 /* MesRapportsController.m in Sources */,
 				31EAC26A11AD641900E928E0 /* incidentObj.m in Sources */,
 				31EAC26D11AD65A500E928E0 /* GetIncidentsByPosition.m in Sources */,
-				31EAC32211AD775A00E928E0 /* ActualiteCell.m in Sources */,
 				31EAC33811AD790100E928E0 /* MesRapportsCell.m in Sources */,
 				31EAC34411AD7B1600E928E0 /* ConfirmDeclarationController.m in Sources */,
 				31EAC34911AD7B2300E928E0 /* CategorieController.m in Sources */,

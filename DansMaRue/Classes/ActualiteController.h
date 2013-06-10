@@ -10,7 +10,6 @@
 #import "activityDelegate.h"
 #import "FicheIncidentController.h"
 #import "GetActivities.h"
-#import "ActualiteCell.h"
 #import <MessageUI/MFMailComposeViewController.h>
 
 #define kTableViewRowHeight			100
@@ -29,13 +28,12 @@
 #define kIconInvalidated			@"icn_incident_nonvalide.png"
 
 @interface ActualiteController : UIViewController
-	<UITableViewDelegate, UITableViewDataSource, activityDelegate, MFMailComposeViewControllerDelegate>
+	<activityDelegate, MFMailComposeViewControllerDelegate>
 {
 	NSMutableDictionary*		mActivities;
 	NSMutableDictionary*		mIncidentsById;
 	NSMutableArray*				mOrderedKeys;
 	NSMutableArray*				mBannedIncidentsId;
-	IBOutlet UITableView*		mTableView;
 	
 	UIView*						mLoadingView;
 	BOOL						mLoadingOngoing;
