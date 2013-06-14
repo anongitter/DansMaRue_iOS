@@ -45,7 +45,7 @@
 	[[mNavBar topItem] setLeftBarButtonItem:returnButton];
 	[returnButton release];
 	
-	NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+	NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
 	mLabelAppVersion.text = [NSString stringWithFormat:@"v%@", appVersion];
 	
 }
@@ -201,6 +201,8 @@
 		{
 			[[UIApplication sharedApplication] openURL: [NSURL URLWithString:@"tel://0491316035"]];
 		}
+        
+#warning TO DO clean this code - seems to not be used anymore
 		else if(alertView.tag == 2)
 		{
 			NSString* url = @"http://www.c4mprod.com/web/page-410";
@@ -234,6 +236,8 @@
     
 }
 
+
+#warning TO DO clean this code - seems to not be used anymore
 -(IBAction) btnApps:(id)sender 
 {
 	UIAlertView * lAlert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil) message:NSLocalizedString(@"leave_app_to_browser", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"confirm", nil), nil];

@@ -26,7 +26,6 @@
 	[mChangeIncidentDelegate release];
 	[super dealloc];
 }
-
 /*- (void)generateChangeForIncident:(NSNumber *)_incidentId newCategory:(NSNumber *)_incidentCategory newAddress:(NSString*)_incidentAddress
 {
 	self.mReceivedData = [NSMutableData data];

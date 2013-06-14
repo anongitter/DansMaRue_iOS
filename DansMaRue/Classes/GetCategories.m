@@ -76,7 +76,6 @@
 	{
         NSDictionary * dicresponse = httpResponse.allHeaderFields;
 		
-		NSLog(@"HTTP headers for response:\n %@",dicresponse);
         BOOL testAvailableVersion = YES;
         if ([dicresponse objectForKey:kHTTPHeaderForceUpdateKey/*@"x-app-force-update"*/])
 		{
@@ -98,7 +97,6 @@
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
 	
-    NSLog(@"downloaded categories: %@", filesContent);
     
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
 	[filesContent release];

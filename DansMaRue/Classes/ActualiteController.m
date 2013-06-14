@@ -21,13 +21,55 @@
     return YES;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
-}
+}*/
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    if(interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIDeviceOrientationPortraitUpsideDown)
+    {
+        [self updateView];
+    }
+    if(interfaceOrientation == UIDeviceOrientationLandscapeRight || interfaceOrientation == UIDeviceOrientationLandscapeLeft)
+    {
+        [self updateLandScapeView];
+    }
+    return YES;
+}
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if([[UIDevice currentDevice] orientation] == UIInterfaceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
+    {
+        [self updateView];
+    }
+    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft)
+    {
+        [self updateLandScapeView];
+    }
+}
+
+
+- (void) updateView
+{
+    [self.mScrollView setContentSize:CGSizeMake(self.view.frame.size.width, 900)];
+    [self.mContentView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 900)];
+}
+
+
+- (void) updateLandScapeView
+{
+    [self.mScrollView setContentSize:CGSizeMake(self.view.frame.size.width, 650)];
+    [self.mContentView setFrame:CGRectMake(0, 0, self.view.frame.size.width, 650)];
+}
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad

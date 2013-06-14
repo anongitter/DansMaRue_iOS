@@ -25,12 +25,12 @@
 
 //Release Mode
 #if CONFIGURATION_Release
-#define C4MLog(...)  NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define C4MLog(...)  { }
 #endif
 
 //AdHoc Mode
 #if CONFIGURATION_AdHoc
-#define C4MLog(...)  { }
+#define C4MLog(...)  NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #endif
 
 

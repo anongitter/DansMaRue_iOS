@@ -53,7 +53,6 @@
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
 	//id idRootJson = [mJson objectWithString:filesContent error:nil];
 	NSMutableArray* idRootJson = [mJson objectWithString:filesContent error:nil];
-	//NSLog(@"idRootJson count : %d", [(NSMutableArray*)idRootJson count]);
 	
 	[filesContent release];
 	

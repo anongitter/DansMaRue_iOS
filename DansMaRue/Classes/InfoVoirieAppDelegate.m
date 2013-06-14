@@ -143,7 +143,7 @@
     
     NSString* lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultKey_LastVersionAvailable];
     components = [lastVersion componentsSeparatedByString:@"."];
-    //NSLog(@"last version components = %@", components);
+
     int lastVersionMajor = 0;
     int lastVersionMinor = 0;
     int lastVersionBuild = 0;
@@ -163,9 +163,8 @@
     }
     
     NSString* newVersion = _notification.object;
-    //NSLog(@"newVersion = %@", newVersion);
+    
     components = [newVersion componentsSeparatedByString:@"."];
-    //NSLog(@"new version components = %@", components);
     int newVersionMajor = 0;
     int newVersionMinor = 0;
     int newVersionBuild = 0;
@@ -183,9 +182,7 @@
             }
         }
     }
-    //NSLog(@"");
     
-    //NSLog(@"%d.%d.%d / %d.%d.%d", lastVersionMajor, lastVersionMinor, lastVersionBuild, newVersionMajor, newVersionMinor, newVersionBuild);
     
     if ( newVersionMajor > lastVersionMajor || 
         ( newVersionMajor == lastVersionMajor && newVersionMinor > lastVersionMinor ) ||

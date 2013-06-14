@@ -52,9 +52,9 @@
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="752947153">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC43NDkwMTk2MDc4IDAuODY2NjY2NjY2NyAwLjkzNzI1NDkwMgA</bytes>
 						</object>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -67,7 +67,10 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="900737905"/>
-				<reference key="IBUIBackgroundColor" ref="752947153"/>
+				<object class="NSColor" key="IBUIBackgroundColor" id="752947153">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MCAwAA</bytes>
+				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
@@ -77,7 +80,7 @@
 			</object>
 			<object class="IBUIView" id="771851767">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIView" id="460499929">
@@ -96,7 +99,7 @@
 					</object>
 					<object class="IBUIView" id="807911599">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 1200}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -110,7 +113,7 @@
 					</object>
 					<object class="IBUIImageView" id="100335059">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 367}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -125,7 +128,7 @@
 					</object>
 					<object class="IBUILabel" id="712556426">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">306</int>
 						<string key="NSFrame">{{10, 10}, {300, 300}}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -159,7 +162,7 @@
 					</object>
 					<object class="IBUIButton" id="650988200">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{10, 308}, {300, 30}}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -194,7 +197,7 @@
 					</object>
 					<object class="IBUILabel" id="300263116">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{10, 388}, {300, 21}}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -221,7 +224,7 @@
 					</object>
 					<object class="IBUILabel" id="78352748">
 						<reference key="NSNextResponder" ref="771851767"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">282</int>
 						<string key="NSFrame">{{10, 380}, {300, 509}}</string>
 						<reference key="NSSuperview" ref="771851767"/>
 						<reference key="NSWindow"/>
@@ -483,13 +486,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>mContentView</string>
 							<string>mScrollView</string>
-							<string>mTableView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIView</string>
 							<string>UIScrollView</string>
-							<string>UITableView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -498,7 +499,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>mContentView</string>
 							<string>mScrollView</string>
-							<string>mTableView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -509,10 +509,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mScrollView</string>
 								<string key="candidateClassName">UIScrollView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">mTableView</string>
-								<string key="candidateClassName">UITableView</string>
 							</object>
 						</object>
 					</object>
