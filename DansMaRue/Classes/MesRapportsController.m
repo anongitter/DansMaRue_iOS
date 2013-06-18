@@ -110,7 +110,7 @@
 {
 	if (mMapShown == NO)
 	{
-		CGRect frame = CGRectMake(0, 60, 320, 307);
+		CGRect frame = CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height - 60);
 		
 		UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithCustomView:mListButtonView];
 		self.navigationItem.rightBarButtonItem = mapButton;
@@ -128,7 +128,7 @@
 	}
 	else
 	{
-		CGRect frame = CGRectMake(0, 367, 320, 307);
+		CGRect frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - 60);
 		
 		UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithCustomView:mMapButtonView];
 		self.navigationItem.rightBarButtonItem = mapButton;

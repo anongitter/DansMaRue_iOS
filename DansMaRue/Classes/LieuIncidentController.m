@@ -277,7 +277,7 @@
 - (void)resizeMapControlAfterAnimation
 {
 	CGRect frame = mMapControl.frame;
-	frame.size.height = 199;
+	frame.size.height = self.view.frame.size.height - 168;
 	mMapControl.frame = frame;
 }
 
@@ -296,7 +296,7 @@
 	}
 	else
 	{
-		frame.size.height = 367;
+		frame.size.height = self.view.frame.size.height;
 		frame.origin.y = 0;
 		mMapFullView = YES;
 	}

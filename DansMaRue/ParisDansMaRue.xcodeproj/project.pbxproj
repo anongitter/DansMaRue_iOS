@@ -57,6 +57,7 @@
 		7B087349176B24480056830C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B087346176B24470056830C /* Icon@2x.png */; };
 		7B08734A176B24480056830C /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B087347176B24470056830C /* Icon~ipad.png */; };
 		7B1288881760B76F00044538 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1288871760B76F00044538 /* AddressBook.framework */; };
+		7B22D22C1770A1BF006E4DBD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B22D22B1770A1BF006E4DBD /* Default-568h@2x.png */; };
 		7BEE68C01761C9B7007B31F2 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEE68BC1761C9B7007B31F2 /* HockeySDK.framework */; };
 		7BEE68C11761C9B7007B31F2 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE68BE1761C9B7007B31F2 /* HockeySDK.xcconfig */; };
 		7BEE68C21761C9B7007B31F2 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BEE68BF1761C9B7007B31F2 /* HockeySDKResources.bundle */; };
@@ -245,7 +246,6 @@
 		2599A4AD1451B9AB001B8D38 /* C4MNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MNavigationBar.h; sourceTree = "<group>"; };
 		2599A4AE1451B9AB001B8D38 /* C4MNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MNavigationBar.m; sourceTree = "<group>"; };
 		25ABF37116EE3C7700D81CA8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		25ABF37316EE3C8500D81CA8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		25ABF37916EE3F6700D81CA8 /* dans_ma_rue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dans_ma_rue.jpg; sourceTree = "<group>"; };
 		25ABF3B816EE4ECD00D81CA8 /* btn_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_blue.png; sourceTree = "<group>"; };
 		25ABF3BA16EE518100D81CA8 /* blue_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_on.png; sourceTree = "<group>"; };
@@ -315,6 +315,7 @@
 		7B087347176B24470056830C /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
 		7B12888617607ECD00044538 /* ReverseGeocodingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReverseGeocodingDelegate.h; sourceTree = "<group>"; };
 		7B1288871760B76F00044538 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		7B22D22B1770A1BF006E4DBD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7BEE68BC1761C9B7007B31F2 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7BEE68BE1761C9B7007B31F2 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7BEE68BF1761C9B7007B31F2 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
@@ -647,7 +648,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				25ABF37316EE3C8500D81CA8 /* Default-568h@2x.png */,
+				7B22D22B1770A1BF006E4DBD /* Default-568h@2x.png */,
 				25ABF37116EE3C7700D81CA8 /* Default@2x.png */,
 				D967A7EB124C9C3400062FFF /* DDPinImages */,
 				D9A2CA6112143F2D00B18B06 /* Pictos */,
@@ -1573,6 +1574,7 @@
 				7B087348176B24480056830C /* Icon.png in Resources */,
 				7B087349176B24480056830C /* Icon@2x.png in Resources */,
 				7B08734A176B24480056830C /* Icon~ipad.png in Resources */,
+				7B22D22C1770A1BF006E4DBD /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
