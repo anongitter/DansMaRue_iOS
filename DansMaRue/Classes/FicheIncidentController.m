@@ -65,7 +65,7 @@
 	[super viewDidLoad];
 	//mScrollView.contentSize = CGSizeMake(320, 700);
 	
-	mArrayUpdate = [[NSMutableArray alloc] init];
+	self.mArrayUpdate = [NSMutableArray array];
 	//mUpdateImages = [[NSMutableDictionary alloc] init];
 	
 	mGetUpdates = [[GetUpdates alloc] initWithUpdateDelegate:self];
@@ -923,21 +923,25 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 	[self showLoadingView:NO];
 }
 
+
+
 #pragma mark -
 #pragma mark Get Updates Delegate Methods
+
+
+
 - (void)didReceiveUpdates:(NSMutableArray*)_updates
 {
 	[mUpdateImages removeAllObjects];
 	[self showLoadingView:NO];
-	if (_updates == nil)
+    
+    
+    self.mArrayUpdate = _updates;
+    if (!_updates)
 	{
-		self.mArrayUpdate = [NSArray array];
+		self.mArrayUpdate = [NSMutableArray array];
 	}
-	else
-	{
-		self.mArrayUpdate = _updates;
-	}
-	
+    
 	NSMutableArray* removeUpdates = [NSMutableArray array];
 	
 	for	(NSDictionary* dictionary in mArrayUpdate)
