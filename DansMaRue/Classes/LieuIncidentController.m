@@ -125,6 +125,13 @@
 	}
 	
 	[mMKMapView removeAnnotations:[mMKMapView annotations]];
+    
+    // By default, set coordinate to paris notre dame
+    if (mCoordinate.longitude == 0.0f && mCoordinate.latitude == 0.0f)
+    {
+        mCoordinate = CLLocationCoordinate2DMake(48.853433,2.348308);
+    }
+    
 	DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:mCoordinate addressDictionary:nil];
 	if (mFicheController == nil && mValRapController == nil)
 	{
@@ -152,7 +159,7 @@
             if ([mIncidentCreated maddress] != nil && [[mIncidentCreated maddress] length] != 0)
             {
                 NSArray* addressArray = [[mIncidentCreated maddress] componentsSeparatedByString:@"\n"];
-                C4MLog(@"address = %@", addressArray);
+
                 if (addressArray != nil && [addressArray count] > 0)
                 {
                     NSMutableString* street = [NSMutableString stringWithString:[addressArray objectAtIndex:0]];
@@ -194,6 +201,13 @@
 	MKCoordinateRegion region;
 	region.center = [[[mMKMapView annotations] lastObject] coordinate];
 	
+    // By default, set coordinate to paris notre dame
+    if (region.center.longitude == 0.0f && region.center.latitude == 0.0f)
+    {
+        region.center = CLLocationCoordinate2DMake(48.853433,2.348308);
+    }
+    
+    
     //method 1
     region.span = MKCoordinateSpanMake(.001, .001);
 	[mMKMapView setRegion:region];

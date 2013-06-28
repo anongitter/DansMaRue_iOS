@@ -1671,7 +1671,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairie de Paris (WTEMWM5569)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1681,7 +1681,7 @@
 				GCC_PREFIX_HEADER = ParisDansMaRue_Prefix.pch;
 				INFOPLIST_FILE = "ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "D71653A0-4C05-43AF-90EA-28552D2D9DCA";
+				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
