@@ -184,39 +184,80 @@
 	[super viewWillAppear:animated];
 }
 
+
+
 #pragma mark -
 #pragma mark Actions
+
+
+
 - (IBAction)triggerReturnButton:(id)sender
 {
 	[mGetUpdates setUpdateDelegate:nil];
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
+
 - (IBAction)touchDownButton:(id)sender
 {
-	UIButton *button = (UIButton *)sender;
-	if (button.tag == kWhereButtonTag)
-	{
-		[mLabelWhere setTextColor:[UIColor whiteColor]];
-	}
-	else if(button.tag == kCategoryButtonTag)
-	{
-		[mLabelParentCategory setTextColor:[UIColor whiteColor]];
-	}
+	UIButton* button = (UIButton *)sender;
+    
+    switch (button.tag)
+    {
+        case whereButtonTag:
+        {
+            mLabelWhere.textColor = [UIColor whiteColor];
+            mLabelAddress.textColor = [UIColor whiteColor];
+            break;
+        }
+        case categoryButtonTag:
+        {
+            mLabelParentCategory.textColor = [UIColor whiteColor];
+            mLabelCategory.textColor = [UIColor whiteColor];
+            break;
+        }
+        case priorityButtonTag:
+        {
+            mLabelPriority.textColor = [UIColor whiteColor];
+            _mPriorityButtonLabel.textColor = [UIColor whiteColor];
+            break;
+        }
+        default:
+            break;
+    }
 }
+
 
 - (IBAction)touchUpButton:(id)sender
 {
 	UIButton *button = (UIButton *)sender;
-	if (button.tag == kWhereButtonTag)
-	{
-		[mLabelWhere setTextColor:[[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor]];
-	}
-	else if(button.tag == kCategoryButtonTag)
-	{
-		[mLabelParentCategory setTextColor:[[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor]];
-	}
+    
+    switch (button.tag)
+    {
+        case whereButtonTag:
+        {
+            mLabelWhere.textColor = [[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor];
+            mLabelAddress.textColor = [UIColor blackColor];
+            break;
+        }
+        case categoryButtonTag:
+        {
+            mLabelParentCategory.textColor = [[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor];
+            mLabelCategory.textColor = [UIColor blackColor];
+            break;
+        }
+        case priorityButtonTag:
+        {
+            _mPriorityButtonLabel.textColor = [[InfoVoirieContext sharedInfoVoirieContext] mTextBlueColor];
+            mLabelPriority.textColor = [UIColor blackColor];
+            break;
+        }
+        default:
+            break;
+    }
 }
+
+
 /*
 - (BOOL)testAuthenticationToken
 {
@@ -257,7 +298,8 @@
 	[nextController release];
 }
 
-- (IBAction)triggerPriorityButton:(id)sender{
+- (IBAction)triggerPriorityButton:(id)sender
+{
     mPickerHolderView.hidden = FALSE;
 }
 
@@ -330,6 +372,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMPriorityButtonLabel:nil];
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.mScrollView = nil;
@@ -363,6 +406,7 @@
 	[mUpdateImages release];
     [mPicker release];
     [mLabelPriority release];
+    [_mPriorityButtonLabel release];
 	[super dealloc];
 }
 
@@ -454,7 +498,7 @@
 {
 	// height for Upper Element View
 	if (section == 0) {
-		return kHeaderHeight;
+		return mUpperElementsView.frame.size.height;
 	}
 	// no header view
 	if (section == 2) {

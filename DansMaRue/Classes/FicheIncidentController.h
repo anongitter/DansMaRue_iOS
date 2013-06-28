@@ -31,6 +31,15 @@
 #define kActionSheetPhotoType		0
 #define kActionSheetPhotoSource		1
 
+
+enum buttonType
+{
+	whereButtonTag = 10,
+    categoryButtonTag = 11,
+	priorityButtonTag = 12
+};
+
+
 #define kImagePickerOverView		0
 #define kImagePickerNearView		1
 
@@ -119,8 +128,8 @@
 
 @property (nonatomic, retain) IBOutlet UIScrollView *mScrollView;
 @property (nonatomic, retain) IBOutlet UITableView *mTableView;
-@property (nonatomic, retain) IBOutlet UIView	*mUpperElementsView;
-@property (nonatomic, retain) IBOutlet UIView	*mButtonsView;
+@property (nonatomic, retain) IBOutlet UIView *mUpperElementsView;
+@property (nonatomic, retain) IBOutlet UIView *mButtonsView;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelDescription;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelDate;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelWhere;
@@ -129,6 +138,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *mLabelCategory;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelPriority;
 @property (nonatomic, retain) IBOutlet UILabel *mLabelNumberConfirmations;
+@property (retain, nonatomic) IBOutlet UILabel *mPriorityButtonLabel;
 
 @property (nonatomic, retain) IBOutlet UIButton *mButtonAddPhoto;
 @property (nonatomic, retain) IBOutlet UIButton *mButtonInvalidateIncident;
