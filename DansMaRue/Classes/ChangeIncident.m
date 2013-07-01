@@ -66,8 +66,12 @@
 	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
 	[dictionary setObject:[NSNumber numberWithInt:_incident.mid] forKey:@"incidentId"];
 	[dictionary setObject:[NSNumber numberWithInt: _incident.mcategory] forKey:@"categoryId"];
-	[dictionary setObject:_incident.maddress forKey:@"address"];
-	
+    
+    if ([_incident.maddress length] > 0)
+    {
+        [dictionary setObject:_incident.maddress forKey:@"address"];
+	}
+    
 	NSNumber* latitude = [NSNumber numberWithDouble:(_incident.coordinate.latitude)];
 	NSNumber* longitude = [NSNumber numberWithDouble:(_incident.coordinate.longitude)];
 	

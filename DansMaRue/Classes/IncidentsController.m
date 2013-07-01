@@ -12,9 +12,11 @@
 
 @implementation IncidentsController
 
+
 @synthesize mIncidentsOngoing;
 @synthesize mIncidentsUpdated;
 @synthesize mIncidentsResolved;
+
 
 -(BOOL) shouldAutorotate{
     return YES;
@@ -51,43 +53,31 @@
 	[self.view addSubview:mLoadingView];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	
-#ifdef kMarseilleTownhallVersion
-	/*if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] == nil)
-	{
-		[mViewNotConnected setHidden:NO];
-		[mLoadingView setHidden:YES];
-		return;
-	}
-	else
-	{*/
-		[mViewNotConnected setHidden:YES];
-	//}
-
-#endif	
-	if (mLoadingOngoing == NO)
-	{
-		GetIncidentsByPosition * lGetIncidentsByPosition = [[GetIncidentsByPosition alloc] initWithDelegate:self];
-		
-		NSMutableDictionary* lPosition =	[NSMutableDictionary dictionary];
-		[lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude] forKey:@"latitude"];
-		[lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude] forKey:@"longitude"];
-		
-		[lGetIncidentsByPosition generatIncident:lPosition farRadius:YES];
-		[lGetIncidentsByPosition release];
-		
-		[mMKMapView setCenterCoordinate:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
-		MKCoordinateRegion region;
-		region.center = [[InfoVoirieContext sharedInfoVoirieContext] mLocation];
-		region.span = MKCoordinateSpanMake(.01, .01);
-		[mMKMapView setRegion:region];
+  
+    if (mLoadingOngoing == NO)
+    {
+        GetIncidentsByPosition * lGetIncidentsByPosition = [[GetIncidentsByPosition alloc] initWithDelegate:self];
+        
+        NSMutableDictionary* lPosition =	[NSMutableDictionary dictionary];
+        [lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude] forKey:@"latitude"];
+        [lPosition setObject:[NSNumber numberWithDouble:[[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude] forKey:@"longitude"];
+        
+        [lGetIncidentsByPosition generatIncident:lPosition farRadius:YES];
+        [lGetIncidentsByPosition release];
+        
+        [mMKMapView setCenterCoordinate:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
+        MKCoordinateRegion region;
+        region.center = [[InfoVoirieContext sharedInfoVoirieContext] mLocation];
+        region.span = MKCoordinateSpanMake(.01, .01);
+        [mMKMapView setRegion:region];
         //mMKMapView.region = MKCoordinateRegionMakeWithDistance(region.center, 1.0f, 1.0f);
-		
-		[self showLoadingView:YES];
-	}
+        
+        [self showLoadingView:YES];
+    }    
 }
 
 - (void) showLoadingView:(BOOL)show
@@ -174,6 +164,18 @@
 
 - (void)changeMapAnnotations:(NSInteger)_index
 {
+	NSMutableArray* annotationsToDelete = [NSMutableArray array];
+    
+	for(NSObject<MKAnnotation> *annotation in [mMKMapView annotations])
+    {
+		if([annotation isKindOfClass:[IncidentObj class]])
+		{
+            [annotationsToDelete addObject:annotation];
+        }
+    }    
+	[mMKMapView removeAnnotations:annotationsToDelete];
+    
+    
 	NSMutableArray* annotations;
 	if(_index == kSwitchOngoingIndex)
 		annotations = self.mIncidentsOngoing;
@@ -182,14 +184,8 @@
 	else
 		annotations = self.mIncidentsResolved;
 	
-	NSMutableArray* annotationsToDelete = [[NSMutableArray alloc] init];
-	for(NSObject<MKAnnotation> *annotation in [mMKMapView annotations])
-		if([annotation isKindOfClass:[IncidentObj class]])
-			[annotationsToDelete addObject:annotation];
-	[mMKMapView removeAnnotations:annotationsToDelete];
 	// Add proper annotations to the MapView
 	[mMKMapView addAnnotations:annotations];
-	[annotationsToDelete release];
 }
 
 - (IBAction)toggleControls:(id)sender
@@ -265,6 +261,13 @@
 {
 	static NSString  * annotationViewId = @"AnnotationView";
 	MKAnnotationView * annotationView = nil;
+    
+    // If it's the user position anotation, do NOT return a callout anotation
+    if ([[InfoVoirieContext sharedInfoVoirieContext] mLocation].latitude == [annotation coordinate].latitude &&
+        [[InfoVoirieContext sharedInfoVoirieContext] mLocation].longitude == [annotation coordinate].longitude)
+    {
+        return annotationView;
+    }
 	
 	annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewId];
 	

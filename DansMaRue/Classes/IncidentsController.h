@@ -38,7 +38,7 @@
 	NSMutableArray*				mIncidentsResolved;
 	
 	UIView*						mLoadingView;
-	BOOL						mLoadingOngoing;
+	BOOL						mLoadingOngoing;	
 }
 
 @property (nonatomic, retain) NSMutableArray*				mIncidentsOngoing;
