@@ -14,4 +14,4 @@ build/*
 xcuserdata
 profile
 *.moved-aside
-InfoVoirieContext.h
+DansMaRue/Classes/InfoVoirieContext.h
