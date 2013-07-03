@@ -570,10 +570,10 @@
 					<object class="IBUILabel" id="784303797">
 						<reference key="NSNextResponder" ref="417467608"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 7}, {300, 21}}</string>
+						<string key="NSFrame">{{10, 70}, {300, 21}}</string>
 						<reference key="NSSuperview" ref="417467608"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="419257181"/>
+						<reference key="NSNextKeyView" ref="917403172"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -600,11 +600,11 @@
 					</object>
 					<object class="IBUIButton" id="419257181">
 						<reference key="NSNextResponder" ref="417467608"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{2, 30}, {158, 61}}</string>
+						<int key="NSvFlags">-2147483356</int>
+						<string key="NSFrame">{{2, 7}, {158, 61}}</string>
 						<reference key="NSSuperview" ref="417467608"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="917403172"/>
+						<reference key="NSNextKeyView" ref="330068557"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -635,10 +635,10 @@
 					<object class="IBUIButton" id="917403172">
 						<reference key="NSNextResponder" ref="417467608"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{160, 30}, {158, 61}}</string>
+						<string key="NSFrame">{{160, 7}, {158, 61}}</string>
 						<reference key="NSSuperview" ref="417467608"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="330068557"/>
+						<reference key="NSNextKeyView" ref="419257181"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -839,14 +839,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mButtonIncidentResolved</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="419257181"/>
-					</object>
-					<int key="connectionID">57</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mLabelDate</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="193764398"/>
@@ -988,15 +980,6 @@
 						<reference key="destination" ref="540248788"/>
 					</object>
 					<int key="connectionID">171</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">triggerIncidentResolvedButton:</string>
-						<reference key="source" ref="419257181"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">67</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1477,10 +1460,10 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="419257181"/>
-							<reference ref="917403172"/>
 							<reference ref="330068557"/>
 							<reference ref="463829415"/>
 							<reference ref="784303797"/>
+							<reference ref="917403172"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">ButtonsView</string>
