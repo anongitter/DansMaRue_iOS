@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 
 
-#error RENAME THIS FILE INTO InfoVoireContext.h and fill the values
+#error COPY THIS FILE INTO DansMaRue/Classes/InfoVoireContext.h and fill the values
 #warning TO BE DEFINED
 
 
