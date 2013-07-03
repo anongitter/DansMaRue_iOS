@@ -14,9 +14,6 @@
 #endif
 
 
-#define kHockeyAppBetaId				@"ec713c79aa54a6f88faf42251244cb28"
-#define kHockeyAppLiveId				@"cfba79666242b1e33c03c9695ebd8b01"
-
 
 // Debug Mode
 #if CONFIGURATION_Debug

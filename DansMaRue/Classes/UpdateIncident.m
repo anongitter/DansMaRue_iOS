@@ -37,13 +37,7 @@
 	NSMutableDictionary* incidentLog = [NSMutableDictionary dictionary];
 	
 	[dictionary setObject:@"updateIncident" forKey:@"request"];
-	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[dictionary setObject:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forKey:@"authentToken"];
-	}
-#endif
+
 	
 	[incidentLog setObject:(NSNumber*)_incidentId forKey:@"incidentId"];
 	[incidentLog setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];

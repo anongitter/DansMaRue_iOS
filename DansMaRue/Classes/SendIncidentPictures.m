@@ -106,12 +106,7 @@
 	
 	C4MLog(@"request header = %@", [request allHTTPHeaderFields]);
 	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[request setValue:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forHTTPHeaderField:@"authentToken"];
-	}
-#endif
+
 	
 	mURLConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 	

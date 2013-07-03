@@ -44,12 +44,6 @@
     
     [dictionary setObject:_incident.mEmail forKey:@"email"];
 	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[dictionary setObject:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forKey:@"authentToken"];
-	}
-#endif
 	
 	NSNumber* category = [NSNumber numberWithInteger:_incident.mcategory];
 	[incidentLog setObject:category forKey:@"categoryId"];

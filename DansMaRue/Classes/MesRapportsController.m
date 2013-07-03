@@ -64,21 +64,6 @@
 {
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 	
-#ifdef kMarseilleTownhallVersion
-	/*if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] == nil)
-	{
-		[mViewNotConnected setHidden:NO];
-		[mLoadingView setHidden:YES];
-		[mLabelInfo setHidden:YES];
-		return;
-	}
-	else
-	{*/
-		[mViewNotConnected setHidden:YES];
-	//}
-	
-#endif
-	
 	if (mLoadingOngoing == NO)
 	{
 		GetUserReports * mGetUserReports = [[GetUserReports alloc] initWithDelegate:self];

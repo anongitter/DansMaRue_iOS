@@ -258,23 +258,6 @@
 }
 
 
-/*
-- (BOOL)testAuthenticationToken
-{
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] == nil)
-	{
-		UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"information", nil) message:NSLocalizedString(@"function_require_connexion", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-		
-		return NO;
-	}
-#endif
-	
-	return YES;
-}
-*/
 - (IBAction)triggerWhereButton:(id)sender
 {
 	/*if ([self testAuthenticationToken] == NO)

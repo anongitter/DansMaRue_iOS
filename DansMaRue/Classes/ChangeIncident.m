@@ -26,34 +26,7 @@
 	[mChangeIncidentDelegate release];
 	[super dealloc];
 }
-/*- (void)generateChangeForIncident:(NSNumber *)_incidentId newCategory:(NSNumber *)_incidentCategory newAddress:(NSString*)_incidentAddress
-{
-	self.mReceivedData = [NSMutableData data];
-	
-	NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
-	
-	[dictionary setObject:@"changeIncident" forKey:@"request"];
-	[dictionary setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
-	[dictionary setObject:(NSNumber*)_incidentId forKey:@"incidentId"];
-	[dictionary setObject:(NSNumber *)_incidentCategory forKey:@"categoryId"];
-	[dictionary setObject:_incidentAddress forKey:@"address"];
-	
-	NSNumber* latitude = [NSNumber numberWithDouble:(_incident.coordinate.latitude)];
-	NSNumber* longitude = [NSNumber numberWithDouble:(_incident.coordinate.longitude)];
-	
-	[position setObject:(NSNumber*)latitude forKey:@"latitude"];
-	[position setObject:(NSNumber*)longitude forKey:@"longitude"];
-	[dictionary setObject:position forKey:@"position"];
-	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[dictionary setObject:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forKey:@"authentToken"];
-	}
-#endif
-	
-	mURLConnection = [[InfoVoirieContext launchRequestWithArray:[NSMutableArray arrayWithObject:dictionary] andDelegate:self] retain];
-}*/
+
 
 - (void)generateChangeForIncident:(IncidentObj*)_incident
 {
@@ -78,14 +51,7 @@
 	[position setObject:(NSNumber*)latitude forKey:@"latitude"];
 	[position setObject:(NSNumber*)longitude forKey:@"longitude"];
 	[dictionary setObject:position forKey:@"position"];
-	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[dictionary setObject:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forKey:@"authentToken"];
-	}
-#endif
-	
+    
 	mURLConnection = [[InfoVoirieContext launchRequestWithArray:[NSMutableArray arrayWithObject:dictionary] andDelegate:self] retain];
 }
 
