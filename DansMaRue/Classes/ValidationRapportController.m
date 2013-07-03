@@ -104,6 +104,14 @@
     mIncidentCreated.mPriorityId = 3;
     incidentLabels = [[NSArray alloc] initWithObjects:@"Dangereux", @"Gênant", @"Mineur", nil];
     
+    
+    NSString* previousEmailEntered = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastUserEmail"];
+    if ([previousEmailEntered length] > 0)
+    {
+        mIncidentCreated.mEmail = previousEmailEntered;
+        self.mLabelEmail.text = previousEmailEntered;
+    }
+    
 	C4MLog(@"%s", __PRETTY_FUNCTION__);
 }
 
@@ -324,17 +332,30 @@
 {
     mPickerHolderView.hidden = FALSE;
     
+    if ([self.mLabelPriority.text length] > 0)
+    {
+        [mPicker selectRow:[incidentLabels indexOfObject:self.mLabelPriority.text] inComponent:0 animated:NO];
+    }
+    
     self.navigationItem.rightBarButtonItem = nil;
     [self.navigationItem setRightBarButtonItem:mOkButtonItem];
 }
 
 
 - (IBAction)triggerEmailButton:(id)sender{
-    
+  
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"Entrez votre email pour être informé de l'évolution de l'incident." delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField * alertTextField = [alert textFieldAtIndex:0];
     alertTextField.placeholder = @"Email";
+    
+    
+    NSString* lastUsedEmail = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastUserEmail"];
+    if ([lastUsedEmail length] > 0)
+    {
+        alertTextField.text = lastUsedEmail;
+    }
+    
     alertTextField.keyboardType = UIKeyboardTypeEmailAddress;
     alert.tag = kAlertViewEmail;
     [alert show];
@@ -499,7 +520,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
                     
                     if([emailTest evaluateWithObject:candidate]){
-                        mIncidentCreated.mEmail = [[alertView textFieldAtIndex:0] text];
+                        [[NSUserDefaults standardUserDefaults] setValue:candidate forKey:@"lastUserEmail"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        mIncidentCreated.mEmail = candidate;
                         self.mLabelEmail.text = mIncidentCreated.mEmail;
                     }
                 }

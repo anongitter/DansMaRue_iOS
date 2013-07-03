@@ -95,36 +95,7 @@ kErrorEmptyUserID
 			break;
 		case kErrorBadAddressParameter:
 			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_bad_address_parameter", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-
-#ifdef kMarseilleTownhallVersion
-		case kErrorAuthenticationFailed_BadLogin:
-			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-		case kErrorBadUserLogin:
-			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-		case kErrorEmptyUserLogin:
-			C4MLog(@"Error: Empty User Login");
-			generalError = YES;
-			break;
-		case kErrorBadPassword:
-			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-		case kErrorEmptyPassword:
-			C4MLog(@"Error: Empty Password");
-			generalError = YES;
-			break;
-		case kErrorBadAuthentToken:
-			C4MLog(@"Error: Bad Authentication Token sent to Server");
-			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-		case kErrorEmptyAuthentToken:
-			C4MLog(@"Error: No Authentication Token sent to Server");
-			alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"error_authentication_failed_bad_login", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
-			break;
-#endif
-		
+			break;		
 		case kErrorBadRadius:
 			C4MLog(@"Error: Bad Radius");
 			generalError = YES;

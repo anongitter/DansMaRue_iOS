@@ -50,12 +50,6 @@
 	[self.navigationItem setLeftBarButtonItem:infoButton];
 	[infoButton release];
 	
-#ifdef kMarseilleTownhallVersion
-	UIBarButtonItem* loginButton = [[UIBarButtonItem alloc] initWithCustomView:mButtonLogin];
-	[self.navigationItem setRightBarButtonItem:loginButton];
-	[loginButton release];
-#endif
-	
 	mLabelTextOngoingIncidents.text = NSLocalizedString(@"ongoing", nil);
 	mLabelTextUpdatedIncidents.text = NSLocalizedString(@"updated", nil);
 	mLabelTextResolvedIncidents.text = NSLocalizedString(@"resolve", nil);
@@ -71,29 +65,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	C4MLog(@"viewWillAppear");
-	
-#ifdef kMarseilleTownhallVersion
-	CGRect frame;
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] == nil)
-	{
-		//[mViewLogin setHidden:NO];
-	}
-	else
-	{
-		mLabelWelcomeUser.text = [NSString stringWithFormat:NSLocalizedString(@"welcome_message", nil), [[InfoVoirieContext sharedInfoVoirieContext] mUserLogin]];
-		
-		frame = mViewWelcomeUser.frame;
-		frame.origin.y = -5;
-		mViewWelcomeUser.frame = frame;
-		
-		frame = mButtonNewIncident.frame;
-		frame.origin.y = 20 + mViewWelcomeUser.frame.size.height;
-		mButtonNewIncident.frame = frame;
-	}
-	
-#endif
-	
 	if (mLoadingOngoing <= 0 && mHasBeenGeolocated == YES)
 	{
 		if ([[InfoVoirieContext sharedInfoVoirieContext] mLocationFound] == YES)

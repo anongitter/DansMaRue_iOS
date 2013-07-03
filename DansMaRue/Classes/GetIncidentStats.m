@@ -44,13 +44,7 @@
 	NSMutableDictionary* dictionnaryReports = [NSMutableDictionary dictionary];
 	[dictionnaryReports setObject:@"getReports" forKey:@"request"];
 	[dictionnaryReports setObject:(id)[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"udid"];
-	
-#ifdef kMarseilleTownhallVersion
-	if ([[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] != nil)
-	{
-		[dictionnaryReports setObject:[[InfoVoirieContext sharedInfoVoirieContext] mAuthenticationToken] forKey:@"authentToken"];
-	}
-#endif
+
 	[requests addObject:dictionnaryReports];
 	
 	mURLConnection = [[InfoVoirieContext launchRequestWithArray:requests andDelegate:self] retain];

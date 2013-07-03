@@ -294,7 +294,6 @@
 		31EAC37311AD7C3700E928E0 /* FicheIncidentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FicheIncidentController.h; sourceTree = "<group>"; };
 		31EAC37411AD7C3700E928E0 /* FicheIncidentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FicheIncidentController.m; sourceTree = "<group>"; };
 		31EAC37511AD7C3700E928E0 /* FicheIncidentController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FicheIncidentController.xib; sourceTree = "<group>"; };
-		31EAC37D11AD7F0100E928E0 /* InfoVoirieContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoVoirieContext.h; sourceTree = "<group>"; };
 		31EAC37E11AD7F0100E928E0 /* InfoVoirieContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoVoirieContext.m; sourceTree = "<group>"; };
 		31F2616E11BFE38200FEA59E /* ConfirmIncidentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmIncidentCell.h; sourceTree = "<group>"; };
 		31F2616F11BFE38200FEA59E /* ConfirmIncidentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmIncidentCell.m; sourceTree = "<group>"; };
@@ -316,6 +315,7 @@
 		7B12888617607ECD00044538 /* ReverseGeocodingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReverseGeocodingDelegate.h; sourceTree = "<group>"; };
 		7B1288871760B76F00044538 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		7B22D22B1770A1BF006E4DBD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7B95DB8B17841F07003D38C1 /* InfoVoirieContextTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoVoirieContextTemplate.h; sourceTree = "<group>"; };
 		7BEE68BC1761C9B7007B31F2 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		7BEE68BE1761C9B7007B31F2 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		7BEE68BF1761C9B7007B31F2 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
@@ -582,7 +582,7 @@
 				31EAC1F111AD583700E928E0 /* Mes rapports */,
 				1D3623240D0F684500981E51 /* InfoVoirieAppDelegate.h */,
 				1D3623250D0F684500981E51 /* InfoVoirieAppDelegate.m */,
-				31EAC37D11AD7F0100E928E0 /* InfoVoirieContext.h */,
+				7B95DB8B17841F07003D38C1 /* InfoVoirieContextTemplate.h */,
 				31EAC37E11AD7F0100E928E0 /* InfoVoirieContext.m */,
 				D9F86C9211F5EEF50036C38E /* constants.h */,
 			);
