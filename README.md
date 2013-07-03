@@ -8,7 +8,7 @@ Elle a été adoptée par la Mairie de Paris pour l'application Paris - DansMaRu
 
 Le code est entièrement libre, sous licence GPL.
 
-Si vous êtes une mairie, contactez C4Mprod pour étudier l'adaptation à votre système d'information.
+Si vous êtes une mairie, contactez C4Mprod pour étudier l'adaptation à votre système d'information : contact@c4mprod.com.
 
 =================
 Installation
