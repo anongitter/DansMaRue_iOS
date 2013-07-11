@@ -55,6 +55,11 @@
 	
 	BOOL							mMapFullView;
 }
+@property (nonatomic, retain) NSString* mPreviousNumber;
+@property (nonatomic, retain) NSString* mPreviousStreet;
+@property (nonatomic, retain) NSString* mPreviousCP;
+@property (nonatomic, retain) NSString* mPreviousCity;
+
 
 - (id)initWithIncident:(IncidentObj *)_incident;
 - (id)initWithFicheViewController:(FicheIncidentController *) _ficheController;

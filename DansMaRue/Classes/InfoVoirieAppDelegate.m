@@ -43,7 +43,10 @@
 #endif
 	
 	[[BITHockeyManager sharedHockeyManager] startManager];
+   
     
+#warning print default user dictionary
+    NSLog(@"[NSUserDefaults standardUserDefaults] %@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
     
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
