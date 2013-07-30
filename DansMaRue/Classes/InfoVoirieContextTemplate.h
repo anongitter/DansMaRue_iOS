@@ -21,18 +21,7 @@
 #define kHockeyAppLiveId                        @"YOUR_LIVE_HOCKEY_APP_ID"
 
 
-#warning ADD CONFIGURATION_X into preprocessing macro
-
-//1 debug
-//2 appstore
-//3 Adhoc
-#if build_configuration != 1                    //not debug (appstore/adhoc)
-#define kDev_CociteServer						AV_URL_PROD
-#else
-#define kDev_CociteServer						AV_URL_PROD 
-#endif
-
-#define kServer                                 kDev_CociteServer
+#define kServer                                 AV_URL_PROD
 
 #define kChosenDigestLength                     CC_SHA1_DIGEST_LENGTH
 

@@ -205,9 +205,7 @@ static InfoVoirieContext *	sharedInfoVoirieContextInstance = nil;
 
 
 - (NSString*)mAuthenticationToken
-{
-	//NSLog(@"%f", [[NSDate date] timeIntervalSince1970] - mLastTokenComputationTimestamp);
-	
+{	
 	if ([[NSDate date] timeIntervalSince1970] - mLastTokenComputationTimestamp >= kTimeBetweenTokenReComputation)
 	{
 		return [self computeAuthenticationTokenWithLogin:mUserLogin andPassword:mUserPassword ];

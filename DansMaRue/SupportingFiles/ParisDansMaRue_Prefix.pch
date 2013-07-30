@@ -38,7 +38,7 @@
 #define kErrorBadJsonRequest				2
 #define kErrorBadRequestSubElement			3
 #define kErrorEmptyDeviceIdentifier			4
-#define kErrorBadDeviceIdentifier				5
+#define kErrorBadDeviceIdentifier			5
 #define kEmptyPositionParameter				6
 #define kErrorBadPositionParameter			7
 
@@ -51,19 +51,19 @@
 #define kErrorNoIncidentForUser				10
 
 // Update Incident
-#define kErrorEmptyIncidentID					11
+#define kErrorEmptyIncidentID				11
 #define kErrorBadIncidentID					12
 #define kErrorBadUserID						13
 #define kErrorEmptyUserID					14
 
-#define kErrorDoubleResolved					17
+#define kErrorDoubleResolved				17
 #define kErrorDoubleConfirm					18
 #define kErrorDoubleInvalidate				19
 
 // User Authentication
 #define kErrorAuthenticationFailed_BadLogin	20
 #define kErrorBadUserLogin					21
-#define kErrorEmptyUserLogin					22
+#define kErrorEmptyUserLogin				22
 #define kErrorBadPassword					23
 #define kErrorEmptyPassword					24
 #define kErrorBadAuthentToken				25
@@ -75,7 +75,7 @@
 
 // Save Incident Pictures
 #define kErrorBadIncidentPictureContent		29
-#define kErrorReadingTempPictureFile			30
+#define kErrorReadingTempPictureFile		30
 #define kErrorBadJsonRequestToken			31
 
 //#define kDateFormat				@"yyyy-MM-dd HH:mm:ss"

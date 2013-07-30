@@ -46,6 +46,7 @@
 	[returnButton release];
 	
 	NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    appVersion = [appVersion stringByAppendingFormat:@" (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
 	mLabelAppVersion.text = [NSString stringWithFormat:@"v%@", appVersion];
 	
 }
@@ -205,7 +206,7 @@
 #warning TO DO clean this code - seems to not be used anymore
 		else if(alertView.tag == 2)
 		{
-			NSString* url = @"http://www.c4mprod.com/web/page-410";
+			NSString* url = @"http://www.c4mprod.com";
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 		}
 	}

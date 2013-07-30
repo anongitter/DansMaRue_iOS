@@ -46,7 +46,6 @@
    
     
 #warning print default user dictionary
-    NSLog(@"[NSUserDefaults standardUserDefaults] %@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
     
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -214,7 +213,6 @@
 #pragma mark - UIAlertView Methods
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	//NSLog(@"");
 	if ( alertView.cancelButtonIndex != buttonIndex )
 	{
 		if ( alertView.tag == 'NEWV' )
@@ -226,7 +224,6 @@
 	{
 		if ( alertView.tag == 'FORC' )
 		{
-			//NSLog(@"");
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:NSLocalizedString(@"application_itunes_link", nil)]];
 		}
 	}

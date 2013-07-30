@@ -1623,7 +1623,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairie de Paris (WTEMWM5569)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1636,7 +1636,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "SupportingFiles/ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
+				PROVISIONING_PROFILE = "D71653A0-4C05-43AF-90EA-28552D2D9DCA";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1645,7 +1645,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1655,7 +1654,6 @@
 				GCC_PREFIX_HEADER = SupportingFiles/ParisDansMaRue_Prefix.pch;
 				INFOPLIST_FILE = "SupportingFiles/ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1665,6 +1663,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = 4.2;
@@ -1674,6 +1673,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = ParisDansMaRue;
+				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv6";
 			};
@@ -1684,7 +1684,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mairie de Paris (WTEMWM5569)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1692,7 +1692,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = ParisDansMaRue;
-				PROVISIONING_PROFILE = "D71653A0-4C05-43AF-90EA-28552D2D9DCA";
+				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv6";
 			};
@@ -1703,6 +1703,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: C4MProd";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1710,6 +1711,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = ParisDansMaRue;
+				PROVISIONING_PROFILE = "1A57ED7A-6700-4518-9ABE-1DFA13AFCC00";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv6";
 			};
