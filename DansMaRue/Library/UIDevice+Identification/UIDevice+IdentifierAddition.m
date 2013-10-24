@@ -80,12 +80,19 @@
 #pragma mark Public Methods
 
 - (NSString *) uniqueDeviceIdentifier{
-    NSString *macaddress = [[UIDevice currentDevice] macaddress];
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     
-    NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,bundleIdentifier];
-    NSString *uniqueIdentifier = [stringToHash stringFromSHA1];
-    
+    NSString *uniqueIdentifier = @"";
+    if (IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0.0")){
+        NSUUID *oNSUUID = [[UIDevice currentDevice] identifierForVendor];
+        uniqueIdentifier = [oNSUUID UUIDString];
+        
+    } else {
+        NSString *macaddress = [[UIDevice currentDevice] macaddress];
+        NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+        
+        NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,bundleIdentifier];
+        uniqueIdentifier = [stringToHash stringFromSHA1];
+    }
     return uniqueIdentifier;
 }
 
