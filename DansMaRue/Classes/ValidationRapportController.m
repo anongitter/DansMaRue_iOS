@@ -8,7 +8,7 @@
 
 #import "ValidationRapportController.h"
 #import "CategorieController.h"
-#import "LieuIncidentController.h"
+#import "FullscreenLieuIncidentController.h"
 #import "InfoVoirieAppDelegate.h"
 #import "InfoVoirieContext.h"
 
@@ -186,7 +186,7 @@
 #pragma mark Actions
 - (IBAction) whereButtonPressed:(id)sender
 {
-	LieuIncidentController *nextController = [[LieuIncidentController alloc] initWithViewController:self];
+	FullscreenLieuIncidentController *nextController = [[FullscreenLieuIncidentController alloc] initWithViewController:self];
 	[self.navigationController pushViewController:nextController animated:YES];
 	[nextController release];
 }

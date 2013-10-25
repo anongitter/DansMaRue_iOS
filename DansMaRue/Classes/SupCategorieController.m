@@ -7,7 +7,7 @@
 //
 
 #import "SupCategorieController.h"
-#import "LieuIncidentController.h"
+#import "FullscreenLieuIncidentController.h"
 #import "CategoriesCell.h"
 #import "InfoVoirieContext.h"
 
@@ -232,10 +232,10 @@
 			lincident.mcategory = [numCat integerValue];
 			//NSLog(@"sup category : category : %d", lincident.mcategory);
 			lincident.mstate = @"ongoing";
-			LieuIncidentController *lLieuIncidentController = [[LieuIncidentController alloc] initWithIncident:lincident];
-			[self.navigationController pushViewController:lLieuIncidentController animated:YES];
-			lLieuIncidentController.title = NSLocalizedString(@"precise_incident_place", nil);
-			[lLieuIncidentController release];
+			FullscreenLieuIncidentController *lFullscreenLieuIncidentController = [[FullscreenLieuIncidentController alloc] initWithIncident:lincident];
+			[self.navigationController pushViewController:lFullscreenLieuIncidentController animated:YES];
+			lFullscreenLieuIncidentController.title = NSLocalizedString(@"precise_incident_place", nil);
+			[lFullscreenLieuIncidentController release];
 			[lincident release];
 		}
 	}	
