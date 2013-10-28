@@ -30,6 +30,9 @@
 @synthesize mCityLabel;
 @synthesize mMyLocationBtn;
 @synthesize mValidateBtn;
+@synthesize mAutocompleteSuggestions;
+@synthesize mAutocompleteTableView;
+@synthesize mAutocompleteGeocoder;
 
 -(BOOL) shouldAutorotate{
     return YES;
@@ -84,6 +87,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
+        mAutocompleteGeocoder = [[CLGeocoder alloc] init];
     }
     return self;
 }
@@ -175,8 +179,16 @@
 		}
 	}
     [self.mMapView addAnnotation:annotation];
-	
 	[annotation release];
+    
+    //Auto-complete stuffs
+    self.mAutocompleteSuggestions = [[NSMutableArray alloc] init];
+    mAutocompleteTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.mSearchField.frame.origin.y+self.mSearchField.frame.size.height+10, 320, 140) style:UITableViewStylePlain];
+    self.mAutocompleteTableView.delegate = self;
+    self.mAutocompleteTableView.dataSource = self;
+    self.mAutocompleteTableView.scrollEnabled = YES;
+    self.mAutocompleteTableView.hidden = YES;
+    [self.view addSubview:self.mAutocompleteTableView];
     
 }
 
@@ -275,6 +287,8 @@
 - (IBAction)onCancelAction:(id)sender {
     
     self.mSearchField.text = @"";
+    self.mAutocompleteTableView.hidden = YES;
+    [self.mAutocompleteSuggestions removeAllObjects];
     
 }
 
@@ -345,6 +359,9 @@
     {
 		[self launchFowardGeocoderWithAddress:self.mSearchField.text];
     }
+    
+    self.mAutocompleteTableView.hidden = YES;
+    
     C4MLog(@"textFieldShouldEndEditing end");
 	return YES;
 }
@@ -357,7 +374,7 @@
     [self animateBottomBarDown];
     self.mValidateBtn.enabled = NO;
 
-    
+    self.mAutocompleteTableView.hidden = YES;
 }
 
 - (IBAction) longTap:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -522,9 +539,7 @@
     {
         [locationDictionary setValue:address forKey:(NSString *)kABPersonAddressStreetKey];
     }
-    
     [locationDictionary setValue:NSLocalizedString(@"city", nil) forKey:(NSString *)kABPersonAddressCityKey];
-    //[locationDictionary setValue:mTextFieldCP.text forKey:(NSString *)kABPersonAddressZIPKey];
     [locationDictionary setValue:NSLocalizedString(@"country", nil) forKey:(NSString *)kABPersonAddressCountryKey];
     
     [mReverseGeocoding launchFowardGeocoderWithDictionary:locationDictionary];
@@ -570,9 +585,9 @@
         NSString* num = @"";
         if ([lPacemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
         {
-            num = lPacemark.subThoroughfare;
+            num = [NSString stringWithFormat:@"%@%@", num, @" "];
         }
-        self.mStreetLabel.text = [NSString stringWithFormat:@"%@ %@", num, lPacemark.thoroughfare];
+        self.mStreetLabel.text = [NSString stringWithFormat:@"%@%@", num, lPacemark.thoroughfare];
         
         mReverseGeocodingDone = YES;
         //TODO : animate up
@@ -598,6 +613,95 @@
     [alert release];
 }
 
+#pragma mark -
+#pragma mark AUtocomplete
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField.text.length > 2) {
+        NSString *substring = [NSString stringWithString:textField.text];
+        substring = [substring stringByReplacingCharactersInRange:range withString:string];
+        [self searchAutocompleteEntriesWithSubstring:substring];
+    }
+    
+    return YES;
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    
+    //[self launchFowardGeocoderWithAddress:substring];
+    
+    [self.mAutocompleteSuggestions removeAllObjects];
+    
+    NSMutableDictionary* locationDictionary = [NSMutableDictionary dictionary];
+    if ([substring length] > 0)
+    {
+        [locationDictionary setValue:substring forKey:(NSString *)kABPersonAddressStreetKey];
+    }
+    [locationDictionary setValue:NSLocalizedString(@"city", nil) forKey:(NSString *)kABPersonAddressCityKey];
+    [locationDictionary setValue:NSLocalizedString(@"country", nil) forKey:(NSString *)kABPersonAddressCountryKey];
+    
+    [self.mAutocompleteGeocoder geocodeAddressDictionary:locationDictionary completionHandler:^(NSArray* _Placemarks, NSError* _Error)
+     {
+         if (!_Error)
+         {
+             for(CLPlacemark* placemark in _Placemarks) {
+                 NSString* num = @"";
+                 NSString* addr = @"";
+                 NSString* zipcode = @"";
+                 if ([placemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
+                 {
+                     num = [NSString stringWithFormat:@"%@%@", placemark.subThoroughfare, @" "];
+                 }
+                 if ([placemark.thoroughfare rangeOfString:@"-"].location == NSNotFound)
+                 {
+                     addr = [NSString stringWithFormat:@"%@%@", placemark.thoroughfare, @" "];
+                 }
+                 if ([placemark.postalCode rangeOfString:@"-"].location == NSNotFound)
+                 {
+                     zipcode = [NSString stringWithFormat:@"%@%@", placemark.postalCode, @" "];
+                 }
+                 NSString* suggestion =[NSString stringWithFormat:@"%@%@%@%@", num, addr, zipcode, placemark.locality];
+                 [self.mAutocompleteSuggestions addObject:suggestion];
+             }
+             self.mAutocompleteTableView.hidden = NO;
+             [self.mAutocompleteTableView reloadData];
+         }
+     }];
+}
+
+#pragma mark UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section {
+    return self.mAutocompleteSuggestions.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = nil;
+    static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+    cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc]
+                 initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier] autorelease];
+    }
+    cell.textLabel.text = [self.mAutocompleteSuggestions objectAtIndex:indexPath.row];
+    return cell;
+}
+
+#pragma mark UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    self.mSearchField.text = selectedCell.textLabel.text;
+    
+    [self.mSearchField resignFirstResponder];
+    [self textFieldShouldEndEditing:self.mSearchField];
+    
+}
+
 
 #pragma mark -
 #pragma mark Dealoc
@@ -617,6 +721,9 @@
     [mStreetLabel release];
     [mMyLocationBtn release];
     [mValidateBtn release];
+    [mAutocompleteSuggestions dealloc];
+    [mAutocompleteTableView dealloc];
+    [mAutocompleteGeocoder dealloc];
     [super dealloc];
 }
 - (void)viewDidUnload {

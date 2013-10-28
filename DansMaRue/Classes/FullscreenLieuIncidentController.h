@@ -16,7 +16,7 @@
 
 #define kMapZoom		0.001
 
-@interface FullscreenLieuIncidentController : UIViewController <ReverseGeocodingDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate> {
+@interface FullscreenLieuIncidentController : UIViewController <ReverseGeocodingDelegate, UIAlertViewDelegate, MKMapViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet MKMapView *mMapView;
     IBOutlet UIButton *mCancelBtn;
@@ -39,6 +39,10 @@
 	BOOL							mChosePinPosition;
     BOOL							mIsLeaving;
     
+    NSMutableArray *mAutocompleteSuggestions;
+    UITableView *mAutocompleteTableView;
+    CLGeocoder *mAutocompleteGeocoder;
+    
 }
 
 @property (retain, nonatomic) IBOutlet MKMapView *mMapView;
@@ -49,6 +53,9 @@
 @property (retain, nonatomic) IBOutlet UILabel *mCityLabel;
 @property (retain, nonatomic) IBOutlet UIButton *mMyLocationBtn;
 @property (retain, nonatomic) IBOutlet UIButton *mValidateBtn;
+@property (nonatomic, retain) NSMutableArray *mAutocompleteSuggestions;
+@property (nonatomic, retain) UITableView *mAutocompleteTableView;
+@property (nonatomic, retain) CLGeocoder *mAutocompleteGeocoder;
 
 -(void)animateBottomBarUp;
 -(void)animateBottomBarDown;
@@ -56,6 +63,7 @@
 - (id)initWithIncident:(IncidentObj *)_incident;
 - (id)initWithFicheViewController:(FicheIncidentController *) _ficheController;
 - (id)initWithViewController:(ValidationRapportController *)_valController;
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring;
 
 - (IBAction)backgroundTap:(id)sender;
 - (IBAction)onCancelAction:(id)sender;
