@@ -287,6 +287,34 @@
 }
 
 - (IBAction)onValidateAction:(id)sender {
+	
+	mIncidentCreated.mStreetNumber = @"";
+	mIncidentCreated.mStreet = mStreetLabel.text;
+    mIncidentCreated.mZipCode = @"";
+    mIncidentCreated.mCity = mCityLabel.text;
+	mIncidentCreated.coordinate = [[[mMapView annotations] objectAtIndex:0] coordinate];
+    
+	if(mValRapController == nil)
+	{
+		if (mFicheController == nil)
+		{
+			ValidationRapportController *nextController = [[ValidationRapportController alloc] initWithIncident:mIncidentCreated];
+			[self.navigationController pushViewController:nextController animated:YES];
+			[nextController release];
+		}
+		else
+		{
+			mFicheController.mLabelAddress.text = [[mFicheController mIncident] maddress];
+			[mFicheController changeIncident];
+			[self.navigationController popViewControllerAnimated:YES];
+		}
+	}
+	else
+	{
+		mValRapController.mLabelAddressStreet.text = mStreetLabel.text;
+		mValRapController.mLabelAddressCity.text = mCityLabel.text;
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 
@@ -336,9 +364,18 @@
 {
     if(gestureRecognizer.state == UIGestureRecognizerStateBegan){
         [self.mSearchField resignFirstResponder];
-        [self.mMapView removeAnnotations:[self.mMapView annotations]];
-        CGPoint touchLocation = [gestureRecognizer locationInView:self.mMapView];
+        for (id ann in [self.mMapView annotations])
+        {
+            if ([ann isKindOfClass:[DDAnnotation class]]) {
+                DDAnnotation *annotation = (DDAnnotation *)ann;
+                if ([annotation.title isEqualToString:NSLocalizedString(@"position_of_your_incident", nil)]) {
+                    [mMapView removeAnnotation:annotation];
+                    break;
+                }
+            }
+        }
         
+        CGPoint touchLocation = [gestureRecognizer locationInView:self.mMapView];
         CLLocationCoordinate2D coordinate;
         coordinate = [self.mMapView convertPoint:touchLocation toCoordinateFromView:self.mMapView];
         
@@ -382,15 +419,18 @@
     self.mValidateBtn.enabled = YES;
 }
 
-- (void)mapView:(MKMapView *)mapView
-didAddAnnotationViews:(NSArray *)annotationViews
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews
 {
     for (MKAnnotationView *annView in annotationViews)
     {
-        CGRect endFrame = annView.frame;
-        annView.frame = CGRectOffset(endFrame, 0, -500);
-        [UIView animateWithDuration:0.5
-                         animations:^{ annView.frame = endFrame; }];
+        if ([annView.annotation isKindOfClass:[DDAnnotation class]]) {
+            DDAnnotation *annotation = (DDAnnotation *)annView.annotation;
+            if ([annotation.title isEqualToString:NSLocalizedString(@"position_of_your_incident", nil)]) {
+                CGRect endFrame = annView.frame;
+                annView.frame = CGRectOffset(endFrame, 0, -500);
+                [UIView animateWithDuration:0.5 animations:^{ annView.frame = endFrame; }];
+            }
+        }
     }
 }
 
@@ -404,24 +444,31 @@ didAddAnnotationViews:(NSArray *)annotationViews
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-	static NSString* annotationViewIdentifier = @"annotationViewIdentifier";
+    
+    if (annotation == mapView.userLocation) {
+        return nil;
+        
+    } else {
+        
+        static NSString* annotationViewIdentifier = @"annotationViewIdentifier";
+        
+        MKAnnotationView *view = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
+        if (view == nil)
+        {
+            view = [[[DDAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier] autorelease];
+            
+            if ([view isKindOfClass:[DDAnnotationView class]])
+            {
+                ((DDAnnotationView *)view).mapView = mapView;
+            } else
+            {
+                // NOTE: view will be draggable enabled MKPinAnnotationView when running under iOS 4.
+            }
+        }
+        [view setCanShowCallout:YES];
+        return view;
+    }
 	
-	MKAnnotationView *view = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
-	if (view == nil)
-	{
-		view = [[[DDAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier] autorelease];
-		
-		if ([view isKindOfClass:[DDAnnotationView class]])
-		{
-			((DDAnnotationView *)view).mapView = mapView;
-		} else
-		{
-			// NOTE: view will be draggable enabled MKPinAnnotationView when running under iOS 4.
-		}
-	}
-	[view setCanShowCallout:YES];
-	
-	return view;
 }
 
 
