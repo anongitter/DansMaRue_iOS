@@ -26,6 +26,7 @@
     IBOutlet UILabel *mCityLabel;
     IBOutlet UIButton *mMyLocationBtn;
     IBOutlet UIButton *mValidateBtn;
+    IBOutlet UIView *mHintView;
 
     CLLocationCoordinate2D			mCoordinate;
     
@@ -56,6 +57,7 @@
 @property (nonatomic, retain) NSMutableArray *mAutocompleteSuggestions;
 @property (nonatomic, retain) UITableView *mAutocompleteTableView;
 @property (nonatomic, retain) CLGeocoder *mAutocompleteGeocoder;
+@property (retain, nonatomic) IBOutlet UIView *mHintView;
 
 -(void)animateBottomBarUp;
 -(void)animateBottomBarDown;

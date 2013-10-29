@@ -12,6 +12,7 @@
 #import "DDAnnotationView.h"
 #import "InfoVoirieContext.h"
 #import <AddressBook/AddressBook.h>
+#import <Foundation/Foundation.h>
 
 @interface FullscreenLieuIncidentController ()
 
@@ -33,6 +34,7 @@
 @synthesize mAutocompleteSuggestions;
 @synthesize mAutocompleteTableView;
 @synthesize mAutocompleteGeocoder;
+@synthesize mHintView;
 
 -(BOOL) shouldAutorotate{
     return YES;
@@ -88,6 +90,7 @@
     if (self) {
         mReverseGeocoding = [[ReverseGeocoding alloc] initWithDelegate:self];
         mAutocompleteGeocoder = [[CLGeocoder alloc] init];
+        self.hidesBottomBarWhenPushed = YES;
     }
     return self;
 }
@@ -130,14 +133,11 @@
     {
         mCoordinate = CLLocationCoordinate2DMake(48.853433,2.348308);
     }
-    DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:mCoordinate addressDictionary:nil];
     
-    if (mFicheController == nil && mValRapController == nil)
+    if (mFicheController != nil || mValRapController != nil)
 	{
-		annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
-	}
-	else
-	{
+        DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:mCoordinate addressDictionary:nil];
+        
 		if ([mIncidentCreated mdescriptive] == nil || [[mIncidentCreated mdescriptive] length] == 0 || [[mIncidentCreated mdescriptive] isEqualToString:NSLocalizedString(@"comment_needed", nil)])
 		{
 			annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
@@ -177,9 +177,9 @@
                 }
             }
 		}
+        [self.mMapView addAnnotation:annotation];
+        [annotation release];
 	}
-    [self.mMapView addAnnotation:annotation];
-	[annotation release];
     
     //Auto-complete stuffs
     self.mAutocompleteSuggestions = [[NSMutableArray alloc] init];
@@ -196,38 +196,37 @@
 {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coordinateChanged_:) name:@"DDAnnotationCoordinateDidChangeNotification" object:nil];
-    
-    //Set default location
-	MKCoordinateRegion region;
-	region.center = [[[self.mMapView annotations] lastObject] coordinate];
-    if (region.center.longitude == 0.0f && region.center.latitude == 0.0f)
-    {
-        region.center = CLLocationCoordinate2DMake(48.853433,2.348308);
-    }
-    region.span = MKCoordinateSpanMake(.001, .001);
-	[self.mMapView setRegion:region];
-    
-    
-    
-    if (mFicheController == nil && mValRapController == nil)
-	{
-        [mReverseGeocoding launchReverseGeocodingForLocation:[[InfoVoirieContext sharedInfoVoirieContext] mLocation]];
-		mReverseGeocodingDone = NO;
-		mForwardGeocodingDone = NO;
-		
-        // Forward geocode!
-        if (mStreetLabel.text != nil || mCityLabel.text != nil)
-        {
-            [self launchFowardGeocoderWithAddress:[NSString stringWithFormat:@"%@ %@", mStreetLabel.text, mCityLabel.text]];
-        }
-		
-		mValidateBtn.enabled = NO;
-	}
+    [self.mMapView.userLocation addObserver:self
+                                forKeyPath:@"location"
+                                   options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
+                                   context:NULL];
     
     CGRect b = mBottonBar.frame;
     b.origin.y += 66;
     mBottonBar.frame = b;
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.mMapView.userLocation removeObserver:self forKeyPath:@"location"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"location"])
+    {
+        //Move to user location
+        MKCoordinateRegion region;
+        region.center = [[[self.mMapView userLocation] location] coordinate];
+        if (region.center.longitude == 0.0f && region.center.latitude == 0.0f)
+        {
+            region.center = CLLocationCoordinate2DMake(48.853433,2.348308);
+        }
+        region.span = MKCoordinateSpanMake(.001, .001);
+        [self.mMapView setRegion:region];
+    }
 }
 
 #pragma mark -
@@ -402,6 +401,8 @@
         [annotation release];
         
         [mReverseGeocoding launchReverseGeocodingForLocation:coordinate];
+        
+        self.mHintView.hidden = YES;
     }
 }
 
@@ -721,9 +722,10 @@
     [mStreetLabel release];
     [mMyLocationBtn release];
     [mValidateBtn release];
-    [mAutocompleteSuggestions dealloc];
-    [mAutocompleteTableView dealloc];
-    [mAutocompleteGeocoder dealloc];
+    [mAutocompleteSuggestions release];
+    [mAutocompleteTableView release];
+    [mAutocompleteGeocoder release];
+    [mHintView release];
     [super dealloc];
 }
 - (void)viewDidUnload {
@@ -735,6 +737,7 @@
     [self setMStreetLabel:nil];
     [self setMMyLocationBtn:nil];
     [self setMValidateBtn:nil];
+    [self setMHintView:nil];
     [super viewDidUnload];
 }
 

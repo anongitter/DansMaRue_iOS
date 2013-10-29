@@ -75,7 +75,8 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection 
 {
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	C4MLog(@"connectionDidFinishLoading = %@", filesContent );
+	C4MLog(@"<<-- didReceiveData : %@", filesContent);
+    
 	id idRootJson = [mJson objectWithString:filesContent error:nil];
 	
 	[filesContent release];

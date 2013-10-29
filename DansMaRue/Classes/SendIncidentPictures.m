@@ -127,7 +127,7 @@
 	BOOL success;
 	
 	NSString* filesContent = [[NSString alloc] initWithData:mReceivedData encoding:NSUTF8StringEncoding];
-	C4MLog(@"SCAN = %@", filesContent);
+	C4MLog(@"<<-- didReceiveData : %@", filesContent);
 	
 	NSMutableDictionary* rootJson = [mJson objectWithString:filesContent error:nil];
 	NSMutableDictionary* answer = [rootJson objectForKey:@"answer"];

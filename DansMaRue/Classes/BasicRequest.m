@@ -151,12 +151,12 @@ kErrorEmptyUserID
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
 {
-	[self.mReceivedData setLength:0];
+    [self.mReceivedData setLength:0];
 }
 
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data 
 {
-	[self.mReceivedData appendData:data];
+    [self.mReceivedData appendData:data];
 }
 
 

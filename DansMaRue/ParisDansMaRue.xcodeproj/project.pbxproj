@@ -1677,7 +1677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: prigent roudaut (7LDKB49Z7K)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1690,7 +1690,7 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "SupportingFiles/ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4E3F9DB5-5A23-4674-973E-45AF825F411B";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1699,7 +1699,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: prigent roudaut (7LDKB49Z7K)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1709,6 +1709,7 @@
 				GCC_PREFIX_HEADER = SupportingFiles/ParisDansMaRue_Prefix.pch;
 				INFOPLIST_FILE = "SupportingFiles/ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
+				PROVISIONING_PROFILE = "4E3F9DB5-5A23-4674-973E-45AF825F411B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1776,7 +1777,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: prigent roudaut (7LDKB49Z7K)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1786,7 +1787,7 @@
 				GCC_PREFIX_HEADER = SupportingFiles/ParisDansMaRue_Prefix.pch;
 				INFOPLIST_FILE = "SupportingFiles/ParisDansMaRue-Info.plist";
 				PRODUCT_NAME = "PARIS DansMaRue";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4E3F9DB5-5A23-4674-973E-45AF825F411B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

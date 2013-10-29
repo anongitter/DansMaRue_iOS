@@ -48,6 +48,7 @@
 	{
 		mIncidentCreated = [_incident retain];
         mIncidentCreated.mEmail = @"";
+        self.hidesBottomBarWhenPushed = NO;
 	}
 	return self;
 }
@@ -58,7 +59,11 @@
 	[super viewDidLoad];
 	
 	mScrollView.contentSize = CGSizeMake(320, 690);
-	mScrollView.contentInset = UIEdgeInsetsMake(-60, 0, 0, 0);
+    //DAP - not hidding the description
+	//mScrollView.contentInset = UIEdgeInsetsMake(-60, 0, 0, 0);
+    mLabelDescription.hidden = NO;
+    mButtonDescription.hidden = NO;
+    mImageViewDescription.hidden = NO;
 	
 	mButtonValidate.enabled = NO;
 	
@@ -295,7 +300,7 @@
 {
 	mTypeImagePicked = kImagePickerOverView;
 	NSString* commentString = nil;
-	if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)])
+	if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)] || [mLabelDescription.text isEqualToString:@"Description"])
 	{
 		commentString = @"";
 	}
