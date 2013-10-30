@@ -39,6 +39,7 @@
 	BOOL							mForwardGeocodingDone;
 	BOOL							mChosePinPosition;
     BOOL							mIsLeaving;
+    BOOL                            mIsCentered;
     
     NSMutableArray *mAutocompleteSuggestions;
     UITableView *mAutocompleteTableView;

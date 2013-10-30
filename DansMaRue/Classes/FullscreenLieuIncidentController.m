@@ -99,6 +99,10 @@
 {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+    
     self.mStreetLabel.text = @"";
 	self.mCityLabel.text = @"";
     self.mSearchField.text = @"";
@@ -116,6 +120,9 @@
 	[returnButton release];
     
     [self.mMapView setShowsUserLocation:YES];
+    if ([self.mMapView respondsToSelector:@selector(setUserTrackingMode:animated:)]){
+        [self.mMapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
+    }
     
     UITapGestureRecognizer* tapRec = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self action:@selector(backgroundTap:)];
@@ -196,6 +203,8 @@
 {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coordinateChanged_:) name:@"DDAnnotationCoordinateDidChangeNotification" object:nil];
+    
+    mIsCentered = NO;
     [self.mMapView.userLocation addObserver:self
                                 forKeyPath:@"location"
                                    options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
@@ -204,6 +213,7 @@
     CGRect b = mBottonBar.frame;
     b.origin.y += 66;
     mBottonBar.frame = b;
+    
     
 }
 
@@ -215,7 +225,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"location"])
+    if (!mIsCentered && [keyPath isEqualToString:@"location"])
     {
         //Move to user location
         MKCoordinateRegion region;
@@ -226,6 +236,7 @@
         }
         region.span = MKCoordinateSpanMake(.001, .001);
         [self.mMapView setRegion:region];
+        mIsCentered = YES;
     }
 }
 

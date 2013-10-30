@@ -75,6 +75,12 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
 	/*
 	mActivities = [[NSMutableDictionary alloc] init];
 	mIncidentsById = [[NSMutableDictionary alloc] init];
