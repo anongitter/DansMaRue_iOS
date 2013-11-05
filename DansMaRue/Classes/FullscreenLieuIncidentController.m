@@ -99,7 +99,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
     
@@ -144,16 +144,8 @@
     if (mFicheController != nil || mValRapController != nil)
 	{
         DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:mCoordinate addressDictionary:nil];
-        
-		if ([mIncidentCreated mdescriptive] == nil || [[mIncidentCreated mdescriptive] length] == 0 || [[mIncidentCreated mdescriptive] isEqualToString:NSLocalizedString(@"comment_needed", nil)])
-		{
-			annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
-		}
-		else
-		{
-			annotation.title = mIncidentCreated.mdescriptive;
-		}
-		
+        annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
+				
 		if ([mIncidentCreated mStreet] != nil && [mIncidentCreated mCity] != nil)
 		{
 			mStreetLabel.text = [NSString stringWithFormat:@"%@ %@", [mIncidentCreated mStreetNumber], [mIncidentCreated mStreet]];
@@ -411,6 +403,9 @@
         [self.mMapView addAnnotation:annotation];
         [annotation release];
         
+        self.mCityLabel.text = @"";
+        self.mStreetLabel.text = @"";
+        [self animateBottomBarDown];
         [mReverseGeocoding launchReverseGeocodingForLocation:coordinate];
         
         self.mHintView.hidden = YES;
@@ -444,8 +439,11 @@
 #pragma mark Map View Delegate Methods
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    [self animateBottomBarUp];
-    self.mValidateBtn.enabled = YES;
+    
+    if ([[mCityLabel.text uppercaseString] rangeOfString:@"PARIS"].location != NSNotFound) {
+        [self animateBottomBarUp];
+        self.mValidateBtn.enabled = YES;
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews
@@ -467,6 +465,10 @@
 	if (oldState == MKAnnotationViewDragStateDragging)
 	{
 		DDAnnotation *annotation = (DDAnnotation *)annotationView.annotation;
+        
+        self.mCityLabel.text = @"";
+        self.mStreetLabel.text = @"";
+        [self animateBottomBarDown];
         [mReverseGeocoding launchReverseGeocodingForLocation:annotation.coordinate];
 	}
 }
@@ -520,21 +522,48 @@
     }
     
 	C4MLog(@"didFindPlacemark : %@", lPacemark);
-	if (lPacemark.postalCode != nil && lPacemark.locality != nil)
+    
+    NSString* city = @"";
+	if (lPacemark.locality != nil)
 	{
-		self.mCityLabel.text = [NSString stringWithFormat:@"%@ %@", lPacemark.postalCode, lPacemark.locality];
+		city = lPacemark.locality;
 	}
-	
+    NSString* zipcode = @"";
+	if (lPacemark.postalCode != nil)
+	{
+		zipcode = lPacemark.postalCode;
+	}
     NSString* num = @"";
 	if ([lPacemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
 	{
 		num = lPacemark.subThoroughfare;
 	}
-    self.mStreetLabel.text = [NSString stringWithFormat:@"%@ %@", num, lPacemark.thoroughfare];
-	
-    //TODO : animate up
-    [self animateBottomBarUp];
-    self.mValidateBtn.enabled = YES;
+    NSString* street = @"";
+    if (lPacemark.thoroughfare != nil) {
+        street = lPacemark.thoroughfare;
+    }
+    NSString* country = @"";
+    if (lPacemark.country != nil) {
+        country = lPacemark.country;
+    }
+    
+    C4MLog(@"street : '%@'  zip : '%@' city : '%@'  country : '%@'", street, zipcode, city, country);
+    if ([[city uppercaseString] isEqualToString:@"PARIS"] && ![zipcode isEqualToString:@""]&& [[country uppercaseString] isEqualToString:@"FRANCE"]) {
+        //TODO : animate up
+        if (num.length >0) {
+            self.mStreetLabel.text = [NSString stringWithFormat:@"%@ %@", num, street];
+        } else {
+            self.mStreetLabel.text = street;
+        }
+        self.mCityLabel.text = [NSString stringWithFormat:@"%@ %@", zipcode, city];
+        [self animateBottomBarUp];
+        self.mValidateBtn.enabled = YES;
+    } else {
+        UIAlertView * lAlertTmp = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"warning", nil) message:NSLocalizedString(@"position_out_of_city", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
+         [lAlertTmp show];
+         [lAlertTmp release];
+    }
+    
 	mReverseGeocodingDone = YES;
 }
 
@@ -589,22 +618,60 @@
         [self.mMapView setRegion:region animated:YES];
         
         //fill address
-        if (lPacemark.postalCode != nil && lPacemark.locality != nil)
+        NSString* city = @"";
+        if (lPacemark.locality != nil)
         {
-            self.mCityLabel.text = [NSString stringWithFormat:@"%@ %@", lPacemark.postalCode, lPacemark.locality];
+            city = lPacemark.locality;
         }
-        
+        NSString* zipcode = @"";
+        if (lPacemark.postalCode != nil)
+        {
+            zipcode = lPacemark.postalCode;
+        }
         NSString* num = @"";
         if ([lPacemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
         {
-            num = [NSString stringWithFormat:@"%@%@", num, @" "];
+            num = lPacemark.subThoroughfare;
         }
-        self.mStreetLabel.text = [NSString stringWithFormat:@"%@%@", num, lPacemark.thoroughfare];
+        NSString* street = @"";
+        if (lPacemark.thoroughfare != nil) {
+            street = lPacemark.thoroughfare;
+        }
+        NSString* country = @"";
+        if (lPacemark.country != nil) {
+            country = lPacemark.country;
+        }
         
-        mReverseGeocodingDone = YES;
-        //TODO : animate up
-        [self animateBottomBarUp];
-        self.mValidateBtn.enabled = YES;
+        C4MLog(@"street : '%@'  zip : '%@' city : '%@'  country : '%@'", street, zipcode, city, country);
+        if ([[city uppercaseString] isEqualToString:@"PARIS"] && ![zipcode isEqualToString:@""]&& [[country uppercaseString] isEqualToString:@"FRANCE"]) {
+            //TODO : animate up
+            if (num.length >0) {
+                self.mStreetLabel.text = [NSString stringWithFormat:@"%@ %@", num, street];
+            } else {
+                self.mStreetLabel.text = street;
+            }
+            self.mCityLabel.text = [NSString stringWithFormat:@"%@ %@", zipcode, city];
+            [self animateBottomBarUp];
+            self.mValidateBtn.enabled = YES;
+            
+            //Add annotation
+            for (id ann in [self.mMapView annotations])
+            {
+                if ([ann isKindOfClass:[DDAnnotation class]]) {
+                    DDAnnotation *annotation = (DDAnnotation *)ann;
+                    if ([annotation.title isEqualToString:NSLocalizedString(@"position_of_your_incident", nil)]) {
+                        [mMapView removeAnnotation:annotation];
+                        break;
+                    }
+                }
+            }
+            DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:lPacemark.location.coordinate addressDictionary:nil];
+            annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
+            [self.mMapView addAnnotation:annotation];
+            [annotation release];
+            
+        }
+        mForwardGeocodingDone = YES;
     }
     else
     {
@@ -641,6 +708,7 @@
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
     
+    //http://stackoverflow.com/questions/11614721/clgeocoder-geocoding-is-hopelessly-inaccurate
     
     //[self launchFowardGeocoderWithAddress:substring];
     
@@ -654,14 +722,22 @@
     [locationDictionary setValue:NSLocalizedString(@"city", nil) forKey:(NSString *)kABPersonAddressCityKey];
     [locationDictionary setValue:NSLocalizedString(@"country", nil) forKey:(NSString *)kABPersonAddressCountryKey];
     
-    [self.mAutocompleteGeocoder geocodeAddressDictionary:locationDictionary completionHandler:^(NSArray* _Placemarks, NSError* _Error)
+    C4MLog(@"locationDictionary %@", locationDictionary);
+//    substring = [NSString stringWithFormat:@"%@%@",substring ,@", Paris, France"];
+//    C4MLog(@"locationString %@", substring);
+    
+//    [self.mAutocompleteGeocoder geocodeAddressString:substring completionHandler:^(NSArray* _Placemarks, NSError* _Error)
+     [self.mAutocompleteGeocoder geocodeAddressDictionary:locationDictionary completionHandler:^(NSArray* _Placemarks, NSError* _Error)
      {
          if (!_Error)
          {
+             C4MLog(@"_Placemarks %@", _Placemarks);
              for(CLPlacemark* placemark in _Placemarks) {
                  NSString* num = @"";
                  NSString* addr = @"";
                  NSString* zipcode = @"";
+                 NSString* city = @"";
+                 NSString* country = @"";
                  if ([placemark.subThoroughfare rangeOfString:@"-"].location == NSNotFound)
                  {
                      num = [NSString stringWithFormat:@"%@%@", placemark.subThoroughfare, @" "];
@@ -674,10 +750,26 @@
                  {
                      zipcode = [NSString stringWithFormat:@"%@%@", placemark.postalCode, @" "];
                  }
-                 NSString* suggestion =[NSString stringWithFormat:@"%@%@%@%@", num, addr, zipcode, placemark.locality];
-                 [self.mAutocompleteSuggestions addObject:suggestion];
+                 if (placemark.locality != nil) {
+                     city = placemark.locality;
+                 }
+                 if (placemark.country != nil) {
+                     country = placemark.country;
+                 }
+                 
+                 if ([[city uppercaseString] isEqualToString:@"PARIS"] && [[country uppercaseString] isEqualToString:@"FRANCE"]) {
+                     NSString* suggestion =[NSString stringWithFormat:@"%@%@%@%@", num, addr, zipcode, city];
+                     [self.mAutocompleteSuggestions addObject:suggestion];
+                 }
              }
-             self.mAutocompleteTableView.hidden = NO;
+             
+             if ([self.mAutocompleteSuggestions count] > 0) {
+                 self.mAutocompleteTableView.hidden = NO;
+                 [self.mAutocompleteTableView reloadData];
+             }
+         } else {
+             [self.mAutocompleteSuggestions removeAllObjects];
+             self.mAutocompleteTableView.hidden = YES;
              [self.mAutocompleteTableView reloadData];
          }
      }];

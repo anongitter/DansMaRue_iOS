@@ -40,7 +40,7 @@ CGImageRef UIGetScreenImage();
 	[super viewDidLoad];
     
     //fix iOS7 to vaid layout go underneath the navBar
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
 

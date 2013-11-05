@@ -57,7 +57,7 @@
                             <rect key="frame" x="51" y="11" width="212" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             <connections>
                                 <action selector="textFieldDoneEditing:" destination="-1" eventType="editingDidEndOnExit" id="oaK-xD-JWf"/>
                                 <outlet property="delegate" destination="-1" id="RFH-Cl-2CH"/>

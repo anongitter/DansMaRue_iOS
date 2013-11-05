@@ -38,7 +38,7 @@
 	[super viewDidLoad];
     
     //fix iOS7 to vaid layout go underneath the navBar
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
     
@@ -172,9 +172,14 @@
 
 - (IBAction)infoButtonPressed
 {
-	C4MInfo *info = [[C4MInfo alloc] init];
+    
+    C4MInfo *info = [[C4MInfo alloc] init];
 	info.hidesBottomBarWhenPushed = YES;
-	[self.navigationController presentModalViewController:info animated:YES];
+    UINavigationController* lNavigationController = [[UINavigationController alloc] initWithRootViewController:info];
+    
+    InfoVoirieAppDelegate* lAppDelegate = (InfoVoirieAppDelegate*)[UIApplication sharedApplication].delegate;
+    [lAppDelegate.tabBarController presentModalViewController:lNavigationController animated:YES];
+    [lNavigationController release];
 	[info release];
 }
 
@@ -226,6 +231,7 @@
 	mTextFieldPassword.text = nil;
 	
 	[mViewLogin setHidden:NO];
+    [mViewWelcomeUser setHidden:YES];
 	
 	[self updateLoginButton];
 }
@@ -424,6 +430,7 @@
 	
 	//[UIView commitAnimations];
 	
+    [mViewWelcomeUser setHidden:NO];
 	[self viewWillAppear:YES];
 	
 	[[InfoVoirieContext sharedInfoVoirieContext] saveUserInfo];

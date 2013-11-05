@@ -59,7 +59,7 @@
 	[super viewDidLoad];
     
     //fix iOS7 to vaid layout go underneath the navBar
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
 
@@ -634,9 +634,12 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 		mLabelFarPhoto.hidden = YES;
 		[mIconFar setImage:[UIImage imageNamed:@"icn_pen.png"]];
 		
-		CommentaireController *nextController = [[CommentaireController alloc] initWithDelegate:self];
-		[self.navigationController pushViewController:nextController animated:NO];
-		[nextController release];
+        if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)] || [mLabelDescription.text isEqualToString:@"Description"] || [mLabelDescription.text isEqualToString:@""])
+        {
+            CommentaireController *nextController = [[CommentaireController alloc] initWithDelegate:self];
+            [self.navigationController pushViewController:nextController animated:NO];
+            [nextController release];
+        }
 	}
 	[_controller dismissModalViewControllerAnimated:YES];
 }

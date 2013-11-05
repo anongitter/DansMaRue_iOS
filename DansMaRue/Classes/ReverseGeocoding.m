@@ -53,7 +53,6 @@
     C4MLog(@"launchReverseGeocodingForLocation");
     [mGeocoder cancelGeocode];
     
-    
     CLLocation* loc = [[CLLocation alloc] initWithLatitude:_Location.latitude longitude:_Location.longitude];
     
     [mGeocoder reverseGeocodeLocation:loc completionHandler:^(NSArray* _Placemarks, NSError* _Error)
