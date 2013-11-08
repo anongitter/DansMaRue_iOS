@@ -440,7 +440,28 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     
-    if ([[mCityLabel.text uppercaseString] rangeOfString:@"PARIS"].location != NSNotFound) {
+    if (view.annotation == mapView.userLocation) {
+        //Add annotation
+        for (id ann in [self.mMapView annotations])
+        {
+            if ([ann isKindOfClass:[DDAnnotation class]]) {
+                DDAnnotation *annotation = (DDAnnotation *)ann;
+                if ([annotation.title isEqualToString:NSLocalizedString(@"position_of_your_incident", nil)]) {
+                    [mMapView removeAnnotation:annotation];
+                    break;
+                }
+            }
+        }
+        DDAnnotation *annotation = [[DDAnnotation alloc] initWithCoordinate:mapView.userLocation.coordinate addressDictionary:nil];
+        annotation.title = NSLocalizedString(@"position_of_your_incident", nil);
+        [self.mMapView addAnnotation:annotation];
+        [annotation release];
+        
+        self.mCityLabel.text = @"";
+        self.mStreetLabel.text = @"";
+        [mReverseGeocoding launchReverseGeocodingForLocation:mapView.userLocation.coordinate];
+        
+    } else if ([[mCityLabel.text uppercaseString] rangeOfString:@"PARIS"].location != NSNotFound) {
         [self animateBottomBarUp];
         self.mValidateBtn.enabled = YES;
     }
@@ -450,13 +471,10 @@
 {
     for (MKAnnotationView *annView in annotationViews)
     {
-        if ([annView.annotation isKindOfClass:[DDAnnotation class]]) {
-            DDAnnotation *annotation = (DDAnnotation *)annView.annotation;
-            if ([annotation.title isEqualToString:NSLocalizedString(@"position_of_your_incident", nil)]) {
-                CGRect endFrame = annView.frame;
-                annView.frame = CGRectOffset(endFrame, 0, -500);
-                [UIView animateWithDuration:0.5 animations:^{ annView.frame = endFrame; }];
-            }
+        if (annView.annotation != mapView.userLocation) {
+            CGRect endFrame = annView.frame;
+            annView.frame = CGRectOffset(endFrame, 0, -500);
+            [UIView animateWithDuration:0.5 animations:^{ annView.frame = endFrame; }];
         }
     }
 }
@@ -478,7 +496,6 @@
     
     if (annotation == mapView.userLocation) {
         return nil;
-        
     } else {
         
         static NSString* annotationViewIdentifier = @"annotationViewIdentifier";
@@ -709,9 +726,6 @@
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
     
     //http://stackoverflow.com/questions/11614721/clgeocoder-geocoding-is-hopelessly-inaccurate
-    
-    //[self launchFowardGeocoderWithAddress:substring];
-    
     [self.mAutocompleteSuggestions removeAllObjects];
     
     NSMutableDictionary* locationDictionary = [NSMutableDictionary dictionary];
