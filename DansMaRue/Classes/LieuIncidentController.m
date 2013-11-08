@@ -21,9 +21,15 @@
 
 
 @implementation LieuIncidentController
+
+
 @synthesize mIncidentCreated;
 @synthesize mValRapController;
 @synthesize mFicheController;
+@synthesize mPreviousNumber;
+@synthesize mPreviousStreet;
+@synthesize mPreviousCP;
+@synthesize mPreviousCity;
 
 -(BOOL) shouldAutorotate{
     return YES;
@@ -93,6 +99,11 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
 	
 	mLabelSearch.text = NSLocalizedString(@"searching_street", nil);
 	mLabelCity.text = @"";
@@ -475,6 +486,10 @@
 - (void)dealloc
 {
 	//NSLog(@"dealloc");
+    [mPreviousNumber release];
+    [mPreviousStreet release];
+    [mPreviousCP release];
+    [mPreviousCity release];
 	[mMapControlButton release];
 	[mTextFieldStreet release];
 	[mTextFieldCity release];
@@ -573,6 +588,24 @@
 #pragma mark Text Field Delegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (textField == mTextFieldNumber)
+    {
+        self.mPreviousNumber = textField.text;
+    }
+    else if (textField == mTextFieldStreet)
+    {
+        self.mPreviousStreet = textField.text;
+    }
+    else if (textField == mTextFieldCP)
+    {
+        self.mPreviousCP = textField.text;
+    }
+    else if (textField == mTextFieldCity)
+    {
+        self.mPreviousCity = textField.text;
+    }
+    
+    
 	mButtonValidatePosition.enabled = NO;
 	mForwardGeocodingDone = NO;
 	return YES;
@@ -739,9 +772,15 @@
 
 - (void)fowardGeocoder:(CLGeocoder*)_Geocoder didFailWithError:(NSError*)_Error
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[_Error localizedDescription] delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
-	[alert show];
-	[alert release];
+    [self displayGeolocationReverseFail];
+    
+    
+    mTextFieldCity.text = mPreviousCity;
+    mTextFieldCP.text = mPreviousCP;
+    mTextFieldNumber.text = mPreviousNumber;
+    mTextFieldStreet.text = mPreviousStreet;
+   
+    
 	mForwardGeocodingDone = YES;
 	[self testValidateButtonEnable];
 	[mLoader stopAnimating];
@@ -770,34 +809,41 @@
     }
     else
     {
-		NSString* message = @"";
+		[self displayGeolocationReverseFail];
         
-        if ([mTextFieldNumber.text length] > 0)
-        {
-            message = [message stringByAppendingFormat:@"%@ ", mTextFieldNumber.text];
-        }
-        if([mTextFieldStreet.text length] > 0)
-        {
-            message = [message stringByAppendingFormat:@"%@ ", mTextFieldStreet.text];
-        }
-        if ([mLabelCity.text length] > 0)
-        {
-            message = [message stringByAppendingFormat:@"%@ ", mLabelCity.text];
-        }
-        if ([mTextFieldCP.text length] > 0)
-        {
-            message = [message stringByAppendingFormat:@"%@ ", mTextFieldCP.text];
-        }
-        
-        NSString* content = [NSString stringWithFormat:@"%@ : %@.", NSLocalizedString(@"cant_find", nil), message];
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"information", nil) message:content delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
-        [alert show];
-        [alert release];
 		mForwardGeocodingDone = NO;
     }
 	[self testValidateButtonEnable];
 	[mLoader stopAnimating];
+}
+
+
+- (void)displayGeolocationReverseFail
+{
+    NSString* message = @"";
+    
+    if ([mTextFieldNumber.text length] > 0)
+    {
+        message = [message stringByAppendingFormat:@"%@ ", mTextFieldNumber.text];
+    }
+    if([mTextFieldStreet.text length] > 0)
+    {
+        message = [message stringByAppendingFormat:@"%@ ", mTextFieldStreet.text];
+    }
+    if ([mLabelCity.text length] > 0)
+    {
+        message = [message stringByAppendingFormat:@"%@ ", mLabelCity.text];
+    }
+    if ([mTextFieldCP.text length] > 0)
+    {
+        message = [message stringByAppendingFormat:@"%@ ", mTextFieldCP.text];
+    }
+    
+    NSString* content = [NSString stringWithFormat:@"%@ : %@.", NSLocalizedString(@"cant_find", nil), message];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"information", nil) message:content delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
+    [alert show];
+    [alert release];
 }
 
 

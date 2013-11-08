@@ -8,7 +8,7 @@
 
 #import "CategorieController.h"
 #import "SubCategorieController.h"
-#import "LieuIncidentController.h"
+#import "FullscreenLieuIncidentController.h"
 #import "CategoriesCell.h"
 #import "InfoVoirieContext.h"
 
@@ -66,6 +66,12 @@
 {
     [super viewDidLoad];
 	
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
+    
 	mParentCategorie = [[NSMutableArray alloc] init];
 
     
@@ -164,9 +170,9 @@
 				IncidentObj *lincident = [[IncidentObj alloc] init];
 				lincident.mcategory = [numCat integerValue];
 				lincident.mstate = @"ongoing";
-				LieuIncidentController *lLieuIncidentController = [[LieuIncidentController alloc] initWithIncident:lincident];
-				[self.navigationController pushViewController:lLieuIncidentController animated:YES];
-				[lLieuIncidentController release];
+				FullscreenLieuIncidentController *lFullscreenLieuIncidentController = [[FullscreenLieuIncidentController alloc] initWithIncident:lincident];
+				[self.navigationController pushViewController:lFullscreenLieuIncidentController animated:YES];
+				[lFullscreenLieuIncidentController release];
 				[lincident release];
 			}
 			else {

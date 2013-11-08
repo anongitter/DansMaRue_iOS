@@ -25,7 +25,7 @@
 	UIImageView * mNavOn;	
 	UIImageView * mNavOff;	
 	
-	UINavigationBar *mNavBar;
+	//UINavigationBar *mNavBar;
 	
 	IBOutlet UILabel *mLabelAppVersion;
 }

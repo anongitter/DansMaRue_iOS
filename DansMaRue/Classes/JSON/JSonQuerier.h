@@ -10,7 +10,7 @@
 #import "JSonResponseHandler.h"
 
 // PROD
-#define kJSonAPIURL @"http://coach-forme.ppd.c4mprod.com/api/"
+#define kJSonAPIURL @""
 
 
 #define kJsonRequestKeyWord @"request"

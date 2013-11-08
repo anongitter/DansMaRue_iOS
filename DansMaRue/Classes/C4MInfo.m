@@ -27,27 +27,53 @@
 
 @synthesize mNavBar;
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidLoad 
 {
 	[super viewDidLoad];
 
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
+    
 	NSString* web_content = NSLocalizedString(@"legalNoticeContent", nil);
 	mWebView.dataDetectorTypes = UIDataDetectorTypeNone  ;
 	[mWebView loadHTMLString:web_content baseURL:nil];
 	
 	UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:NSLocalizedString(@"c4m_info_navbar_title", nil)];
 	label.frame = CGRectMake(0, 0, 120, 44);
-	[[mNavBar topItem] setTitleView:label];
+	[self.navigationController.navigationBar.topItem setTitleView:label];
 	
 	UIButton *buttonView = [InfoVoirieContext createNavBarBackButton];
 	[buttonView addTarget:self action:@selector(btnBack:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *returnButton = [[UIBarButtonItem alloc] initWithCustomView:buttonView];
-	[[mNavBar topItem] setLeftBarButtonItem:returnButton];
+	[self.navigationController.navigationBar.topItem setLeftBarButtonItem:returnButton];
 	[returnButton release];
-	
+    
+    
 	NSString* appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    appVersion = [appVersion stringByAppendingFormat:@" (%@)", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
 	mLabelAppVersion.text = [NSString stringWithFormat:@"v%@", appVersion];
+    
+	UIBarButtonItem *lVersionNb = [[UIBarButtonItem alloc] initWithCustomView:mLabelAppVersion];
+	[self.navigationController.navigationBar.topItem setRightBarButtonItem:lVersionNb];
+	[lVersionNb release];
 	
+	
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+//        mNavBar.frame =  CGRectMake(0,20,mNavBar.frame.size.width,mNavBar.frame.size.height);
+//        mNavBar.bounds = CGRectMake(0, 20, mNavBar.frame.size.width, mNavBar.frame.size.height);
+//        mTableView.frame =  CGRectMake(0,64,mTableView.frame.size.width,mTableView.frame.size.height-20);
+//        mTableView.bounds = CGRectMake(0, 64, mTableView.frame.size.width, mTableView.frame.size.height);
+//        mLabelAppVersion.frame =  CGRectMake(231,31,mLabelAppVersion.frame.size.width,mLabelAppVersion.frame.size.height);
+//        mLabelAppVersion.bounds = CGRectMake(231, 31, mLabelAppVersion.frame.size.width, mLabelAppVersion.frame.size.height);
+    }
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -205,7 +231,7 @@
 #warning TO DO clean this code - seems to not be used anymore
 		else if(alertView.tag == 2)
 		{
-			NSString* url = @"http://www.c4mprod.com/web/page-410";
+			NSString* url = @"http://www.c4mprod.com";
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 		}
 	}
@@ -263,7 +289,6 @@
 	mTableView.delegate = nil ; 	
 	[mWebView release] ; 
 	[mTableView release];
-
     [super dealloc];
 }
 

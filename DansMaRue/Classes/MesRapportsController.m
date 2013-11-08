@@ -34,6 +34,12 @@
 
 - (void)viewDidLoad
 {
+    
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
 	mDictionnaryReportsOngoing = [[NSMutableDictionary alloc] init];
 	mArrayCurrentTable = [[NSMutableArray alloc] init];
 	mOrderedKeys = [[NSMutableArray alloc] init];

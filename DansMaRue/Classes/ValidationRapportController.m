@@ -8,7 +8,7 @@
 
 #import "ValidationRapportController.h"
 #import "CategorieController.h"
-#import "LieuIncidentController.h"
+#import "FullscreenLieuIncidentController.h"
 #import "InfoVoirieAppDelegate.h"
 #import "InfoVoirieContext.h"
 
@@ -48,6 +48,7 @@
 	{
 		mIncidentCreated = [_incident retain];
         mIncidentCreated.mEmail = @"";
+        self.hidesBottomBarWhenPushed = NO;
 	}
 	return self;
 }
@@ -56,9 +57,19 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
 	
 	mScrollView.contentSize = CGSizeMake(320, 690);
-	mScrollView.contentInset = UIEdgeInsetsMake(-60, 0, 0, 0);
+    //DAP - not hidding the description
+	//mScrollView.contentInset = UIEdgeInsetsMake(-60, 0, 0, 0);
+    mLabelDescription.hidden = NO;
+    mButtonDescription.hidden = NO;
+    mImageViewDescription.hidden = NO;
 	
 	mButtonValidate.enabled = NO;
 	
@@ -186,7 +197,7 @@
 #pragma mark Actions
 - (IBAction) whereButtonPressed:(id)sender
 {
-	LieuIncidentController *nextController = [[LieuIncidentController alloc] initWithViewController:self];
+	FullscreenLieuIncidentController *nextController = [[FullscreenLieuIncidentController alloc] initWithViewController:self];
 	[self.navigationController pushViewController:nextController animated:YES];
 	[nextController release];
 }
@@ -295,7 +306,7 @@
 {
 	mTypeImagePicked = kImagePickerOverView;
 	NSString* commentString = nil;
-	if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)])
+	if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)] || [mLabelDescription.text isEqualToString:@"Description"])
 	{
 		commentString = @"";
 	}
@@ -623,9 +634,12 @@ didFinishPickingMediaWithInfo:(NSDictionary*)info
 		mLabelFarPhoto.hidden = YES;
 		[mIconFar setImage:[UIImage imageNamed:@"icn_pen.png"]];
 		
-		CommentaireController *nextController = [[CommentaireController alloc] initWithDelegate:self];
-		[self.navigationController pushViewController:nextController animated:NO];
-		[nextController release];
+        if ([mLabelDescription.text isEqualToString:NSLocalizedString(@"comment_needed", nil)] || [mLabelDescription.text isEqualToString:@"Description"] || [mLabelDescription.text isEqualToString:@""])
+        {
+            CommentaireController *nextController = [[CommentaireController alloc] initWithDelegate:self];
+            [self.navigationController pushViewController:nextController animated:NO];
+            [nextController release];
+        }
 	}
 	[_controller dismissModalViewControllerAnimated:YES];
 }

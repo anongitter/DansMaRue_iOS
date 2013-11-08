@@ -43,7 +43,9 @@
 #endif
 	
 	[[BITHockeyManager sharedHockeyManager] startManager];
+   
     
+#warning print default user dictionary
     
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -68,7 +70,11 @@
 	
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newVersionAvailable:) name:kNotificationDidReceiveNewVersion object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forceUpdate:) name:kNotificationDidReceiveForceUpdate object:nil];
-	
+    
+    if (IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0.0")){
+        [[UITextField appearance] setTintColor:[UIColor blackColor]];
+    }
+    
 	return YES;
 }
 
@@ -93,7 +99,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
 
-	C4MLog(@"locationManager didUpdate");
+//	C4MLog(@"locationManager didUpdate");
 	// On sauvegarde la nouvelle position courante de l'utilisateur (utile pour les annotations)
 	[InfoVoirieContext sharedInfoVoirieContext].mLocation = newLocation.coordinate;
     
@@ -106,7 +112,7 @@
 	mNumGeolocIteration++;
 	if (mNumGeolocIteration == 1)
 	{
-		C4MLog(@"numGeoloc = 1");
+//		C4MLog(@"numGeoloc = 1");
 		
 		UIViewController *home = [[[[tabBarController viewControllers] objectAtIndex:0] viewControllers] objectAtIndex:0];
 		if ([home isKindOfClass:[NouveauController class]])
@@ -114,7 +120,7 @@
 			[(NouveauController*)home reloadIncidentStats];
 		}
 	}
-	C4MLog(@"ok");
+//	C4MLog(@"ok");
 }
 
 
@@ -211,7 +217,6 @@
 #pragma mark - UIAlertView Methods
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	//NSLog(@"");
 	if ( alertView.cancelButtonIndex != buttonIndex )
 	{
 		if ( alertView.tag == 'NEWV' )
@@ -223,7 +228,6 @@
 	{
 		if ( alertView.tag == 'FORC' )
 		{
-			//NSLog(@"");
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:NSLocalizedString(@"application_itunes_link", nil)]];
 		}
 	}

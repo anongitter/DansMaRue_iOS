@@ -41,6 +41,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
 	UILabel *label = [InfoVoirieContext createNavBarUILabelWithTitle:NSLocalizedString(@"new_report_navbar_title", nil)];
 	[self.navigationItem setTitleView:label];
 	

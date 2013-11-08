@@ -19,6 +19,7 @@
 #import "ImageManager.h"
 #import "UpdateCell.h"
 #import "InfoVoirieContext.h"
+#import "FullscreenLieuIncidentController.h"
 
 
 @implementation FicheIncidentController
@@ -63,6 +64,12 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    //fix iOS7 to vaid layout go underneath the navBar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7(x)
+
 	//mScrollView.contentSize = CGSizeMake(320, 700);
 	
 	self.mArrayUpdate = [NSMutableArray array];
@@ -265,7 +272,7 @@
 		return;
 	}*/
 
-	LieuIncidentController *nextController = [[LieuIncidentController alloc] initWithFicheViewController:self];
+	FullscreenLieuIncidentController *nextController = [[FullscreenLieuIncidentController alloc] initWithFicheViewController:self];
 	[self.navigationController pushViewController:nextController animated:YES];
 	[nextController release];
 }
